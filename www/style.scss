@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+$ticket-button-active-bgcolor-default: #1e2424; // dark blue
+$top-of-book-active-box-shadow-color: #68c4bc;
+$ticket-button-active-shadow-default: #68c4bc;
+$bg-color: #1e2424;
+
+.card__img {
+    width: 65%;
+    height: 65%;
+    border-bottom-left-radius: 3%;
+    border-bottom-right-radius: 3%;
+    border-top-left-radius: 3%;
+    border-top-right-radius: 3%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: $ticket-button-active-bgcolor-default;
+    box-shadow: inset 0 0 1rem $top-of-book-active-box-shadow-color;
+}
+
+* {
+  box-sizing: padding-box;
+  
+}
+
+.card {
+  color: #fff;
+  position: relative;
+  float: left;
+  overflow: hidden;
+  margin: 10px 1%;
+  width: 100%;
+  background: #000000;
+  text-align: center;
+  transition: all 0.3s ease-out;
+  
+   &_bg_red {
+    background: rgba(255, 255, 255, 0);
+  }
+
+  &__img {
+    opacity: 1;
+    width: 85%;
+  }
+
+  &__text-block {
+    top: 50%;
+    left: 40px;
+    right: 40px;
+    position: absolute;
+    transform: translateY(-50%);
+  }
+
+
+  &__heading {
+    position: relative;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin: 0;
+    transform: translateY(75%);
+  }
+
+
+  &__text {
+    font-size: 0.9em;
+    font-weight: 500;
+    opacity: 0;
+    margin: 0;
+  }
+  
+  &__link {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 1;
+  }
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+    opacity: 0;
+    transition: opacity 0.6s, transform 0.6s;
+  }
+
+  &:before {
+    border-top: 1px double #fff;
+    border-bottom: 1px double #fff;
+    transform: scale(0, 1);
+  }
+
+  &:after {
+    border-right: 1px double #fff;
+    border-left: 1px double #fff;
+    transform: scale(1, 0);
+  }
+
+  &:hover {
+    
+    .card__img {
+      opacity: 0.2;
+      filter: blur(5px);
+      transform: scale(1.1);
+      animation: place-order-keyframes .4s linear;
+      background-color: $ticket-button-active-bgcolor-default;
+      @keyframes place-order-keyframes {
+        0% {
+            background-color: lighten(saturate($ticket-button-active-bgcolor-default, 90%), 2%);
+            box-shadow: 0 0 0 0 rgba($top-of-book-active-box-shadow-color, .8),
+                inset 0 0 1rem $ticket-button-active-shadow-default,
+                inset 0 0 0 0 rgba($top-of-book-active-box-shadow-color, 1);
+        }
+
+        4%, 90% {
+            background-color: lighten(saturate($ticket-button-active-bgcolor-default, 90%), 10%);
+            box-shadow: 0 0 125px 3px rgba($top-of-book-active-box-shadow-color, .8),
+                inset 0 0 0 14px rgba(255, 255, 255, 1),
+                inset 0 0 125px 8px lighten(rgba($top-of-book-active-box-shadow-color, 1), 60%);
+        }
+
+        100% {
+            background-color: $ticket-button-active-bgcolor-default;
+            box-shadow: 0 0 0 0 rgba($top-of-book-active-box-shadow-color, .8),
+                inset 0 0 1rem $ticket-button-active-shadow-default,
+                inset 0 0 0 0 rgba($top-of-book-active-box-shadow-color, 1);
+        }
+      }
+    }
+    
+  }
+
+  &:hover {
+
+    .card__heading,
+    .card__text {
+      opacity: 1;
+      border-color: rgba(255, 255, 255, 0.5);
+      transition-delay: 0.2s;
+      transform: translateY(0);
+    }
+    
+  }
+
+  &:hover {
+    
+    .card__text{
+      transition-delay: 0.3s;
+    }
+    
+  }
+
+  &:hover:before,
+  &:hover:after {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  
+}

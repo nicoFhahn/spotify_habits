@@ -20,6 +20,14 @@
   font-family: 'Quicksand', sans-serif;
 }
 
+.section {
+  text-align: left;
+  margin-top: 20%;
+  margin-bottom:10%;
+  font-size: 5vh;
+  font-family: 'Quicksand', sans-serif;
+}
+
 .p {
   font-family: 'Quicksand', sans-serif;
 }

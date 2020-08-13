@@ -6,7 +6,7 @@ library(knitr)
 library(tidyverse)
 load_dot_env("spotify_client.env")
 access_token <- get_spotify_access_token()
-get_spotify_authorization_code()
+code <- get_spotify_authorization_code()
 # first get your all time top 20 artists:
 get_my_top_artists_or_tracks(type = 'artists', time_range = 'long_term', limit = 20) %>% 
   select(name, genres) %>% 
@@ -14,8 +14,17 @@ get_my_top_artists_or_tracks(type = 'artists', time_range = 'long_term', limit =
   mutate(genres = paste(genres, collapse = ', ')) %>% 
   ungroup
 
+
+longterm_art <- get_my_top_artists_or_tracks(
+  type = "artists",
+  time_range = "long_term",
+  limit = 20,
+  authorization = code
+)
+
+
 # compare to your recent top 20 artists:
-get_my_top_artists_or_tracks(type = 'artists', time_range = 'short_term', limit = 20) %>% 
+get_my_top_artists_or_tracks(type = 'artists', time_range = 'short_term', limit = 20, authorization = code) %>% 
   select(name, genres) %>% 
   rowwise %>% 
   mutate(genres = paste(genres, collapse = ', ')) %>% 
