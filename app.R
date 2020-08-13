@@ -34,13 +34,6 @@ ui <- fluidPage(
     use_shticky(),
     use_waypointer(),
     div(
-        id = "stick",
-        style = "position:fixed;width:100%;",
-        fluidRow(
-            column(12),
-        )
-    ),
-    div(
         id = "bg",
         longdiv(
             h1("Your Spotify listening habits", class = "title"),
