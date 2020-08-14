@@ -5,12 +5,10 @@ $ticket-button-active-shadow-default: #68c4bc;
 $bg-color: #1e2424;
 
 .card__img {
-    width: 65%;
-    height: 65%;
-    border-bottom-left-radius: 3%;
-    border-bottom-right-radius: 3%;
-    border-top-left-radius: 3%;
-    border-top-right-radius: 3%;
+    border-bottom-left-radius: 25%;
+    border-bottom-right-radius: 25%;
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -33,6 +31,10 @@ $bg-color: #1e2424;
   background: #000000;
   text-align: center;
   transition: all 0.3s ease-out;
+  border-bottom-left-radius: 25%;
+  border-bottom-right-radius: 25%;
+  border-top-left-radius: 25%;
+  border-top-right-radius: 25%;
   
    &_bg_red {
     background: rgba(255, 255, 255, 0);
@@ -40,7 +42,7 @@ $bg-color: #1e2424;
 
   &__img {
     opacity: 1;
-    width: 85%;
+    width: 75%;
   }
 
   &__text-block {
@@ -55,9 +57,11 @@ $bg-color: #1e2424;
   &__heading {
     position: relative;
     font-weight: 400;
+    font-size: 1.9em;
     text-transform: uppercase;
     margin: 0;
     transform: translateY(75%);
+    font-family: 'Quicksand', sans-serif;
   }
 
 
@@ -66,6 +70,7 @@ $bg-color: #1e2424;
     font-weight: 500;
     opacity: 0;
     margin: 0;
+    font-family: 'Quicksand', sans-serif;
   }
   
   &__link {
@@ -82,9 +87,9 @@ $bg-color: #1e2424;
     content: '';
     position: absolute;
     top: 20px;
-    right: 20px;
+    right: 50px;
     bottom: 20px;
-    left: 20px;
+    left: 50px;
     opacity: 0;
     transition: opacity 0.6s, transform 0.6s;
   }
@@ -92,45 +97,33 @@ $bg-color: #1e2424;
   &:before {
     border-top: 1px double #fff;
     border-bottom: 1px double #fff;
+    border-bottom-left-radius: 25%;
+    border-bottom-right-radius: 25%;
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
     transform: scale(0, 1);
   }
 
   &:after {
     border-right: 1px double #fff;
     border-left: 1px double #fff;
+    border-bottom-left-radius: 25%;
+    border-bottom-right-radius: 25%;
+    border-top-left-radius: 25%;
+    border-top-right-radius: 25%;
     transform: scale(1, 0);
   }
 
   &:hover {
     
     .card__img {
+      width:75%;
       opacity: 0.2;
       filter: blur(5px);
       transform: scale(1.1);
-      animation: place-order-keyframes .4s linear;
+      animation: place-order-keyframes .1s linear;
+      //background-color: $ticket-button-active-bgcolor-default;
       background-color: $ticket-button-active-bgcolor-default;
-      @keyframes place-order-keyframes {
-        0% {
-            background-color: lighten(saturate($ticket-button-active-bgcolor-default, 90%), 2%);
-            box-shadow: 0 0 0 0 rgba($top-of-book-active-box-shadow-color, .8),
-                inset 0 0 1rem $ticket-button-active-shadow-default,
-                inset 0 0 0 0 rgba($top-of-book-active-box-shadow-color, 1);
-        }
-
-        4%, 90% {
-            background-color: lighten(saturate($ticket-button-active-bgcolor-default, 90%), 10%);
-            box-shadow: 0 0 125px 3px rgba($top-of-book-active-box-shadow-color, .8),
-                inset 0 0 0 14px rgba(255, 255, 255, 1),
-                inset 0 0 125px 8px lighten(rgba($top-of-book-active-box-shadow-color, 1), 60%);
-        }
-
-        100% {
-            background-color: $ticket-button-active-bgcolor-default;
-            box-shadow: 0 0 0 0 rgba($top-of-book-active-box-shadow-color, .8),
-                inset 0 0 1rem $ticket-button-active-shadow-default,
-                inset 0 0 0 0 rgba($top-of-book-active-box-shadow-color, 1);
-        }
-      }
     }
     
   }

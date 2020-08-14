@@ -20,9 +20,12 @@ longdiv <- function(...){
         style = "height:100vh;"
     )
 }
+bigbreak <- function(n) {
+    HTML(paste(rep("<br></br>", n), collapse = ""))
+}
 load_dot_env("spotify_client.env")
 css <- sass(sass_file("www/style.scss"))
-# get_spotify_authorization_code()
+# code <- get_spotify_authorization_code()
 # Define UI for application that draws a histogram
 ui <- fluidPage(
     tags$head(
@@ -56,81 +59,147 @@ ui <- fluidPage(
         ),
         longdiv(
             div(
-                id = "stick",
+                id = "stick1",
                 h1("Your alltime favorite artists", class = "section")
             ),
+            div(id = "watchdis1"),
+            HTML('<hr style="height:60vh; visibility:hidden;" />'),
             fluidRow(
                 column(
-                    width = 3,
+                    width = 4,
                     class = "colt",
                     uiOutput("image_1")
                 ),
                 column(
-                    width = 3,
+                    width = 4,
                     class = "colt",
                     uiOutput("image_2")
                 ),
                 column(
-                    width = 3,
+                    width = 4,
                     class = "colt",
                     uiOutput("image_3")
-                ),
-                column(
-                    width = 3,
-                    class = "colt",
-                    uiOutput("image_4")
                 )
             ),
+            bigbreak(20),
             fluidRow(
                 column(
-                    width = 3,
+                    width = 4,
+                    class = "colt",
+                    uiOutput("image_4")
+                ),
+                column(
+                    width = 4,
                     class = "colt",
                     uiOutput("image_5")
                 ),
                 column(
-                    width = 3,
+                    width = 4,
                     class = "colt",
                     uiOutput("image_6")
-                ),
+                )
+            ),
+            #HTML('<hr style="height:30vh; visibility:hidden;" />'),
+            fluidRow(
                 column(
-                    width = 3,
+                    width = 4,
                     class = "colt",
                     uiOutput("image_7")
                 ),
                 column(
-                    width = 3,
+                    width = 4,
                     class = "colt",
                     uiOutput("image_8")
+                ),
+                column(
+                    width = 4,
+                    class = "colt",
+                    uiOutput("image_9")
                 )
             ),
             fluidRow(
                 column(
-                    width = 3,
-                    class = "colt",
-                    uiOutput("image_9")
-                ),
-                column(
-                    width = 3,
+                    width = 4,
                     class = "colt",
                     uiOutput("image_10")
                 ),
                 column(
-                    width = 3,
+                    width = 4,
                     class = "colt",
                     uiOutput("image_11")
                 ),
                 column(
-                    width = 3,
+                    width = 4,
                     class = "colt",
                     uiOutput("image_12")
                 )
+            ),
+            #HTML('<hr style="height:30vh; visibility:hidden;" />'),
+            fluidRow(
+                column(
+                    width = 4,
+                    class = "colt",
+                    uiOutput("image_13")
+                ),
+                column(
+                    width = 4,
+                    class = "colt",
+                    uiOutput("image_14")
+                ),
+                column(
+                    width = 4,
+                    class = "colt",
+                    uiOutput("image_15")
+                )
             )
+        ),
+        longdiv(
+            id = "stick2",
+            h1("Your recent favorite artists", class = "section")
+        ),
+        div(id = "watchdis2"),
+        HTML('<hr style="height:30vh; visibility:hidden;" />'),
+        longdiv(
+            h1("Test", class = "section")
         )
     )
 )
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
+    w1 <- Waypoint$
+        new("watchdis1", offset = "30%", animation = "slideInUp")$
+        start()
+    
+    w2 <- Waypoint$
+        new("watchdis2", offset = "50%")$
+        start()
+    
+    shtick1 <- Shtick$
+        new("stick1")
+    
+    shtick2 <- Shtick$
+        new("stick2")
+    
+    observeEvent(w1$get_direction(), {
+        if (w1$get_direction() == "down") {
+            print("Passing first waypoint")
+            shtick1$shtick(top = 20)
+        } else {
+            shtick1$unshtick()
+        }
+    })
+    
+    # observeEvent(w2$get_direction(), {
+    #     if (w2$get_direction() == "down") {
+    #         print("Passing second waypoint")
+    #         shtick1$unshtick()
+    #         shtick2$shtick(top = 20)
+    #     } else {
+    #         shtick2$unshtick()
+    #     }
+    # })
+    
     longterm_art <- get_my_top_artists_or_tracks(
         type = "artists",
         time_range = "long_term",
@@ -149,7 +218,7 @@ server <- function(input, output) {
                 ),
                 p(
                     class = "card__text",
-                    longterm_art$genres[[1]][1]
+                    str_to_title(longterm_art$genres[[1]][1])
                 )
             )
         )
@@ -166,7 +235,7 @@ server <- function(input, output) {
                 ),
                 p(
                     class = "card__text",
-                    longterm_art$genres[[2]][1]
+                    str_to_title(longterm_art$genres[[2]][1])
                 )
             )
         )
@@ -183,7 +252,7 @@ server <- function(input, output) {
                 ),
                 p(
                     class = "card__text",
-                    longterm_art$genres[[3]][1]
+                    str_to_title(longterm_art$genres[[3]][1])
                 )
             )
         )
@@ -200,7 +269,7 @@ server <- function(input, output) {
                 ),
                 p(
                     class = "card__text",
-                    longterm_art$genres[[4]][1]
+                    str_to_title(longterm_art$genres[[4]][1])
                 )
             )
         )
@@ -217,7 +286,7 @@ server <- function(input, output) {
                 ),
                 p(
                     class = "card__text",
-                    longterm_art$genres[[5]][1]
+                    str_to_title(longterm_art$genres[[5]][1])
                 )
             )
         )
@@ -234,7 +303,7 @@ server <- function(input, output) {
                 ),
                 p(
                     class = "card__text",
-                    longterm_art$genres[[6]][1]
+                    str_to_title(longterm_art$genres[[6]][1])
                 )
             )
         )
@@ -251,7 +320,7 @@ server <- function(input, output) {
                 ),
                 p(
                     class = "card__text",
-                    longterm_art$genres[[7]][1]
+                    str_to_title(longterm_art$genres[[7]][1])
                 )
             )
         )
@@ -268,7 +337,7 @@ server <- function(input, output) {
                 ),
                 p(
                     class = "card__text",
-                    longterm_art$genres[[8]][1]
+                    str_to_title(longterm_art$genres[[8]][1])
                 )
             )
         )
@@ -285,7 +354,7 @@ server <- function(input, output) {
                 ),
                 p(
                     class = "card__text",
-                    longterm_art$genres[[9]][1]
+                    str_to_title(longterm_art$genres[[9]][1])
                 )
             )
         )
@@ -302,7 +371,7 @@ server <- function(input, output) {
                 ),
                 p(
                     class = "card__text",
-                    longterm_art$genres[[10]][1]
+                    str_to_title(longterm_art$genres[[10]][1])
                 )
             )
         )
@@ -319,7 +388,7 @@ server <- function(input, output) {
                 ),
                 p(
                     class = "card__text",
-                    longterm_art$genres[[11]][1]
+                    str_to_title(longterm_art$genres[[11]][1])
                 )
             )
         )
@@ -336,7 +405,58 @@ server <- function(input, output) {
                 ),
                 p(
                     class = "card__text",
-                    longterm_art$genres[[12]][1]
+                    str_to_title(longterm_art$genres[[12]][1])
+                )
+            )
+        )
+    })
+    output$image_13 <- renderUI({
+        tags$figure(
+            class = "card card_bg_red",
+            img(src= longterm_art$images[[13]][1, 2], align = "center", class = "card__img"),
+            tags$figcaption(
+                class = "card__text-block",
+                h2(
+                    class = "card__heading",
+                    longterm_art$name[13]
+                ),
+                p(
+                    class = "card__text",
+                    str_to_title(longterm_art$genres[[13]][1])
+                )
+            )
+        )
+    })
+    output$image_14 <- renderUI({
+        tags$figure(
+            class = "card card_bg_red",
+            img(src= longterm_art$images[[14]][1, 2], align = "center", class = "card__img"),
+            tags$figcaption(
+                class = "card__text-block",
+                h2(
+                    class = "card__heading",
+                    longterm_art$name[14]
+                ),
+                p(
+                    class = "card__text",
+                    str_to_title(longterm_art$genres[[14]][1])
+                )
+            )
+        )
+    })
+    output$image_15 <- renderUI({
+        tags$figure(
+            class = "card card_bg_red",
+            img(src= longterm_art$images[[15]][1, 2], align = "center", class = "card__img"),
+            tags$figcaption(
+                class = "card__text-block",
+                h2(
+                    class = "card__heading",
+                    longterm_art$name[15]
+                ),
+                p(
+                    class = "card__text",
+                    str_to_title(longterm_art$genres[[15]][1])
                 )
             )
         )

@@ -47,3 +47,7 @@
 .light {
   color: white;
 }
+
+#stick1 {
+  z-index:100;
+}
