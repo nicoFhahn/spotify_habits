@@ -1,11 +1,3 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
 library(dotenv)
 library(shiny)
 library(shinyjs)
@@ -23,7 +15,9 @@ bigbreak <- function(n) {
   HTML(paste(rep("<br></br>", n), collapse = ""))
 }
 load_dot_env("spotify_client.env")
+print(Sys.getenv("SPOTIFY_CLIENT_ID"))
 css <- sass(sass_file("www/style.scss"))
+access_token <- get_spotify_access_token()
 code <- get_spotify_authorization_code()
 longterm_art <- get_my_top_artists_or_tracks(
   type = "artists",
