@@ -13,6 +13,7 @@ library(spotifyr)
 library(shticky)
 library(waypointer)
 library(sass)
+library(stringr)
 longdiv <- function(...){
     div(
         ...,
@@ -25,7 +26,13 @@ bigbreak <- function(n) {
 }
 load_dot_env("spotify_client.env")
 css <- sass(sass_file("www/style.scss"))
-# code <- get_spotify_authorization_code()
+code <- get_spotify_authorization_code()
+longterm_art <- get_my_top_artists_or_tracks(
+    type = "artists",
+    time_range = "long_term",
+    limit = 20,
+    authorization = code
+)
 # Define UI for application that draws a histogram
 ui <- fluidPage(
     tags$head(
@@ -38,174 +45,118 @@ ui <- fluidPage(
             href = "https://use.fontawesome.com/releases/v5.8.1/css/all.css", 
             integrity = "sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf",
             crossorigin = "anonymous"
-        )
+        ),
+        tags$script(src = "js.js")
     ),
-    use_shticky(),
-    use_waypointer(),
     div(
         id = "bg",
         longdiv(
-            h1("Your Spotify listening habits", class = "title"),
+            div(
+                class = "text-holder",
+                h1("Your Spotify listening habits")
+            ),
             br(),
             br(),
+            div(
+                class = "text-holder-2", id = "again",
             h1(
                 "Visualized with highcharts and R",
-                class = "subtitle"
-            ),
-            p(
-                style = "text-align:center;",
-                "Using spotifyr to access the Spotify API"
             )
-        ),
-        longdiv(
+            ),
             div(
-                id = "stick1",
-                h1("Your alltime favorite artists", class = "section")
-            ),
-            div(id = "watchdis1"),
-            HTML('<hr style="height:60vh; visibility:hidden;" />'),
-            fluidRow(
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_1")
-                ),
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_2")
-                ),
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_3")
-                )
-            ),
-            bigbreak(20),
-            fluidRow(
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_4")
-                ),
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_5")
-                ),
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_6")
-                )
-            ),
-            #HTML('<hr style="height:30vh; visibility:hidden;" />'),
-            fluidRow(
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_7")
-                ),
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_8")
-                ),
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_9")
-                )
-            ),
-            fluidRow(
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_10")
-                ),
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_11")
-                ),
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_12")
-                )
-            ),
-            #HTML('<hr style="height:30vh; visibility:hidden;" />'),
-            fluidRow(
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_13")
-                ),
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_14")
-                ),
-                column(
-                    width = 4,
-                    class = "colt",
-                    uiOutput("image_15")
+                class = "text-holder-3", id = "again2",
+                p(
+                    "Using spotifyr to access the Spotify API"
                 )
             )
         ),
         longdiv(
-            id = "stick2",
-            h1("Your recent favorite artists", class = "section")
+            tags$section(
+                fluidRow(
+                    tags$figure(
+                        class = "stick",
+                        h1("Your alltime favorite artists", class = "section")
+                    ),
+                    div(
+                        bigbreak(10),
+                        
+                        tags$figure(
+                            class = "stick2",
+                            h4(paste("#1", str_to_title(longterm_art$name[1])), class = "section")
+                        ),
+                        fluidRow(
+                            class = "fade",
+                            uiOutput("image_1")
+                        ),
+                        bigbreak(10),
+                        tags$figure(
+                            class = "stick3",
+                            h4(paste("#2", str_to_title(longterm_art$name[2])), class = "section")
+                        ),
+                        fluidRow(
+                            class = "fade",
+                            uiOutput("image_2")
+                        ),
+                        bigbreak(10),
+                        tags$figure(
+                            class = "stick4",
+                            h4(paste("#3", str_to_title(longterm_art$name[3])), class = "section")
+                        ),
+                        fluidRow(
+                            class = "fade",
+                            uiOutput("image_3")
+                        ),
+                        bigbreak(15)
+                    )
+                )
+            ),
+            tags$section(
+                fluidRow(
+                        tags$figure(
+                            class = "stick",
+                            h1("Your recent favorite artists", class = "section")
+                        ),
+                    div(
+                        tags$article(
+                            bigbreak(15),
+                            fluidRow(
+                                class = "fade",
+                                uiOutput("image_4")
+                            ),
+                            bigbreak(15),
+                            fluidRow(
+                                class = "fade",
+                                uiOutput("image_5")
+                            ),
+                            bigbreak(15),
+                            fluidRow(
+                                class = "fade",
+                                uiOutput("image_6")
+                            ),
+                            bigbreak(15)
+                        )
+                    )
+                )
+            )
         ),
-        div(id = "watchdis2"),
-        HTML('<hr style="height:30vh; visibility:hidden;" />'),
         longdiv(
-            h1("Test", class = "section")
+            
+        ),
+        longdiv(
+            
+        ),
+        longdiv(
+            
+        ),
+        longdiv(
+            
         )
     )
 )
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-    w1 <- Waypoint$
-        new("watchdis1", offset = "30%", animation = "slideInUp")$
-        start()
     
-    w2 <- Waypoint$
-        new("watchdis2", offset = "50%")$
-        start()
-    
-    shtick1 <- Shtick$
-        new("stick1")
-    
-    shtick2 <- Shtick$
-        new("stick2")
-    
-    observeEvent(w1$get_direction(), {
-        if (w1$get_direction() == "down") {
-            print("Passing first waypoint")
-            shtick1$shtick(top = 20)
-        } else {
-            shtick1$unshtick()
-        }
-    })
-    
-    # observeEvent(w2$get_direction(), {
-    #     if (w2$get_direction() == "down") {
-    #         print("Passing second waypoint")
-    #         shtick1$unshtick()
-    #         shtick2$shtick(top = 20)
-    #     } else {
-    #         shtick2$unshtick()
-    #     }
-    # })
-    
-    longterm_art <- get_my_top_artists_or_tracks(
-        type = "artists",
-        time_range = "long_term",
-        limit = 20,
-        authorization = code
-    )
     output$image_1 <- renderUI({
         tags$figure(
             class = "card card_bg_red",
@@ -223,6 +174,16 @@ server <- function(input, output) {
             )
         )
     })
+    
+    output$caption_1 <- renderUI({
+        title <- paste("#1", str_to_title(longterm_art$name[1]))
+        print(title)
+        tags$figure(
+            class = "stick2",
+            h4(title, class = "section")
+        )
+    })
+    
     output$image_2 <- renderUI({
         tags$figure(
             class = "card card_bg_red",
