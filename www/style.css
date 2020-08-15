@@ -32,6 +32,14 @@
 h1.section{
   font-size:3.4em;
   font-weight:bold;
+  text-shadow: 1px 2px 3px #DDEEFF,
+               0 0 0 black,
+               -1px 1px 0 #DDEEFF,
+               1px 1px 0 white;
+
+  color: rgba(254, 103, 2, .8);
+  letter-spacing: -5px;
+  font-family: Helvetica, sans-serif;  
 }
 
 
@@ -49,4 +57,10 @@ h1.section{
 
 .light {
   color: white;
+}
+
+td {
+  position: relative;
+  font-size: 1em;
+  letter-spacing: 5px;
 }

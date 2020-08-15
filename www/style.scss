@@ -24,11 +24,10 @@ $bg-color: #1e2424;
 .card {
   color: #fff;
   position: relative;
-  float: left;
+  float: right;
   overflow: hidden;
-  left:25%;
-  margin: 10px 1%;
-  width: 100%;
+  width:30%;
+  margin: 10px 10%;
   background: #000000;
   text-align: center;
   transition: all 0.3s ease-out;
@@ -36,6 +35,8 @@ $bg-color: #1e2424;
   border-bottom-right-radius: 50%;
   border-top-left-radius: 50%;
   border-top-right-radius: 50%;
+  display:flex;
+  justify-content: flex-end;;
   
    &_bg_red {
     background: rgba(255, 255, 255, 0);
@@ -43,7 +44,6 @@ $bg-color: #1e2424;
 
   &__img {
     opacity: 1;
-    width: 25%;
   }
 
   &__text-block {
@@ -87,17 +87,17 @@ $bg-color: #1e2424;
   &:after {
     content: '';
     position: absolute;
-    top: 20px;
-    right: 38%;
-    bottom: 20px;
-    left: 38%;
+    top: 3%;
+    right: 3%;
+    bottom: 3%;
+    left: 3%;
     opacity: 0;
     transition: opacity 0.6s, transform 0.6s;
   }
 
   &:before {
-    border-top: 1px double #fff;
-    border-bottom: 1px double #fff;
+    border-top: 2px double #DDF45B;
+    border-bottom: 2px double #DDF45B;
     border-bottom-left-radius: 50%;
     border-bottom-right-radius: 50%;
     border-top-left-radius: 50%;
@@ -106,8 +106,8 @@ $bg-color: #1e2424;
   }
 
   &:after {
-    border-right: 1px double #fff;
-    border-left: 1px double #fff;
+    border-right: 2px double #DDF45B;
+    border-left: 2px double #DDF45B;
     border-bottom-left-radius: 50%;
     border-bottom-right-radius: 50%;
     border-top-left-radius: 50%;
@@ -121,7 +121,7 @@ $bg-color: #1e2424;
       opacity: 0.2;
       filter: blur(5px);
       transform: scale(1.1);
-      animation: place-order-keyframes .1s linear;
+      animation: place-order-keyframes .2s linear;
       background-color: $ticket-button-active-bgcolor-default;
     }
     
@@ -157,9 +157,6 @@ $bg-color: #1e2424;
 
 $top-offset: 3rem;
 $bp: 35rem;
-
-body {
-}
 
 h1 {
   text-align: center;
@@ -202,20 +199,6 @@ article {
   }
 }
 
-figure.stick{
-  align-items: center;
-  align-self: flex-start;
-  display: flex;
-  height: 10rem;
-  margin: 0;
-  width: 100%;
-  justify-content: left;
-  top: $top-offset;
-  
-  @media screen and (min-width: $bp) {
-    position: sticky;
-  }
-}
 
 figure.stick{
   align-items: center;
@@ -230,7 +213,10 @@ figure.stick{
   @media screen and (min-width: $bp) {
     position: sticky;
   }
+  
+  
 }
+
 h4.section {
   font-size: 2.4em;
 }
@@ -372,7 +358,7 @@ $red: #F64C72;
     left: 0;
     width: 100%;
     height: 100%;
-    animation: appear3 1s cubic-bezier(.19,1,.22,1) forwards;
+    animation: appear3 1.2s cubic-bezier(.19,1,.22,1) forwards;
     animation-delay: 1.8s;
     
   }
@@ -384,8 +370,8 @@ $red: #F64C72;
     text-align: center;
     opacity: 0;
     padding: 3px 10px;
-    animation: text-appear 1s linear forwards;
-    animation-delay: 2.4s;
+    animation: text-appear 1.2s linear forwards;
+    animation-delay: 2.5s;
     
   }
 }
@@ -450,3 +436,5 @@ $red: #F64C72;
     background: $red;
   }
 }
+
+
