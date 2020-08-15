@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 
 #bg {
-  background: rgb(138, 235, 180);
-  background: linear-gradient(180deg, rgba(138, 235, 180,1) 0%, rgba(78, 99, 87,1) 100%);
+  background: linear-gradient(45deg, #392e6d, #2e3881);
+  /* background: linear-gradient(180deg, rgba(138, 235, 180,1) 0%, rgba(78, 99, 87,1) 100%);*/
   width:100%;
 }
 
@@ -11,6 +11,7 @@
   margin-top: 15%;
   font-size: 8vh;
   font-family: 'Quicksand', sans-serif;
+  color:rgb(255,255,255);
 }
 
 .subtitle {
@@ -24,13 +25,15 @@
   text-align: left;
   margin-top: 20%;
   margin-bottom:10%;
-  font-size: 5vh;
+  font-size: 2.4em;
   font-family: 'Quicksand', sans-serif;
 }
 
-.p {
-  font-family: 'Quicksand', sans-serif;
+h1.section{
+  font-size:3.4em;
+  font-weight:bold;
 }
+
 
 .container-fluid{
   padding: 0;
