@@ -1,8 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
-$ticket-button-active-bgcolor-default: #1e2424; // dark blue
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
+@import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
+
+$background: #F5D6BA;
+$yellow: #DDF45B;
+$pink: #FE5D26;
+$red: #F64C72;
+$bg-color: #1e2424;
+$top-offset: 3rem;
+$bp: 35rem;
+$ticket-button-active-bgcolor-default: #1e2424;
 $top-of-book-active-box-shadow-color: #68c4bc;
 $ticket-button-active-shadow-default: #68c4bc;
-$bg-color: #1e2424;
 
 .card__img {
     border-bottom-left-radius: 50%;
@@ -15,7 +28,6 @@ $bg-color: #1e2424;
     background: $ticket-button-active-bgcolor-default;
     box-shadow: inset 0 0 1rem $top-of-book-active-box-shadow-color;
 }
-
 * {
   box-sizing: padding-box;
   
@@ -69,10 +81,12 @@ $bg-color: #1e2424;
   &__text {
     font-size: 0.9em;
     font-weight: 500;
+    color: #fff !important;
     opacity: 0;
     margin: 0;
     font-family: 'Quicksand', sans-serif;
   }
+  
   
   &__link {
     left: 0;
@@ -155,8 +169,9 @@ $bg-color: #1e2424;
   
 }
 
-$top-offset: 3rem;
-$bp: 35rem;
+
+
+
 
 h1 {
   text-align: center;
@@ -232,6 +247,10 @@ h4.section {
   width: 100%;
   justify-content: left;
   top: $top-offset * 3;
+  font-family: 'Ubuntu';
+  letter-spacing: 0.2em;
+  line-height: 2;
+  font-weight: 300;
   
   @media screen and (min-width: $bp) {
     position: sticky;
@@ -247,6 +266,10 @@ h4.section {
   width: 100%;
   justify-content: left;
   top: $top-offset * 5;
+  font-family: 'Ubuntu';
+  letter-spacing: 0.2em;
+  line-height: 2;
+  font-weight: 300;
   
   @media screen and (min-width: $bp) {
     position: sticky;
@@ -262,16 +285,16 @@ figure.stick4{
   width: 100%;
   justify-content: left;
   top: $top-offset * 7;
+  font-family: 'Ubuntu';
+  letter-spacing: 0.2em;
+  line-height: 2;
+  font-weight: 300;
   
   @media screen and (min-width: $bp) {
     position: sticky;
   }
 }
 
-$background: #F5D6BA;
-$yellow: #DDF45B;
-$pink: #FE5D26;
-$red: #F64C72;
 
 .text-holder{
   margin-top: 5%;
@@ -281,6 +304,7 @@ $red: #F64C72;
   display: flex;
   justify-content: center;
   align-items: center;
+  
   &:before{
     content: '';
     background: $yellow;
@@ -292,6 +316,7 @@ $red: #F64C72;
     animation: appear 1.2s cubic-bezier(.19,1,.22,1) forwards;
     
   }
+  
   h1{
     text-transform: uppercase;
     font-weight: 100;
@@ -299,7 +324,8 @@ $red: #F64C72;
     opacity: 0;
     padding: 3px 10px;
     animation: text-appear 1.2s linear forwards;
-    animation-delay: .7s;text-align: center;
+    animation-delay: .7s;
+    text-align: center;
     font-size: 7vh;
     font-family: 'Quicksand', sans-serif;
     
@@ -316,6 +342,7 @@ $red: #F64C72;
   display: flex;
   justify-content: center;
   align-items: center;
+  
   &:before{
     content: '';
     position: absolute;
@@ -327,6 +354,7 @@ $red: #F64C72;
     animation-delay: .9s;
     
   }
+  
   h1{
     font-size: 5vh;
     font-family: 'Quicksand', sans-serif;
@@ -351,6 +379,7 @@ $red: #F64C72;
   display: flex;
   justify-content: center;
   align-items: center;
+  
   &:before{
     content: '';
     position: absolute;
@@ -362,6 +391,7 @@ $red: #F64C72;
     animation-delay: 1.8s;
     
   }
+  
   p{
     color:rgb(255,255,255);
     font-size: 2vh;
@@ -437,4 +467,170 @@ $red: #F64C72;
   }
 }
 
+.modal-title,
+.modal-title:hover {
+  /*
+   * Animation variables
+   */
+  $animationSteps: 20;
+  $animationDuration: 50;
+  $animationElement: span;
+  $animationElementsCount: 100;
+  $delayBetweenLetters: 0.2;
 
+  /*
+   * Elements settings
+   */
+  #{$animationElement} {
+    animation-name: anim-text-flow-keys;
+    animation-duration: #{$animationDuration}s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+  }
+
+  /*
+   * Keyframe loop
+   */
+  @keyframes anim-text-flow-keys {
+    @for $i from 0 through $animationSteps {
+      #{percentage($i * (1 / $animationSteps))} {
+        color: hsla(random(365), 60, 60, 1);
+      }
+    }
+  }
+
+  /*
+   * Element animation delay loop
+   */
+  $totalDelayTime: $animationElementsCount * $delayBetweenLetters;
+
+  @for $i from 1 through $animationElementsCount {
+    #{$animationElement}:nth-of-type(#{$i}) {
+      animation-delay: #{($i * $delayBetweenLetters) - $totalDelayTime}s;
+    }
+  }
+}
+
+
+
+// NEED THESE FOR TABS TO WORK
+// old browsers fallback that dont support attribute selector CSS
+.hidden {
+  display: none !important;
+}
+
+.js-tab-panel[aria-hidden='true'] {
+  display: none;
+}
+
+// EVERYTHING BELOW THIS LINE IS AESTHETIC
+
+body {
+   @media screen and (max-width: 480px) {
+      padding: 0;
+    }
+}
+
+.tab {
+  display: inline-block;
+  
+  a {
+    display: block;
+    color: #000;
+    text-align: center;
+    padding: 15px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    background-color: #d0d0d0;
+    transition: all 0.15s ease-out;
+    border-radius: 4px 4px 0 0;
+    border: 2px solid #000;
+    border-width: 2px 2px 0 2px;
+    
+    @media screen and (max-width: 480px) {
+      border-radius: 0;
+    }
+    
+    .fa {
+      font-size: 16px;
+    }
+    
+    span {
+      @media screen and (max-width: 810px) {
+        display: none;
+      }
+    }
+    
+    &:hover,
+    &:focus {
+      background-color: #e1e1e1;
+      padding: 15px 30px;
+      font-weight: bold;
+    }
+  }
+  &.active a {
+    background-color: #2b2b2b;
+    color: #fff;
+    padding: 15px 60px;
+    
+    @media screen and (max-width: 810px) {
+      padding: 15px 30px;
+    }
+  }
+  & + & {
+    margin-left: 5px;
+    @media screen and (max-width: 480px) {
+      margin-left: -5px;
+      border-left: 1px solid #eee;
+    }
+  }
+  &:first-child a {
+    @media screen and (max-width: 480px) {
+      border-radius: 4px 0 0 0;
+    }
+  }
+  &:last-child a {
+    @media screen and (max-width: 480px) {
+      border-radius: 0 4px 0 0;
+    }
+  }
+  &__wrapper {
+    margin: 0;
+    padding: 0;
+    @media screen and (max-width: 480px) {
+      text-align: center;
+    }
+  }
+}
+
+.panel {
+  &__wrapper {
+    width: 100%;
+    background-color: #2b2b2b;
+    color: #fff;
+    box-shadow: 1px 1px 5px -4px rgba(0, 0, 0, 0.3);
+    max-width: 1000px;
+    padding: 30px;
+    margin: 0 0 50px;
+    border-radius: 0 4px 4px 4px;
+    
+  }
+}
+
+.title {
+  color: #23aff6;
+  font-size: 40px;
+  font-weight: 100;
+  margin: 0 auto 50px;
+  @media screen and (max-width: 480px) {
+    padding: 50px 20px 0;
+  }
+}
+
+p {
+  font-size: 18px;
+  color: #888888;
+}

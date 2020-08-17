@@ -2,7 +2,10 @@ fluidPage(
   useShinyjs(),
   tags$head(
     tags$style(
-      css
+      css1
+    ),
+    tags$style(
+      css2
     ),
     tags$link(rel = "stylesheet", href = "style.css"),
     tags$link(
@@ -50,8 +53,8 @@ fluidPage(
               tags$table(
                 style = "width:100%;color:rgb(255,255,255);",
                 tags$tr(
-                  tags$td("#1", style = "width:5%;color:rgb(255,255,255);"),
-                  tags$td(str_to_title(longterm_art$name[1]))
+                  tags$td("#1", style = "width:5%;color:rgb(255,255,255);", class = "top_art"),
+                  tags$td(str_to_title(longterm_art$name[1]), class = "top_art")
                 ),
                 class = "section"
               )
@@ -66,8 +69,8 @@ fluidPage(
               tags$table(
                 style = "width:100%;color:rgb(255,255,255);",
                 tags$tr(
-                  tags$td("#2", style = "width:5%;color:rgb(255,255,255);"),
-                  tags$td(str_to_title(longterm_art$name[2]))
+                  tags$td("#2", style = "width:5%;color:rgb(255,255,255);", class = "top_art"),
+                  tags$td(str_to_title(longterm_art$name[2]), class = "top_art")
                 ),
                 class = "section"
               )
@@ -82,8 +85,8 @@ fluidPage(
               tags$table(
                 style = "width:100%;color:rgb(255,255,255);",
                 tags$tr(
-                  tags$td("#3", style = "width:5%;color:rgb(255,255,255);"),
-                  tags$td(str_to_title(longterm_art$name[3]))
+                  tags$td("#3", style = "width:5%;color:rgb(255,255,255);", class = "top_art"),
+                  tags$td(str_to_title(longterm_art$name[3]), class = "top_art")
                 ),
                 class = "section"
               )

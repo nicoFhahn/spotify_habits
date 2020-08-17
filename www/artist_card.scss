@@ -1,0 +1,654 @@
+/* Variables */
+$ticket-button-active-bgcolor-default: #1e2424;
+$top-of-book-active-box-shadow-color: #68c4bc;
+$ticket-button-active-shadow-default: #68c4bc;
+/* SCSS for table on the left of the artist card */
+.artist_table {
+  
+  .r-title{
+    --uirTitleMarginTop: var(--rTitleMarginTop, 0);
+	  --uirTitleMarginBottom: var(--rTitleMarginBottom, 20);
+	  margin-top: var(--uirTitleMarginTop) !important;
+	  margin-bottom: var(--uirTitleMarginBottom) !important;
+	  margin-left: 3vw;
+	  font-family: 'Teko', sans-serif;
+	  color: white !important;
+  }
+  
+  h1 {
+    position: relative;
+    color: rgba(#000, 0.035);
+    text-align: left;
+    margin-left: 3vw;
+    margin-top: -1vh;
+    
+    .wrap-reveal1 {
+      position: absolute;
+      display: block;
+      overflow: hidden;
+      top: 0;
+      left: -1.25rem;
+      right: calc(100% + 2.25rem);
+      transform: skewX(-20deg);
+      animation: reveal 1s 1s;
+      animation-fill-mode: forwards;
+      font-family: 'Old Standard TT', serif;
+      font-weight: 400;
+      line-height: 1.5;
+      font-size: 0.6em;
+    }
+    
+    .reveal1 {
+      display: block;
+      padding: 0 1.25rem;
+      white-space: nowrap;
+      color: #fff;
+      transform: skewX(20deg);
+    }
+    
+    .wrap-reveal2 {
+      position: absolute;
+      display: block;
+      overflow: hidden;
+      top: 0;
+      left: -1.25rem;
+      right: calc(100% + 2.25rem);
+      transform: skewX(-20deg);
+      animation: reveal 1s 1s;
+      animation-fill-mode: forwards;
+      animation-delay: 1.2s;
+      animation-fill-mode: forwards;
+      font-family: 'Old Standard TT', serif;
+      font-weight: 400;
+      line-height: 1.5;
+      font-size: 0.6em;
+      }
+      
+    .reveal2 {
+      display: block;
+      padding: 0 1.25rem;
+      white-space: nowrap;
+      color: #fff;
+      transform: skewX(20deg);
+      animation-delay: 1.2s;
+      }
+  
+    .wrap-reveal3 {
+      position: absolute;
+      display: block;
+      overflow: hidden;
+      top: 0;
+      left: -1.25rem;
+      right: calc(100% + 2.25rem);
+      transform: skewX(-20deg);
+      animation: reveal 1s 1s;
+      animation-fill-mode: forwards;
+      animation-delay: 1.4s;
+      font-family: 'Old Standard TT', serif;
+      font-weight: 400;
+      line-height: 1.5;
+      font-size: 0.6em;
+      }
+  
+    .reveal3 {
+      display: block;
+      padding: 0 1.25rem;
+      white-space: nowrap;
+      color: #fff;
+      transform: skewX(20deg);
+      animation-delay: 1.4s;
+      }
+  
+    .wrap-reveal4 {
+      position: absolute;
+      display: block;
+      overflow: hidden;
+      top: 0;
+      left: -1.25rem;
+      right: calc(100% + 2.25rem);
+      transform: skewX(-20deg);
+      animation: reveal 1s 1s;
+      animation-fill-mode: forwards;
+      animation-delay: 1.6s;
+      font-family: 'Old Standard TT', serif;
+      font-weight: 400;
+      line-height: 1.5;
+      font-size: 0.6em;
+      }
+  
+    .reveal4 {
+      display: block;
+      padding: 0 1.25rem;
+      white-space: nowrap;
+      color: #fff;
+      transform: skewX(20deg);
+      animation-delay: 1.6s;
+      }
+  
+    .wrap-reveal5 {
+      position: absolute;
+      display: block;
+      overflow: hidden;
+      top: 0;
+      left: -1.25rem;
+      right: calc(100% + 2.25rem);
+      transform: skewX(-20deg);
+      animation: reveal 1s 1s;
+      animation-fill-mode: forwards;
+      animation-delay: 1.8s;
+      font-family: 'Old Standard TT', serif;
+      font-weight: 400;
+      line-height: 1.5;
+      font-size: 0.6em;
+      }
+  
+    .reveal5 {
+      display: block;
+      padding: 0 1.25rem;
+      white-space: nowrap;
+      color: #fff;
+      transform: skewX(20deg);
+      animation-delay: 1.8s;
+      }
+    }
+}
+
+
+/* SCSS for table on the right of the artist card */
+.disco_table {
+  .r-title {
+	  --uirTitleMarginTop: var(--rTitleMarginTop, 0);
+	  --uirTitleMarginBottom: var(--rTitleMarginBottom, 20);
+	  margin-top: var(--uirTitleMarginTop) !important;
+	  margin-bottom: var(--uirTitleMarginBottom) !important;
+	  margin-left: 0.1vw;
+	  font-family: 'Teko', sans-serif;
+	  color: white !important;
+  }
+  
+  h1 {
+    position: relative;
+    color: rgba(#000, 0.035);
+    text-align: left;
+    margin-top: -1.2%;
+    
+    .wrap-reveal1 {
+      position: absolute;
+      display: block;
+      overflow: hidden;
+      top: 0;
+      left: -1.25rem;
+      right: calc(100% + 2.25rem);
+      transform: skewX(-20deg);
+      animation: reveal 1s 1s;
+      animation-fill-mode: forwards;
+      font-family: 'Old Standard TT', serif;
+      font-weight: 400;
+      line-height: 1.5;
+      font-size: 0.6em;
+    }
+  
+    .reveal1 {
+      display: block;
+      padding: 0 1.25rem;
+      white-space: nowrap;
+      color: #fff;
+      transform: skewX(20deg);
+    }
+  
+    .wrap-reveal2 {
+      position: absolute;
+      display: block;
+      overflow: hidden;
+      top: 0;
+      left: -1.25rem;
+      right: calc(100% + 2.25rem);
+      transform: skewX(-20deg);
+      animation: reveal 1s 1s;
+      animation-fill-mode: forwards;
+      animation-delay: 1.2s;
+      animation-fill-mode: forwards;
+      font-family: 'Old Standard TT', serif;
+      font-weight: 400;
+      line-height: 1.5;
+      font-size: 0.6em;
+    }
+  
+    .reveal2 {
+      display: block;
+      padding: 0 1.25rem;
+      white-space: nowrap;
+      color: #fff;
+      transform: skewX(20deg);
+      animation-delay: 1.2s;
+    }
+  
+    .wrap-reveal3 {
+      position: absolute;
+      display: block;
+      overflow: hidden;
+      top: 0;
+      left: -1.25rem;
+      right: calc(100% + 2.25rem);
+      transform: skewX(-20deg);
+      animation: reveal 1s 1s;
+      animation-fill-mode: forwards;
+      animation-delay: 1.4s;
+      font-family: 'Old Standard TT', serif;
+      font-weight: 400;
+      line-height: 1.5;
+      font-size: 0.6em;
+    }
+    
+    .reveal3 {
+      display: block;
+      padding: 0 1.25rem;
+      white-space: nowrap;
+      color: #fff;
+      transform: skewX(20deg);
+      animation-delay: 1.4s;
+    }
+    
+    .wrap-reveal4 {
+      position: absolute;
+      display: block;
+      overflow: hidden;
+      top: 0;
+      left: -1.25rem;
+      right: calc(100% + 2.25rem);
+      transform: skewX(-20deg);
+      animation: reveal 1s 1s;
+      animation-fill-mode: forwards;
+      animation-delay: 1.6s;
+      font-family: 'Old Standard TT', serif;
+      font-weight: 400;
+      line-height: 1.5;
+      font-size: 0.6em;
+    }
+    
+    .reveal4 {
+      display: block;
+      padding: 0 1.25rem;
+      white-space: nowrap;
+      color: #fff;
+      transform: skewX(20deg);
+      animation-delay: 1.6s;
+    }
+    
+    .wrap-reveal5 {
+      position: absolute;
+      display: block;
+      overflow: hidden;
+      top: 0;
+      left: -1.25rem;
+      right: calc(100% + 2.25rem);
+      transform: skewX(-20deg);
+      animation: reveal 1s 1s;
+      animation-fill-mode: forwards;
+      animation-delay: 1.8s;
+      font-family: 'Old Standard TT', serif;
+      font-weight: 400;
+      line-height: 1.5;
+      font-size: 0.6em;
+    }
+    
+    .reveal5 {
+      display: block;
+      padding: 0 1.25rem;
+      white-space: nowrap;
+      color: #fff;
+      transform: skewX(20deg);
+      animation-delay: 1.8s;
+    }
+  }
+}
+
+@keyframes reveal {
+  0% {
+    right: calc(100% + 2.25rem);
+  }
+  100% {
+    right: -1.25rem;
+  }
+}
+
+/* Image cards for albums and artist */
+.artist_card__img {
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background: $ticket-button-active-bgcolor-default;
+  box-shadow: inset 0 0 1rem $top-of-book-active-box-shadow-color;
+}
+
+.album_card__img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background: $ticket-button-active-bgcolor-default;
+  box-shadow: inset 0 0 1rem $top-of-book-active-box-shadow-color;
+}
+
+.artist_card {
+  color: #fff;
+  position: relative;
+  float: left;
+  width:30%;
+  margin: 1% 6%;
+  background: #000000;
+  text-align: center;
+  transition: all 0.3s ease-out;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  border: 0px;
+  display:flex;
+  justify-content: flex-end;;
+  
+   &_bg_red {
+    background: rgba(255, 255, 255, 0);
+  }
+
+  &__img {
+    opacity: 1;
+  }
+
+  &__text-block {
+    top: 70%;
+    left: 40px;
+    right: 40px;
+    position: absolute;
+    transform: translateY(-50%);
+  }
+
+
+  &__heading {
+    position: relative;
+    transform: translate(-50%, -50%);
+    font-size:4em;
+	  letter-spacing:0.2em;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: white;
+    font-family: Ubuntu;
+    margin-left: 135%;
+    margin-top: 25%;
+    text-shadow: 
+						8px 8px #F64C72,
+						20px 20px #000000;
+  }
+
+
+  &__text {
+  }
+  
+  
+  &__link {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 1;
+  }
+  
+}
+
+.album_card {
+  color: #fff;
+  position: relative;
+  float: right;
+  overflow: hidden;
+  width:55%;
+  border: 10px solid white;
+  margin: 10px 10%;
+  background: #000000;
+  text-align: center;
+  transition: all 0.3s ease-out;
+  display:flex;
+  justify-content: flex-end;;
+  
+   &_bg_red {
+    background: rgba(255, 255, 255, 0);
+  }
+
+  &__img {
+    opacity: 1;
+  }
+
+  &__text-block {
+    top: 5%;
+    left: 40px;
+    right: 40px;
+    position: absolute;
+    transform: translateY(-50%);
+  }
+
+
+  &__heading {
+    position: relative;
+    font-weight: bold;
+    font-family: 'Old Standard TT', serif;
+    line-height: 1.5;
+    font-size: 2em;
+    color: transparent;
+    transform: translateY(75%);
+  }
+
+  
+  &__link {
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 1;
+  }
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    left: 0%;
+    opacity: 0;
+    transition: opacity 0.6s, transform 0.6s;
+  }
+
+  &:before {
+    border-top: 7px double #F64C72;
+    border-bottom: 7px double #F64C72;
+    transform: scale(0, 1);
+  }
+
+  &:after {
+    border-right: 7px double #F64C72;
+    border-left: 7px double #F64C72;
+    transform: scale(1, 0);
+  }
+
+  &:hover {
+    
+    .album_card__img {
+      opacity: 0.2;
+      filter: blur(5px);
+      transform: scale(1.1);
+      animation: place-order-keyframes .2s linear;
+      background-color: $ticket-button-active-bgcolor-default;
+    }
+    
+    .album_card__heading {
+    position: relative;
+    font-weight: bold;
+    font-family: 'Dosis', Sans-Serif;
+    line-height: 1.5;
+    font-size: 2em;
+    color: #F64C72;
+    transform: translateY(75%);
+  }
+    
+  }
+
+  &:hover {
+
+    .card__heading,
+    .card__text {
+      opacity: 1;
+      border-color: rgba(255, 255, 255, 0.5);
+      transition-delay: 0.2s;
+      transform: translateY(0);
+    }
+    
+  }
+
+  &:hover {
+    
+    .card__text{
+      transition-delay: 0.3s;
+    }
+    
+  }
+
+  &:hover:before,
+  &:hover:after {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  
+}
+
+/* Animated fonts */
+.r-link{
+	--uirLinkDisplay: var(--rLinkDisplay, inline-block);
+	--uirLinkTextColor: var(--rLinkTextColor);
+	--uirLinkTextDecoration: var(--rLinkTextDecoration, none);
+
+	display: var(--uirLinkDisplay) !important;
+	color: var(--uirLinkTextColor) !important;
+	text-decoration: var(--uirLinkTextDecoration) !important;
+}
+
+/* The component will reset browser's styles of titles */
+
+.r-title{
+	--uirTitleMarginTop: var(--rTitleMarginTop, 0);
+	--uirTitleMarginBottom: var(--rTitleMarginBottom, 20);
+
+	margin-top: var(--uirTitleMarginTop) !important;
+	margin-bottom: var(--uirTitleMarginBottom) !important;
+	margin-left: 140%;
+	font-family: 'Teko', sans-serif;
+	color: white !important;
+}
+
+
+
+/*
+=====
+CORE STYLES
+=====
+*/
+
+.animated-underline{
+	--uiAnimatedUnderlineWidth: var(--animatedUnderlineWidth, 100%);
+	--uiAnimatedUnderlineHeight: var(--animatedUnderlineHeight, 2px);
+	--uiAnimatedUnderlineBgColor: var(--animatedUnderlineBgColor, currentColor);
+	--uiAnimatedUnderlinePositionX: var(--animatedUnderlinePositionX, left);
+	--uiAnimatedUnderlinePositionY: var(--animatedUnderlinePositionY, bottom);
+
+	/*
+		1. For multi-line animated underline the "inline" value for the display property is compulsory.
+		2. Adds opportunity to create multi-line padding
+	*/
+
+	--rLinkDisplay: inline; /* 1 */
+
+	background-image: linear-gradient(0, var(--uiAnimatedUnderlineBgColor) 0, var(--uiAnimatedUnderlineBgColor));
+	background-size: var(--uiAnimatedUnderlineWidth) var(--uiAnimatedUnderlineHeight);
+	background-position: var(--uiAnimatedUnderlinePositionX) var(--uiAnimatedUnderlinePositionY);
+	background-repeat: no-repeat;
+	
+	-webkit-box-decoration-break: clone; /* 2 */
+	box-decoration-break: clone; /* 2 */
+	
+	will-change: background-size;
+	transition: background-size .25s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+/*
+=====
+SETTINGS
+=====
+*/
+
+:root{
+	--animatedUnderlineHeight: 50%;
+	--animatedUnderlineBgColor: var(--accentColor);
+}	
+
+.animated-underline_type1{
+	--animatedUnderlineWidth: 100%;
+}
+
+.animated-underline_type1:hover{
+	--animatedUnderlineHeight: 100%;
+}
+
+:root{
+	--mainColor: #673AB7;
+	--accentColor: #F64C72;
+	--accentColorDark: #f15493;
+	--blackColor: #222;
+	--whiteColor: #fff;
+	--rLinkTextColor: var(--blackColor);
+}	
+
+
+.news__title{
+	line-height: 1.25;
+}
+
+
+
+@media (max-width: 640px){
+
+	html{
+		font-size: 93.75%;
+	}
+}
+
+@media (min-width: 641px) and (max-width: 768px){
+
+	html{
+		font-size: 100%;
+	}
+}
+
+@media (min-width: 769px) and (max-width: 960px){
+
+	html{
+		font-size: 106.25%;
+	}
+}
+
+
+
+@media (max-width: 960px){
+	.news__title{
+		--rTitleMarginTop: .75rem;
+		font-size: 1.4em;
+	}
+}
+
+@media (min-width: 961px){
+	.news__title{
+		font-size: 2em;
+	}	
+}
