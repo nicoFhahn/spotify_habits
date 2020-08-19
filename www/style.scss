@@ -1,10 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Teko:wght@600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap');
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:300);
-@import url('https://fonts.googleapis.com/css2?family=Dosis&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 
 $background: #F5D6BA;
 $yellow: #DDF45B;
@@ -74,7 +69,7 @@ $ticket-button-active-shadow-default: #68c4bc;
     text-transform: uppercase;
     margin: 0;
     transform: translateY(75%);
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'IBM Plex Mono', monospace;
   }
 
 
@@ -84,7 +79,7 @@ $ticket-button-active-shadow-default: #68c4bc;
     color: #fff !important;
     opacity: 0;
     margin: 0;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'IBM Plex Mono', monospace;
   }
   
   
@@ -295,177 +290,6 @@ figure.stick4{
   }
 }
 
-
-.text-holder{
-  margin-top: 5%;
-  width: 100%;
-  height: 20vh;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  &:before{
-    content: '';
-    background: $yellow;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    animation: appear 1.2s cubic-bezier(.19,1,.22,1) forwards;
-    
-  }
-  
-  h1{
-    text-transform: uppercase;
-    font-weight: 100;
-    position: absolute;
-    opacity: 0;
-    padding: 3px 10px;
-    animation: text-appear 1.2s linear forwards;
-    animation-delay: .7s;
-    text-align: center;
-    font-size: 7vh;
-    font-family: 'Quicksand', sans-serif;
-    
-  }
-  
-}
-.text-holder-2{
-  position: absolute;
-  transform: translate(-50%,-50%);
-  width:40%;
-  left:50%;
-  top: 80%;
-  height: 10vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  &:before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    animation: appear2 1.2s cubic-bezier(.19,1,.22,1) forwards;
-    animation-delay: .9s;
-    
-  }
-  
-  h1{
-    font-size: 5vh;
-    font-family: 'Quicksand', sans-serif;
-    position: absolute;
-    text-align: center;
-    opacity: 0;
-    padding: 3px 10px;
-    animation: text-appear 1.2s linear forwards;
-    animation-delay: 1.6s;
-    
-  }
-  
-}
-
-.text-holder-3{
-  position: absolute;
-  transform: translate(-50%,-50%);
-  width:20%;
-  left:50%;
-  top: 85%;
-  height: 5vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  &:before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    animation: appear3 1.2s cubic-bezier(.19,1,.22,1) forwards;
-    animation-delay: 1.8s;
-    
-  }
-  
-  p{
-    color:rgb(255,255,255);
-    font-size: 2vh;
-    font-family: 'Quicksand', sans-serif;
-    position: absolute;
-    text-align: center;
-    opacity: 0;
-    padding: 3px 10px;
-    animation: text-appear 1.2s linear forwards;
-    animation-delay: 2.5s;
-    
-  }
-}
-
-
-@keyframes text-appear{
-  0%{
-    opacity: 0;
-  }
-  100%{
-    opacity: 1;
-  }
-}
-
-@keyframes appear{
-  0%{
-    left: 0%;
-    width: 0%;
-  }
-  50%{
-    left: 0%;
-    width: 100%;
-  }
-  100%{
-    left: 100%;
-    width: 0%;
-  }
-}
-
-@keyframes appear2{
-  0%{
-    left: 0%;
-    width: 0%;
-    background: $pink;
-  }
-  50%{
-    left: 0%;
-    width: 100%;
-    background: $pink;
-  }
-  100%{
-    left: 100%;
-    width: 0%;
-    background: $pink;
-  }
-}
-
-@keyframes appear3{
-  0%{
-    left: 0%;
-    width: 0%;
-    background: $red;
-  }
-  50%{
-    left: 0%;
-    width: 100%;
-    background: $red;
-  }
-  100%{
-    left: 100%;
-    width: 0%;
-    background: $red;
-  }
-}
 
 .modal-title,
 .modal-title:hover {

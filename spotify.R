@@ -12,7 +12,7 @@ code <- get_spotify_authorization_code()
 longterm_art <- get_my_top_artists_or_tracks(
   type = "artists",
   time_range = "long_term",
-  limit = 10,
+  limit = 15,
   authorization = code
 )
 
@@ -40,7 +40,7 @@ number_of_songs_1 <- nrow(audio_features_1)
 song_ids_1 <- audio_features_1$track_id
 n <- length(song_ids_1)
 k <- 50 ## your LEN
-a <- split(song_ids_1, rep(1:ceiling(n/k), each=k)[1:n])
+a <- split(song_ids_1, rep(1:ceiling(n / k), each = k)[1:n])
 features <- lapply(a, function(x) {
   features <- get_tracks(x)[, c("name", "popularity")]
 })
@@ -58,7 +58,9 @@ genre_1 <- longterm_art[1, ]$genres[[1]][1]
 popularity_1 <- longterm_art[1, ]$popularity
 related_artists_1 <- related_1$name[1:10]
 image_1 <- longterm_art[1, ]$images[[1]][1, 2]
-rm(list=setdiff(ls(), c(
+
+urls <- unlist(lapply(longterm_art$images, function(x) x$url[1]))
+rm(list = setdiff(ls(), c(
   "number_of_songs_1",
   "most_popular_songs_1",
   "least_popular_songs_1",
@@ -70,59 +72,51 @@ rm(list=setdiff(ls(), c(
   "genre_1",
   "popularity_1",
   "related_artists_1",
-  "image_1"
-  )))
+  "image_1",
+  "longterm_art",
+  "urls"
+)))
+
 hchart(density(audio_features_1$danceability), type = "area", color = "#B71C1C", name = "Price")
+features <- audio_features_1[, c(
+  "acousticness", "danceability", "energy",
+  "instrumentalness","loudness", "speechiness",
+  "valence", "tempo", "duration_ms"
+)]
 
-audio_features_1 %>%
-  e_charts() %>%
-  e_density(danceability, areaStyle = list(opacity = .4), smooth = TRUE, name = "density", y_index = 1) %>%
-  e_tooltip(trigger = "axis")
-# compare to your recent top 20 artists:
-get_my_top_artists_or_tracks(type = "artists", time_range = "short_term", limit = 20, authorization = code) %>%
-  select(name, genres) %>%
-  rowwise() %>%
-  mutate(genres = paste(genres, collapse = ", ")) %>%
-  ungroup()
+a <- hist(features$acousticness, plot = FALSE)
+iv <- lapply(2:11, function(x, ...) {
+  paste("(", a$breaks[x - 1], ", ", a$breaks[x], "]", sep = "")
+})
 
-# show favorite key of any of these
-artist <- get_artist_audio_features("The Gorillaz")
-# top 10 keys of artist
-artist %>%
-  count(key_mode, sort = TRUE) %>%
-  head(10)
-# Their most joyful songs
-# maybe also get the most energetic songs
-artist %>%
-  arrange(-valence) %>%
-  select(track_name, valence) %>%
-  head(20)
-
-
-# joyplot
-library(ggjoy)
-
-ggplot(artist, aes(x = valence, y = album_name)) +
-  geom_joy() +
-  theme_joy() +
-  ggtitle("Joyplot of The Gorillaz's joy distributions", subtitle = "Based on valence pulled from Spotify's Web API with spotifyr")
-
-
-joy %>%
-  arrange(-valence) %>%
-  select(track_name, valence) %>%
-  head(5)
-
-
-# your all time favorite songs
-get_my_top_artists_or_tracks(type = "tracks", time_range = "long_term", limit = 20) %>%
-  mutate(artist.name = map_chr(artists, function(x) x$name[1])) %>%
-  select(name, artist.name, album.name)
-
-# recently favs
-get_my_top_artists_or_tracks(type = "tracks", time_range = "short_term", limit = 20) %>%
-  mutate(artist.name = map_chr(artists, function(x) x$name[1])) %>%
-  select(name, artist.name, album.name)
-
-get_related_artists(artist$artist_id[1])
-get_my_currently_playing()
+highchart() %>%
+  hc_chart(type = "column") %>%
+  hc_add_theme(hc_theme_monokai()) %>%
+  hc_xAxis(
+    categories = iv,
+    min = -0.01,
+    gridLineWidth = 0,
+    labels = list(
+      style = list(
+        color = "#fff"
+      )
+    )
+  ) %>%
+  hc_yAxis(
+    title = list(text = "Count"),
+    gridLineWidth = 0,
+    labels = list(
+      style = list(
+        color = "#fff"
+      )
+    )
+    ) %>%
+  hc_add_series(
+    data = a$counts,
+    borderColor = "#EA5F23",
+    color = "rgba(0,0,0,0)",
+    groupPadding = 0,
+    pointPadding = 0
+  ) %>%
+  hc_chart(backgroundColor = "#121212") %>%
+  hc_legend(enabled = FALSE)
