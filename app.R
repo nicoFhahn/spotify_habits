@@ -27,12 +27,9 @@ ui <- source(file.path("ui", "ui.R"), local = TRUE)$value
 server <- function(input, output) {
   modal_rv <- reactiveValues(click = 0)
   shinyjs::onclick(
-    "alltime_1",
-    modal_rv$click <- modal_rv$click + 1
+    "artist_at_1",
+    print("moin")
   )
-  output$at_1_1 <- renderPlot({
-    plot(1:nrow(mtcars))
-  })
   # runjs(jsCode)
   source(file.path("server", "highcharts.R"), local = TRUE)$value
 }
