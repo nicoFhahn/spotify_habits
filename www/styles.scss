@@ -89,14 +89,6 @@ body {
   display: flex;
   height: 100%;
 }
-
-.area1.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area2 { 
   grid-area: area2; 
   align-items: center;
@@ -104,13 +96,6 @@ body {
   margin-left: random(100) / 100 * 100%;
   display: flex;
   height: 100%;
-}
-
-.area2.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
 }
 
 
@@ -123,13 +108,6 @@ body {
   height: 100%;
 }
 
-.area3.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area4 { 
   grid-area: area4; 
   align-items: center;
@@ -138,14 +116,6 @@ body {
   display: flex;
   height: 100%;
 }
-
-.area4.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area5 { 
   grid-area: area5;
   align-items: center;
@@ -155,13 +125,6 @@ body {
   height: 100%;
 } 
 
-.area5.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area6 { 
   grid-area: area6; 
   align-items: center;
@@ -169,13 +132,6 @@ body {
   margin-left: random(100) / 100 * 100%;
   display: flex;
   height: 100%;
-}
-
-.area6.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
 }
 
 .area7 { 
@@ -187,13 +143,6 @@ body {
   height: 100%;
 }
 
-.area7.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area8 { grid-area: area8; 
   align-items: center;
   justify-content: center;
@@ -201,14 +150,6 @@ body {
   display: flex;
   height: 100%;
 }
-
-.area8.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area9 { 
   grid-area: area9; 
   align-items: center;
@@ -216,13 +157,6 @@ body {
   margin-left: random(100) / 100 * 100%;
   display: flex;
   height: 100%;
-}
-
-.area9.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
 }
 
 .area10 { 
@@ -234,13 +168,6 @@ body {
   height: 100%;
 }
 
-.area10.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area11 { 
   grid-area: area11; 
   align-items: center;
@@ -248,13 +175,6 @@ body {
   margin-left: random(100) / 100 * 100%;
   display: flex;
   height: 100%;
-}
-
-.area11.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
 }
 
 .area12 { 
@@ -266,13 +186,6 @@ body {
   height: 100%;
 } 
 
-.area12.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area13 { 
   grid-area: area13; 
   align-items: center;
@@ -280,13 +193,6 @@ body {
   margin-left: random(100) / 100 * 100%;
   display: flex;
   height: 100%;
-}
-
-.area13.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
 }
 
 .area14 { 
@@ -298,13 +204,6 @@ body {
   height: 100%;
 } 
 
-.area14.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area15 { 
   grid-area: area15; 
   align-items: center;
@@ -312,13 +211,6 @@ body {
   margin-left: random(100) / 100 * 100%;
   display: flex;
   height: 100%;
-}
-
-.area15.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
 }
 
 .area16 { 
@@ -330,13 +222,6 @@ body {
   height: 100%;
 }
 
-.area16.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area17 { 
   grid-area: area17;
   align-items: center;
@@ -345,13 +230,6 @@ body {
   display: flex;
   height: 100%;
 } 
-
-.area17.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
 
 .area18 { 
   grid-area: area18;
@@ -362,13 +240,6 @@ body {
   height: 100%;
 } 
 
-.area18.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area19 { 
   grid-area: area19; 
   align-items: center;
@@ -378,12 +249,6 @@ body {
   height: 100%;
 }
 
-.area19.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
 
 .area20 { 
   grid-area: area20; 
@@ -392,13 +257,6 @@ body {
   margin-left: random(100) / 100 * 100%;
   display: flex;
   height: 100%;
-}
-
-.area20.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
 }
 
 .area21 { 
@@ -410,13 +268,6 @@ body {
   height: 100%;
 }
 
-.area21.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area22 { 
   grid-area: area22; 
   align-items: center;
@@ -424,13 +275,6 @@ body {
   margin-left: random(100) / 100 * 100%;
   display: flex;
   height: 100%;
-}
-
-.area22.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
 }
 
 .area23 { 
@@ -442,13 +286,6 @@ body {
   height: 100%;
 }
 
-.area23.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area24 { 
   grid-area: area24; 
   align-items: center;
@@ -456,13 +293,6 @@ body {
   margin-left: random(100) / 100 * 100%;
   display: flex;
   height: 100%;
-}
-
-.area24.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
 }
 
 .area25 { 
@@ -474,13 +304,6 @@ body {
   height: 100%;
 }
 
-.area25.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area26 { 
   grid-area: area26; 
   align-items: center;
@@ -488,13 +311,6 @@ body {
   margin-left: random(100) / 100 * 100%;
   display: flex;
   height: 100%;
-}
-
-.area26.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
 }
 
 .area27 { 
@@ -506,13 +322,6 @@ body {
   height: 100%;
 }
 
-.area27.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
-}
-
 .area28 { 
   grid-area: area28; 
   align-items: center;
@@ -522,12 +331,85 @@ body {
   height: 100%;
 }
 
-.area28.fade-in-element {
-  $img-fadein-delay: #{random(30)/10}s;
-  img {
-    animation: fadein $img-fadein-duration $img-fadein-delay both;
-  }
+img#artist_at_1.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
 }
+
+img#artist_at_2.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+img#artist_at_3.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+img#artist_at_4.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+img#artist_at_5.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+img#artist_at_6.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+img#artist_at_7.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+img#artist_at_8.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+img#artist_at_9.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+img#artist_at_10.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+img#artist_at_11.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+
+img#artist_at_12.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+
+img#artist_at_13.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+
+img#artist_at_14.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+img#artist_at_15.fade-in-element {
+  $img-fadein-delay: #{random(30)/10 + 2}s;
+  animation: fadein $img-fadein-duration $img-fadein-delay both;
+}
+
+
 
 img {
   width: calc(1em + 6vw);

@@ -1,50 +1,28 @@
-$(document).ready(function() {
+function isElementVisible($elementToBeChecked)
+{
+    var TopView = $(window).scrollTop();
+    var BotView = TopView + $(window).height();
+    var TopElement = $elementToBeChecked.offset().top;
+    var BotElement = TopElement + $elementToBeChecked.height();
+    return ((BotElement <= BotView) && (TopElement >= TopView));
+}
 
-    /** ---------------------------- //
-     *  @group viewport trigger script 
-     * for adding or removing classes from elements in view within viewport
-     *  @author @david
-     *  use like this: add following to css stylesheets:    
-            .foobar.in-view {
-            @extend .fadeInUpBig;
-            transform:rotate(90deg)}
-        */
-  
-      // ps: disable on small devices!
-    var $animationElements = $('.hidden');
-    var $window = $(window);
-
-    // ps: Let's FIRST disable triggering on small devices!
-
-    function checkIfInView() {
-
-        var windowHeight = $window.height();
-        var windowTopPosition = $window.scrollTop();
-        var windowBottomPosition = (windowTopPosition + windowHeight);
-
-        $.each($animationElements, function () {
-            var $element = $(this);
-            var elementHeight = $element.outerHeight();
-            var elementTopPosition = $element.offset().top;
-            var elementBottomPosition = (elementTopPosition + elementHeight);
-
-//check to see if this current container is within viewport
-            if ((elementBottomPosition >= windowTopPosition) &&
-                (elementTopPosition <= windowBottomPosition)) {
-                $element.removeClass('hidden');
-                $element.addClass('fade-in-element');
-            } else {
-                $element.removeClass('fade-in-element');
-                $element.addClass('hidden');
-            }
-        });
-    }
-
-    $window.on('scroll resize', checkIfInView);
-    $window.trigger('scroll');
-
-
-    /* @end viewport trigger script  */
-
+$(window).scroll(function () {
+    $( ".hidden" ).each(function() {
+        $this = $(this);
+        isOnView = isElementVisible($(this));
+        if(isOnView && !$(this).hasClass('animate')){
+            $(this).addClass('animate');
+            startAnimation($(this));
+        }
+    });
 });
+
+function startAnimation($this) {
+  $this.animate({
+    width: "100%"
+  }, 3000, function() {
+    // Animation complete.
+  });
+}
 
