@@ -1,28 +1,53 @@
-function isElementVisible($elementToBeChecked)
-{
-    var TopView = $(window).scrollTop();
-    var BotView = TopView + $(window).height();
-    var TopElement = $elementToBeChecked.offset().top;
-    var BotElement = TopElement + $elementToBeChecked.height();
-    return ((BotElement <= BotView) && (TopElement >= TopView));
-}
+$(document).ready(function() {
 
-$(window).scroll(function () {
-    $( ".hidden" ).each(function() {
-        $this = $(this);
-        isOnView = isElementVisible($(this));
-        if(isOnView && !$(this).hasClass('animate')){
-            $(this).addClass('animate');
-            startAnimation($(this));
-        }
-    });
+    /** ---------------------------- //
+     *  @group viewport trigger script 
+     * for adding or removing classes from elements in view within viewport
+     *  @author @david
+     *  use like this: add following to css stylesheets:    
+            .foobar.in-view {
+            @extend .fadeInUpBig;
+            transform:rotate(90deg)}
+        */
+  
+      // ps: disable on small devices!
+    var $animationElements = $('.hidden');
+    var $window = $(window);
+
+    // ps: Let's FIRST disable triggering on small devices!
+    var isMobile = window.matchMedia("only screen and (max-width: 768px)");
+    if (isMobile.matches) {
+        $animationElements.removeClass('hidden');
+    }
+
+    function checkIfInView() {
+
+        var windowHeight = $window.height();
+        var windowTopPosition = $window.scrollTop();
+        var windowBottomPosition = (windowTopPosition + windowHeight);
+
+        $.each($animationElements, function () {
+            var $element = $(this);
+            var elementHeight = $element.outerHeight();
+            var elementTopPosition = $element.offset().top;
+            var elementBottomPosition = (elementTopPosition + elementHeight);
+
+//check to see if this current container is within viewport
+            if ((elementBottomPosition >= windowTopPosition) &&
+                (elementTopPosition <= windowBottomPosition)) {
+                $element.addClass('fade-in-element');
+                $element.removeClass('hidden');
+            } else {
+                $element.removeClass('fade-in-element');
+                $element.addClass('hidden');
+            }
+        });
+    }
+
+    $window.on('scroll resize', checkIfInView);
+    $window.trigger('scroll');
+
+
+    /* @end viewport trigger script  */
+
 });
-
-function startAnimation($this) {
-  $this.animate({
-    width: "100%"
-  }, 3000, function() {
-    // Animation complete.
-  });
-}
-

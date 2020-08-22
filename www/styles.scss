@@ -410,6 +410,36 @@ img#artist_at_15.fade-in-element {
 }
 
 
+.modal-dialog {
+  width: 90%;
+  color: #fff;
+}
+
+.modal-content {
+  border-radius: 0;
+  background-color: #242424 !important;
+}
+
+.modal-body {
+  margin-left: 2vw;
+  font-family: 'IBM Plex Mono', monospace;
+  h6 {
+    font-size: calc(1em + 1vw);
+  }
+  
+  p {
+    font-size: calc(1em + 0.5vw);
+  }
+}
+
+.modal-header {
+  margin-left: 2vw;
+  border-bottom: 0px;
+  font-family: 'IBM Plex Mono', monospace;
+  h4 {
+      font-size: calc(1em + 3vw);
+  }
+}
 
 img {
   width: calc(1em + 6vw);

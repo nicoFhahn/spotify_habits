@@ -76,7 +76,7 @@ fluidPage(
       h1(
         "Your Spotify listening habits"
       ),
-      h2(
+      h2(id = "click",
         "An Overview"
       )
     ),
