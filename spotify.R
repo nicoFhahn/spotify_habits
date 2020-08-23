@@ -83,7 +83,7 @@ image_1 <- longterm_art[1, ]$images[[1]][1, 2]
 urls <- unlist(lapply(longterm_art$images, function(x) x$url[1]))
 features <- audio_features_1[, c(
   "acousticness", "danceability", "energy",
-  "instrumentalness","loudness", "speechiness",
+  "instrumentalness", "loudness", "speechiness",
   "valence", "tempo", "duration_ms", "album_name"
 )]
 
@@ -132,7 +132,7 @@ highchart() %>%
         color = "#fff"
       )
     )
-    ) %>%
+  ) %>%
   hc_add_series(
     data = a$counts,
     borderColor = "#EA5F23",

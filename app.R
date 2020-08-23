@@ -86,7 +86,7 @@ server <- function(input, output) {
                   nrow(most_popular_albums_1) > 1,
                   "Most popular albums",
                   "Most popular album"
-                  )
+                )
               ),
               p(
                 ifelse(
@@ -139,14 +139,18 @@ server <- function(input, output) {
               p(
                 paste(
                   album_features_1[
-                    order(album_features_1$length), ][
-                      nrow(album_features_1), ][, 11],
+                    order(album_features_1$length),
+                  ][
+                    nrow(album_features_1),
+                  ][, 11],
                   " - ",
                   round(
                     album_features_1[
-                      order(album_features_1$length), ][
-                        nrow(album_features_1), ][, 1] / 60000
-                    ),
+                      order(album_features_1$length),
+                    ][
+                      nrow(album_features_1),
+                    ][, 1] / 60000
+                  ),
                   " minutes",
                   sep = ""
                 )
@@ -158,13 +162,17 @@ server <- function(input, output) {
               p(
                 paste(
                   album_features_1[
-                    order(album_features_1$length), ][
-                      1, ][, 11],
+                    order(album_features_1$length),
+                  ][
+                    1,
+                  ][, 11],
                   " - ",
                   round(
                     album_features_1[
-                      order(album_features_1$length), ][
-                        2, ][, 1] / 60000
+                      order(album_features_1$length),
+                    ][
+                      2,
+                    ][, 1] / 60000
                   ),
                   " minutes",
                   sep = ""
@@ -177,12 +185,16 @@ server <- function(input, output) {
               p(
                 paste(
                   album_features_1[
-                    order(album_features_1$release_date), ][
-                      nrow(album_features_1), ]$name,
+                    order(album_features_1$release_date),
+                  ][
+                    nrow(album_features_1),
+                  ]$name,
                   " (",
                   album_features_1[
-                    order(album_features_1$release_date), ][
-                      nrow(album_features_1), ]$release_date,
+                    order(album_features_1$release_date),
+                  ][
+                    nrow(album_features_1),
+                  ]$release_date,
                   ")",
                   sep = ""
                 )
@@ -194,10 +206,12 @@ server <- function(input, output) {
               p(
                 paste(
                   album_features_1[
-                    order(album_features_1$release_date), ][1, ]$name,
+                    order(album_features_1$release_date),
+                  ][1, ]$name,
                   " (",
                   album_features_1[
-                    order(album_features_1$release_date), ][1, ]$release_date,
+                    order(album_features_1$release_date),
+                  ][1, ]$release_date,
                   ")",
                   sep = ""
                 )

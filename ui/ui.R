@@ -31,7 +31,7 @@ create_random_grid <- function(urls) {
     '<div class="area28 "></div>'
   )
   skeleton_images <- c()
-  for(x in skeleton) {
+  for (x in skeleton) {
     number <- as.numeric(str_extract(x, "[0-9]{1,2}"))
     if (number %in% sample_days) {
       cover <- sample(urls, 1)
@@ -49,8 +49,8 @@ create_random_grid <- function(urls) {
             cover,
             '"><',
             sep = ""
-            )
           )
+        )
       )
     } else {
       skeleton_images <- c(
@@ -76,7 +76,8 @@ fluidPage(
       h1(
         "Your Spotify listening habits"
       ),
-      h2(id = "click",
+      h2(
+        id = "click",
         "An Overview"
       )
     ),
@@ -85,15 +86,9 @@ fluidPage(
       HTML("<h1> Your <span class = 'accent'>alltime</span> favorite artists</h1>"),
       HTML(a),
     ),
-    tags$section(
-      
-    ),
-    tags$section(
-      
-    ),
-    tags$section(
-      
-    )
+    tags$section(),
+    tags$section(),
+    tags$section()
   ),
   tags$script(
     src = "script.js"
