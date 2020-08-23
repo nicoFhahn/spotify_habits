@@ -76,6 +76,139 @@ server <- function(input, output) {
             p(
               paste(related_artists_1[1:5], collapse = ", ")
             )
+          ),
+          tabPanel(
+            "Album Breakdown 1",
+            column(
+              width = 6,
+              h6(
+                ifelse(
+                  nrow(most_popular_albums_1) > 1,
+                  "Most popular albums",
+                  "Most popular album"
+                  )
+              ),
+              p(
+                ifelse(
+                  nrow(most_popular_albums_1) > 1,
+                  paste(
+                    paste(
+                      most_popular_albums_1$name,
+                      collapse = ", "
+                    ),
+                    most_popular_albums_1$popularity,
+                    sep = " - "
+                  ),
+                  paste(
+                    most_popular_albums_1$name,
+                    most_popular_albums_1$popularity,
+                    sep = " - "
+                  )
+                )
+              ),
+              br(),
+              h6(
+                ifelse(
+                  nrow(least_popular_albums_1) > 1,
+                  "Least popular albums",
+                  "Least popular album"
+                )
+              ),
+              p(
+                ifelse(
+                  nrow(least_popular_albums_1) > 1,
+                  paste(
+                    paste(
+                      least_popular_albums_1$name,
+                      collapse = ", "
+                    ),
+                    least_popular_albums_1$popularity,
+                    sep = " - "
+                  ),
+                  paste(
+                    least_popular_albums_1$name,
+                    least_popular_albums_1$popularity,
+                    sep = " - "
+                  )
+                )
+              ),
+              br(),
+              h6(
+                "Longest album"
+              ),
+              p(
+                paste(
+                  album_features_1[
+                    order(album_features_1$length), ][
+                      nrow(album_features_1), ][, 11],
+                  " - ",
+                  round(
+                    album_features_1[
+                      order(album_features_1$length), ][
+                        nrow(album_features_1), ][, 1] / 60000
+                    ),
+                  " minutes",
+                  sep = ""
+                )
+              ),
+              br(),
+              h6(
+                "Shortest album"
+              ),
+              p(
+                paste(
+                  album_features_1[
+                    order(album_features_1$length), ][
+                      1, ][, 11],
+                  " - ",
+                  round(
+                    album_features_1[
+                      order(album_features_1$length), ][
+                        2, ][, 1] / 60000
+                  ),
+                  " minutes",
+                  sep = ""
+                )
+              ),
+              br(),
+              h6(
+                "Newest album"
+              ),
+              p(
+                paste(
+                  album_features_1[
+                    order(album_features_1$release_date), ][
+                      nrow(album_features_1), ]$name,
+                  " (",
+                  album_features_1[
+                    order(album_features_1$release_date), ][
+                      nrow(album_features_1), ]$release_date,
+                  ")",
+                  sep = ""
+                )
+              ),
+              br(),
+              h6(
+                "Oldest album"
+              ),
+              p(
+                paste(
+                  album_features_1[
+                    order(album_features_1$release_date), ][1, ]$name,
+                  " (",
+                  album_features_1[
+                    order(album_features_1$release_date), ][1, ]$release_date,
+                  ")",
+                  sep = ""
+                )
+              )
+            ),
+            column(
+              width = 6,
+              h6(
+                "Test"
+              )
+            )
           )
         )
       )

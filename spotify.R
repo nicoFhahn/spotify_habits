@@ -22,16 +22,37 @@ albums_1 <- dedupe_album_names(albums_1, album_name_col = "name", album_release_
 albums_data_1 <- get_albums(albums_1$id)
 audio_features_1 <- get_artist_audio_features(id_1)
 album_features_1 <- split(audio_features_1, audio_features_1$album_id)
-album_lengths_1 <- lapply(
+album_features_1 <- lapply(
   album_features_1, function(x) {
     data.frame(
       length = sum(x$duration_ms),
+      acousticness = mean(x$acousticness),
+      danceability = mean(x$danceability),
+      energy = mean(x$energy),
+      instrumentalness = mean(x$instrumentalness),
+      loudness = mean(x$loudness),
+      speechiness = mean(x$speechiness),
+      valence = mean(x$valence),
+      tempo = mean(x$tempo),
+      release_date = unique(x$album_release_date),
       name = x$album_name
     )[1, ]
   }
 )
-album_lengths_1 <- Reduce(rbind, album_lengths_1)
-newest_album_1 <- audio_features_1[audio_features_1$album_release_date == max(audio_features_1$album_release_date), c("album_name", "album_release_date")][1, ]
+album_features_1 <- Reduce(rbind, album_features_1)
+missing_date <- album_features_1[!str_detect(album_features_1$release_date, "[0-9]{4}-"), ]
+album_features_1[!str_detect(album_features_1$release_date, "[0-9]{4}-"), ] <- NA
+album_features_1 <- album_features_1[complete.cases(album_features_1), ]
+for (i in 1:nrow(missing_date)) {
+  if (missing_date[i, ]$name %in% album_features_1$name) {
+    missing_date[i, ]$release_date <- album_features_1[album_features_1$name == missing_date$name[i], ]$release_date
+  } else {
+    missing_date[i, ]$release_date <- paste(missing_date[i, ]$release_date, "-06-30", sep = "")
+  }
+}
+
+album_features_1 <- rbind(album_features_1, missing_date)
+album_features_1$release_date <- as.Date(album_features_1$release_date)
 
 related_1 <- get_related_artists(id_1)
 
@@ -60,6 +81,12 @@ related_artists_1 <- related_1$name[1:10]
 image_1 <- longterm_art[1, ]$images[[1]][1, 2]
 
 urls <- unlist(lapply(longterm_art$images, function(x) x$url[1]))
+features <- audio_features_1[, c(
+  "acousticness", "danceability", "energy",
+  "instrumentalness","loudness", "speechiness",
+  "valence", "tempo", "duration_ms", "album_name"
+)]
+
 rm(list = setdiff(ls(), c(
   "number_of_songs_1",
   "most_popular_songs_1",
@@ -67,8 +94,7 @@ rm(list = setdiff(ls(), c(
   "number_of_albums_1",
   "most_popular_albums_1",
   "least_popular_albums_1",
-  "newest_album_1",
-  "album_lengths_1",
+  "album_features_1",
   "genre_1",
   "popularity_1",
   "related_artists_1",
@@ -78,11 +104,7 @@ rm(list = setdiff(ls(), c(
 )))
 
 hchart(density(audio_features_1$danceability), type = "area", color = "#B71C1C", name = "Price")
-features <- audio_features_1[, c(
-  "acousticness", "danceability", "energy",
-  "instrumentalness","loudness", "speechiness",
-  "valence", "tempo", "duration_ms"
-)]
+
 
 a <- hist(features$acousticness, plot = FALSE)
 iv <- lapply(2:11, function(x, ...) {
