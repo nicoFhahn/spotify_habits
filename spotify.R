@@ -81,11 +81,20 @@ related_artists_1 <- related_1$name[1:10]
 image_1 <- longterm_art[1, ]$images[[1]][1, 2]
 
 urls <- unlist(lapply(longterm_art$images, function(x) x$url[1]))
-features <- audio_features_1[, c(
-  "acousticness", "danceability", "energy",
-  "instrumentalness", "loudness", "speechiness",
-  "valence", "tempo", "duration_ms", "album_name"
-)]
+audio_features_1 <- audio_features_1[
+  !str_detect(
+    audio_features_1$track_name,
+    "(Intro|Interlude)"
+    ),
+  ]
+
+audio_features_1$minutes <- as.numeric(str_extract(audio_features_1$duration_ms/60000, "[0-9]{1,}"))
+audio_features_1$seconds <- round(as.numeric(str_extract(audio_features_1$duration_ms/60000, "\\.[0-9]{1,}")) * 60)
+audio_features_1$seconds[!str_detect(audio_features_1$seconds, "[0-9]{2}")] <- paste(
+  "0",
+  audio_features_1$seconds[!str_detect(audio_features_1$seconds, "[0-9]{2}")],
+  sep = ""
+)
 
 rm(list = setdiff(ls(), c(
   "number_of_songs_1",
@@ -98,10 +107,13 @@ rm(list = setdiff(ls(), c(
   "genre_1",
   "popularity_1",
   "related_artists_1",
-  "image_1",
   "longterm_art",
-  "urls"
+  "urls",
+  "audio_features_1"
 )))
+
+
+
 
 hchart(density(audio_features_1$danceability), type = "area", color = "#B71C1C", name = "Price")
 

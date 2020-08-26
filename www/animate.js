@@ -51,3 +51,39 @@ $(document).ready(function() {
     /* @end viewport trigger script  */
 
 });
+
+$( document ).ready( function() {
+  
+  function cssTransitionFallback() {
+    // Queue : false means both animations occur simultaneously 
+    $( 'figure' ).hover(
+      function() {
+        
+        $( 'figcaption' ).animate({
+          opacity: 1
+        }, { duration: 200, queue: false });
+        
+        $('img').animate({
+          'left': '-5px',
+          'max-width': '520px'
+        }, { duration: 200, queue: false });
+      }, 
+      function() {
+
+       $('figcaption').animate({
+          opacity: 0
+        }, { duration: 200, queue: false });
+        
+        $('img').animate({
+          'left': '-20px',
+          'max-width': '600px'
+        }, { duration: 200, queue: false });
+    });
+  }
+  
+  // Only call the function if there's no transition support
+  if( !Modernizr.csstransitions ) {
+    cssTransitionFallback();
+  } 
+  
+});

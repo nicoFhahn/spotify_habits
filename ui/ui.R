@@ -66,6 +66,9 @@ fluidPage(
   tags$head(
     tags$style(
       css
+    ),
+    includeCSS(
+      "www/styles.css"
     )
   ),
   useShinyjs(),

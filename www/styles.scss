@@ -418,17 +418,20 @@ img#artist_at_15.fade-in-element {
 .modal-content {
   border-radius: 0;
   background-color: #242424 !important;
+  .col-sm-10 {
+    padding-left: 0;
+  }
 }
 
 .modal-body {
   margin-left: 2vw;
   font-family: 'IBM Plex Mono', monospace;
   h6 {
-    font-size: calc(1em + 1vw);
+    font-size: calc(1em + 0.9vw);
   }
   
   p {
-    font-size: calc(1em + 0.5vw);
+    font-size: calc(1em + 0.4vw);
   }
 }
 
@@ -436,9 +439,6 @@ img#artist_at_15.fade-in-element {
   margin-left: 2vw;
   border-bottom: 0px;
   font-family: 'IBM Plex Mono', monospace;
-  h4 {
-      font-size: calc(1em + 3vw);
-  }
 }
 
 img {
@@ -447,10 +447,54 @@ img {
   opacity: 0;
 }
 
+figure {
+  img {
+    opacity: 1 !important;
+    float:right;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    margin-bottom: -2%;
+    margin-right: 1%;
+    margin-top: 1%;
+  }
+  figcaption {
+    float: left;
+    h4 {
+      font-size: calc(1em + 3vw);
+      margin-top: 6%;
+    }
+  }
+}
+
 
 @keyframes fadein {
 	to { opacity: 1; }
 }
+
+.tab-content>.tab-pane {
+ height: 70vh;
+}
+
+a {
+  color: #fff;
+}
+
+a:hover {
+  color: #242424;
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover {
+ color:#242424;
+ cursor:default;
+ background-color:#fff;
+ border:1px solid #ddd;
+ border-bottom-color:transparent
+}
+
 
 
 $ease: cubic-bezier(0.165, 0.84, 0.44, 1);
