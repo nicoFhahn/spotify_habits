@@ -1,6 +1,7 @@
 library(dotenv)
 library(shiny)
 library(shinyjs)
+library(shinyWidgets)
 library(spotifyr)
 library(sass)
 library(stringr)
@@ -79,7 +80,7 @@ server <- function(input, output) {
               ),
               br(),
               h6(
-                "#songs on Spotify"
+                "#Songs on Spotify"
               ),
               p(
                 number_of_songs_1
@@ -235,56 +236,13 @@ server <- function(input, output) {
             ),
             column(
               width = 2,
-              # tags$figure(
-              #   tags$image(
-              #     class = "album_cover",
-              #     src = most_popular_albums_1$images[[1]][1, 2]
-              #   ),
-              #   tags$figcaption(
-              #     class = "album_caption",
-              #     p(
-              #       most_popular_albums_1$name 
-              #     )
-              #   )
-              # ),
-              div(
-                class = "album_container",
-                h3(
-                  class = "album_title"
-                ),
-                div(
-                  class = "album_content",
-                  div(
-                    class = "album_content-overlay"
-                  ),
-                  img(
-                    class = "album_content-image",
-                    src = most_popular_albums_1$images[[1]][1, 2]
-                  ),
-                  div(
-                    class = "album_content-details fadeIn-bottom",
-                    h3(
-                      class = "album_content-title",
-                      most_popular_albums_1$name
-                    ),
-                    p(
-                      class = "album_content-text",
-                      most_popular_albums_1$popularity
-                    )
-                  )
-                )
+              img(
+                class = "album_cover",
+                src = most_popular_albums_1$images[[1]][1, 2]
               ),
-              tags$figure(
-                tags$image(
-                  class = "album_cover",
-                  src = least_popular_albums_1$images[[1]][1, 2]
-                ),
-                tags$figcaption(
-                  class = "album_caption",
-                  p(
-                    least_popular_albums_1$name
-                  )
-                )
+              img(
+                class = "album_cover",
+                src = least_popular_albums_1$images[[1]][1, 2]
               )
             )
           ),
@@ -847,11 +805,330 @@ server <- function(input, output) {
                 sep = " - "
               )
             )
+          ),
+          tabPanel(
+            "Song Breakdown 4",
+            br(),
+            fluidRow(
+              column(
+                width = 4,
+                pickerInput(
+                  "plot_var",
+                  choices = c(
+                    "Acousticness",
+                    "Danceability",
+                    "Energy",
+                    "Instrumentalness",
+                    "Liveness",
+                    "Loudness",
+                    "Speechiness",
+                    "Tempo",
+                    "Valence"
+                  ),
+                  selected = "Acousticness",
+                  options = list(
+                    style = c("background: #242424;"),
+                    header = "Audio feature to display"
+                  )
+                )
+              ),
+              column(
+                width = 4,
+                pickerInput(
+                  "plot_type",
+                  choices = c(
+                    "Density",
+                    "Histogram"
+                  ),
+                  selected = "Density",
+                  options = list(
+                    style = c("background: #242424;"),
+                    header = "Type of Plot"
+                  )
+                )
+              )
+            ),
+            fluidRow(
+              column(
+                width = 8,
+                highchartOutput(
+                  "art1_plot",
+                  height = "60vh"
+                )
+              )
+            )
           )
         )
       )
     )
   )
+  
+  output$art1_plot <- renderHighchart({
+    if(input$plot_type == "Density") {
+      a   = density(audio_features_1[, tolower(input$plot_var)])
+      a$y = a$y/sum(a$y)
+      highchart() %>%
+        hc_chart(type = "area") %>%
+        hc_add_theme(hc_theme_monokai()) %>%
+        hc_xAxis(
+          categories = round(a$x, ifelse(any(a$x) > 1, 1, 2)),
+          gridLineWidth = 0,
+          title = list(
+            text = input$plot_var,
+            style = list(
+              color = "#fff",
+              `font-size` = "calc(0.4em + 0.5vw)"
+            )
+          ),
+          labels = list(
+            style = list(
+              color = "#fff",
+              `font-size` = "calc(0.3em + 0.5vw)"
+            )
+          ),
+          tickInterval = 20
+        ) %>%
+        hc_add_series(
+          data = a$y,
+          color = "rgba(234, 95, 35, 1)",
+          fillColor = "rgba(234, 95, 35, 0.1)"
+        ) %>%
+        hc_yAxis(
+          title = list(
+            text = "Count",
+            style = list(
+              color = "#fff",
+              `font-size` = "calc(0.4em + 0.5vw)"
+            )
+          ),
+          gridLineWidth = 1,
+          gridLineColor = "rgba(255, 255, 255, 0.3)",
+          gridLineDashStyle = "Solid",
+          labels = list(
+            style = list(
+              color = "#fff",
+              `font-size` = "calc(0.3em + 0.5vw)"
+            )
+          )
+        ) %>%
+        hc_chart(backgroundColor = "#242424") %>%
+        hc_title(
+          text = paste(
+            input$plot_var,
+            "of",
+            longterm_art$name[1],
+            "songs"
+          ),
+          style = list(
+            color = "#fff",
+            `font-size` = "calc(1em + 0.5vw)"
+          )
+        ) %>%
+        hc_legend(enabled = FALSE)
+    } else {
+      if(input$plot_var %in% c(
+        "Acousticness", "Danceability", "Energy",
+        "Instrumentalness", "Liveness", "Speechiness",
+        "Valence"
+      )) {
+        a <- hist(audio_features_1[, tolower(input$plot_var)], plot = FALSE, breaks = seq(0, 1, 0.1))
+        iv <- lapply(2:11, function(x, ...) {
+          paste("(", a$breaks[x - 1], ", ", a$breaks[x], "]", sep = "")
+        })
+        
+        highchart() %>%
+          hc_chart(type = "column") %>%
+          hc_add_theme(hc_theme_monokai()) %>%
+          hc_xAxis(
+            categories = iv,
+            min = -0.01,
+            gridLineWidth = 0,
+            title = list(
+              text = input$plot_var,
+              style = list(
+                color = "#fff",
+                `font-size` = "calc(0.4em + 0.5vw)"
+              )
+            ),
+            labels = list(
+              style = list(
+                color = "#fff",
+                `font-size` = "calc(0.3em + 0.5vw)"
+              )
+            )
+          ) %>%
+          hc_add_series(
+            data = a$counts,
+            borderColor = "#EA5F23",
+            color = "rgba(234, 95, 35, 0.2)",
+            groupPadding = 0,
+            pointPadding = 0
+          ) %>%
+          hc_yAxis(
+            title = list(
+              text = "Count",
+              style = list(
+                color = "#fff",
+                `font-size` = "calc(0.4em + 0.5vw)"
+              )
+            ),
+            gridLineWidth = 1,
+            gridLineColor = "rgba(255, 255, 255, 0.3)",
+            gridLineDashStyle = "Solid",
+            labels = list(
+              style = list(
+                color = "#fff",
+                `font-size` = "calc(0.3em + 0.5vw)"
+              )
+            )
+          ) %>%
+          hc_chart(backgroundColor = "#242424") %>%
+          hc_title(
+            text = paste(
+              input$plot_var,
+              "of",
+              longterm_art$name[1],
+              "songs"
+            ),
+            style = list(
+              color = "#fff",
+              `font-size` = "calc(1em + 0.5vw)"
+            )
+          ) %>%
+          hc_legend(enabled = FALSE)
+      } else if(input$plot_var == "Loudness") {
+        a <- hist(audio_features_1$loudness, plot = FALSE, breaks = seq(-60, 0, 2))
+        iv <- seq(-60, 0, 10)
+        iv2 <- unlist(lapply(iv, function(x) {
+          c(x, rep("", 4))
+        }))
+        highchart() %>%
+          hc_chart(type = "column") %>%
+          hc_add_theme(hc_theme_monokai()) %>%
+          hc_xAxis(
+            categories = iv2[1:31],
+            min = -0.01,
+            gridLineWidth = 0,
+            title = list(
+              text = input$plot_var,
+              style = list(
+                color = "#fff",
+                `font-size` = "calc(0.4em + 0.5vw)"
+              )
+            ),
+            labels = list(
+              style = list(
+                color = "#fff",
+                `font-size` = "calc(0.3em + 0.5vw)"
+              )
+            ),
+            tickInterval = 5
+          ) %>%
+          hc_add_series(
+            data = c(a$counts, 0),
+            borderColor = "#EA5F23",
+            color = "rgba(234, 95, 35, 0.2)",
+            groupPadding = 0,
+            pointPadding = 0
+          ) %>%
+          hc_yAxis(
+            title = list(
+              text = "Count",
+              style = list(
+                color = "#fff",
+                `font-size` = "calc(0.4em + 0.5vw)"
+              )
+            ),
+            gridLineWidth = 1,
+            gridLineColor = "rgba(255, 255, 255, 0.3)",
+            gridLineDashStyle = "Solid",
+            labels = list(
+              style = list(
+                color = "#fff",
+                `font-size` = "calc(0.3em + 0.5vw)"
+              )
+            )
+          ) %>%
+          hc_chart(backgroundColor = "#242424") %>%
+          hc_title(
+            text = paste(
+              input$plot_var,
+              "of",
+              longterm_art$name[1],
+              "songs"
+            ),
+            style = list(
+              color = "#fff",
+              `font-size` = "calc(1em + 0.5vw)"
+            )
+          ) %>%
+          hc_legend(enabled = FALSE)
+      } else {
+        a <- hist(audio_features_1$tempo, plot = FALSE, breaks = seq(0, 250, 10))
+        highchart() %>%
+          hc_chart(type = "column") %>%
+          hc_add_theme(hc_theme_monokai()) %>%
+          hc_xAxis(
+            categories = a$breaks,
+            min = -0.01,
+            gridLineWidth = 0,
+            title = list(
+              text = input$plot_var,
+              style = list(
+                color = "#fff",
+                `font-size` = "calc(0.4em + 0.5vw)"
+              )
+            ),
+            labels = list(
+              style = list(
+                color = "#fff",
+                `font-size` = "calc(0.3em + 0.5vw)"
+              )
+            ),
+            tickInterval = 5
+          ) %>%
+          hc_add_series(
+            data = a$counts,
+            borderColor = "#EA5F23",
+            color = "rgba(234, 95, 35, 0.2)",
+            groupPadding = 0,
+            pointPadding = 0
+          ) %>%
+          hc_yAxis(
+            title = list(
+              text = "Count",
+              style = list(
+                color = "#fff",
+                `font-size` = "calc(0.4em + 0.5vw)"
+              )
+            ),
+            gridLineWidth = 1,
+            gridLineColor = "rgba(255, 255, 255, 0.3)",
+            gridLineDashStyle = "Solid",
+            labels = list(
+              style = list(
+                color = "#fff",
+                `font-size` = "calc(0.3em + 0.5vw)"
+              )
+            )
+          ) %>%
+          hc_chart(backgroundColor = "#242424") %>%
+          hc_title(
+            text = paste(
+              input$plot_var,
+              "of",
+              longterm_art$name[1],
+              "songs"
+            ),
+            style = list(
+              color = "#fff",
+              `font-size` = "calc(1em + 0.5vw)"
+            )
+          ) %>%
+          hc_legend(enabled = FALSE)
+      }
+    }
+  })
   # runjs(jsCode)
   source(file.path("server", "highcharts.R"), local = TRUE)$value
 }

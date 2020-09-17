@@ -118,7 +118,7 @@ rm(list = setdiff(ls(), c(
 hchart(density(audio_features_1$danceability), type = "area", color = "#B71C1C", name = "Price")
 
 
-a <- hist(features$acousticness, plot = FALSE)
+a <- hist(audio_features_1$speechiness, plot = FALSE, breaks = seq(0, 1, 0.1))
 iv <- lapply(2:11, function(x, ...) {
   paste("(", a$breaks[x - 1], ", ", a$breaks[x], "]", sep = "")
 })
@@ -136,8 +136,20 @@ highchart() %>%
       )
     )
   ) %>%
+  hc_add_series(
+    data = a$counts,
+    borderColor = "#EA5F23",
+    color = "rgba(234, 95, 35, 0.1)",
+    groupPadding = 0,
+    pointPadding = 0
+  ) %>%
   hc_yAxis(
-    title = list(text = "Count"),
+    title = list(
+      text = "Count",
+      style = list(
+        color = "#fff"
+      )
+    ),
     gridLineWidth = 0,
     labels = list(
       style = list(
@@ -145,12 +157,111 @@ highchart() %>%
       )
     )
   ) %>%
+  hc_chart(backgroundColor = "#242424") %>%
+  hc_title(
+    text = "Acousticness of Gorillaz Songs",
+    style = list(color = "#fff")
+    ) %>%
+  hc_legend(enabled = FALSE)
+
+a <- hist(audio_features_1$loudness, plot = FALSE)
+a <- hist(audio_features_1$tempo, plot = FALSE, breaks = seq(0, 250, 10))
+
+highchart() %>%
+  hc_chart(type = "column") %>%
+  hc_add_theme(hc_theme_monokai()) %>%
+  hc_xAxis(
+    categories = a$breaks,
+    min = -0.01,
+    gridLineWidth = 0,
+    labels = list(
+      style = list(
+        color = "#fff"
+      )
+    ),
+    tickInterval = 5
+  ) %>%
   hc_add_series(
     data = a$counts,
     borderColor = "#EA5F23",
-    color = "rgba(0,0,0,0)",
+    color = "rgba(234, 95, 35, 0.1)",
     groupPadding = 0,
     pointPadding = 0
   ) %>%
-  hc_chart(backgroundColor = "#121212") %>%
+  hc_yAxis(
+    title = list(
+      text = "Count",
+      style = list(
+        color = "#fff"
+      )
+    ),
+    gridLineWidth = 1,
+    gridLineColor = "#fff",
+    gridLineDashStyle = "Solid",
+    labels = list(
+      style = list(
+        color = "#fff"
+      )
+    )
+  ) %>%
+  hc_chart(backgroundColor = "#242424") %>%
+  hc_title(
+    text = "Acousticness of Gorillaz Songs",
+    style = list(color = "#fff")
+  ) %>%
+  hc_legend(enabled = FALSE)
+
+
+plot(density(audio_features_1$acousticness))
+
+ggplot(audio_features_1, aes(acousticness, ..density..)) +
+  geom_density(adjust = 2)
+
+d   = density(audio_features_1$tempo)
+d$y = d$y/sum(d$y)
+
+plot(d)
+
+
+highchart() %>%
+  hc_chart(type = "area") %>%
+  hc_add_theme(hc_theme_monokai()) %>%
+  hc_xAxis(
+    categories = round(d$x),
+    min = -0.01,
+    gridLineWidth = 0,
+    labels = list(
+      style = list(
+        color = "#fff"
+      )
+    ),
+    tickInterval = 5
+  ) %>%
+  hc_add_series(
+    data = d$y,
+    borderColor = "#EA5F23",
+    color = "rgba(234, 95, 35, 1)",
+    fillColor = "rgba(234, 95, 35, 0.1)"
+  ) %>%
+  hc_yAxis(
+    title = list(
+      text = "Count",
+      style = list(
+        color = "#fff"
+      )
+    ),
+    gridLineWidth = 1,
+    gridLineColor = "#fff",
+    gridLineDashStyle = "Solid",
+    labels = list(
+      style = list(
+        color = "#fff"
+      )
+    )
+  ) %>%
+  hc_chart(backgroundColor = "#242424") %>%
+  hc_title(
+    text = "Acousticness of Gorillaz Songs",
+    style = list(color = "#fff")
+  ) %>%
   hc_legend(enabled = FALSE)

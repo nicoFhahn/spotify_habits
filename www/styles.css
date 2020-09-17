@@ -116,4 +116,39 @@
   border: solid calc(1em + 0.7vw) #FFF;
   margin-right: 10%;
   margin-top: 25%;
+  opacity: 1;
+}
+
+.btn{
+  border:1px solid #fff;
+}
+
+.bootstrap-select > .dropdown-toggle {
+  background-color: #242424;
+  color: #fff;
+}
+
+div.dropdown-menu {
+ background-color: #242424;
+}
+
+
+ul.dropdown-menu {
+  background-color: #242424;
+}
+
+.bootstrap-select .dropdown-menu li a {
+  color: #fff;
+}
+
+.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+  background-color: rgba(234, 95, 35, 0.1);
+}
+
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover {
+  background-color: rgba(234, 95, 35, 0.5);
+}
+
+.dropdown-menu {
+  box-shadow: 0 6px 12px rgba(234, 95, 35, 0.1);
 }

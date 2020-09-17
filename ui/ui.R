@@ -35,7 +35,7 @@ create_random_grid <- function(urls) {
     number <- as.numeric(str_extract(x, "[0-9]{1,2}"))
     if (number %in% sample_days) {
       cover <- sample(urls, 1)
-      id <- paste("artist_at_", names(cover), sep = "")
+      id <- paste("artist_at_", match(cover, urls), sep = "")
       urls <- urls[!urls %in% cover]
       skeleton_images <- c(
         skeleton_images,
