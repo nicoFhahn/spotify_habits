@@ -1,5 +1,5 @@
 create_random_grid <- function(urls) {
-  sample_days <- sample(1:28, size = 15)
+  sample_numbers <- sample(1:28, size = 15)
   skeleton <- c(
     '<div class="area1"></div>',
     '<div class="area2"></div>',
@@ -31,11 +31,12 @@ create_random_grid <- function(urls) {
     '<div class="area28 "></div>'
   )
   skeleton_images <- c()
+  urls_old <- urls
   for (x in skeleton) {
     number <- as.numeric(str_extract(x, "[0-9]{1,2}"))
-    if (number %in% sample_days) {
+    if (number %in% sample_numbers) {
       cover <- sample(urls, 1)
-      id <- paste("artist_at_", match(cover, urls), sep = "")
+      id <- paste("artist_at_", match(cover, urls_old), sep = "")
       urls <- urls[!urls %in% cover]
       skeleton_images <- c(
         skeleton_images,
