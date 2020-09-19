@@ -115,7 +115,6 @@ rm(list = setdiff(ls(), c(
 
 
 
-hchart(density(audio_features_1$danceability), type = "area", color = "#B71C1C", name = "Price")
 
 
 a <- hist(audio_features_1$speechiness, plot = FALSE, breaks = seq(0, 1, 0.1))
@@ -164,19 +163,29 @@ highchart() %>%
     ) %>%
   hc_legend(enabled = FALSE)
 
-a <- hist(audio_features_1$loudness, plot = FALSE)
-a <- hist(audio_features_1$tempo, plot = FALSE, breaks = seq(0, 250, 10))
-
+max <- plyr::round_any(max(audio_features_1$duration_ms/1000), 100)
+a <- hist(audio_features_1$duration_ms/1000, plot = FALSE, breaks = seq(0, max, 100))
+iv <- seq(0, max, 100)
+iv <- lapply(2:length(iv), function(x, ...) {
+  paste("(", a$breaks[x - 1], ", ", a$breaks[x], "]", sep = "")
+})
 highchart() %>%
   hc_chart(type = "column") %>%
   hc_add_theme(hc_theme_monokai()) %>%
   hc_xAxis(
-    categories = a$breaks,
+    categories = iv,
     min = -0.01,
     gridLineWidth = 0,
+    title = list(
+      style = list(
+        color = "#fff",
+        `font-size` = "calc(0.4em + 0.5vw)"
+      )
+    ),
     labels = list(
       style = list(
-        color = "#fff"
+        color = "#fff",
+        `font-size` = "calc(0.3em + 0.5vw)"
       )
     ),
     tickInterval = 5
@@ -184,43 +193,40 @@ highchart() %>%
   hc_add_series(
     data = a$counts,
     borderColor = "#EA5F23",
-    color = "rgba(234, 95, 35, 0.1)",
+    color = "rgba(234, 95, 35, 0.2)",
     groupPadding = 0,
-    pointPadding = 0
+    pointPadding = 0,
+    tooltip = list(
+      pointFormat = paste(
+        "Number of songs: {point.y}"
+      ),
+      headerFormat = "<span style='font-weight:bold'>{point.x}: </span><br>"
+    )
   ) %>%
   hc_yAxis(
     title = list(
       text = "Count",
       style = list(
-        color = "#fff"
+        color = "#fff",
+        `font-size` = "calc(0.4em + 0.5vw)"
       )
     ),
     gridLineWidth = 1,
-    gridLineColor = "#fff",
+    gridLineColor = "rgba(255, 255, 255, 0.3)",
     gridLineDashStyle = "Solid",
     labels = list(
       style = list(
-        color = "#fff"
+        color = "#fff",
+        `font-size` = "calc(0.3em + 0.5vw)"
       )
     )
   ) %>%
   hc_chart(backgroundColor = "#242424") %>%
-  hc_title(
-    text = "Acousticness of Gorillaz Songs",
-    style = list(color = "#fff")
-  ) %>%
   hc_legend(enabled = FALSE)
 
 
-plot(density(audio_features_1$acousticness))
-
-ggplot(audio_features_1, aes(acousticness, ..density..)) +
-  geom_density(adjust = 2)
-
-d   = density(audio_features_1$tempo)
+d   = density(audio_features_1$duration_ms)
 d$y = d$y/sum(d$y)
-
-plot(d)
 
 
 highchart() %>%
@@ -264,4 +270,7 @@ highchart() %>%
     text = "Acousticness of Gorillaz Songs",
     style = list(color = "#fff")
   ) %>%
-  hc_legend(enabled = FALSE)
+  hc_legend(enabled = FALSE) %>%
+  hc_tooltip(
+    enabled = FALSE
+  )
