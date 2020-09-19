@@ -85,11 +85,11 @@ audio_features_1 <- audio_features_1[
   !str_detect(
     audio_features_1$track_name,
     "(Intro|Interlude)"
-    ),
-  ]
+  ),
+]
 
-audio_features_1$minutes <- as.numeric(str_extract(audio_features_1$duration_ms/60000, "[0-9]{1,}"))
-audio_features_1$seconds <- round(as.numeric(str_extract(audio_features_1$duration_ms/60000, "\\.[0-9]{1,}")) * 60)
+audio_features_1$minutes <- as.numeric(str_extract(audio_features_1$duration_ms / 60000, "[0-9]{1,}"))
+audio_features_1$seconds <- round(as.numeric(str_extract(audio_features_1$duration_ms / 60000, "\\.[0-9]{1,}")) * 60)
 audio_features_1$seconds[!str_detect(audio_features_1$seconds, "[0-9]{2}")] <- paste(
   "0",
   audio_features_1$seconds[!str_detect(audio_features_1$seconds, "[0-9]{2}")],
@@ -160,11 +160,11 @@ highchart() %>%
   hc_title(
     text = "Acousticness of Gorillaz Songs",
     style = list(color = "#fff")
-    ) %>%
+  ) %>%
   hc_legend(enabled = FALSE)
 
-max <- plyr::round_any(max(audio_features_1$duration_ms/1000), 100)
-a <- hist(audio_features_1$duration_ms/1000, plot = FALSE, breaks = seq(0, max, 100))
+max <- plyr::round_any(max(audio_features_1$duration_ms / 1000), 100)
+a <- hist(audio_features_1$duration_ms / 1000, plot = FALSE, breaks = seq(0, max, 100))
 iv <- seq(0, max, 100)
 iv <- lapply(2:length(iv), function(x, ...) {
   paste("(", a$breaks[x - 1], ", ", a$breaks[x], "]", sep = "")
@@ -225,8 +225,8 @@ highchart() %>%
   hc_legend(enabled = FALSE)
 
 
-d   = density(audio_features_1$duration_ms)
-d$y = d$y/sum(d$y)
+d <- density(audio_features_1$duration_ms)
+d$y <- d$y / sum(d$y)
 
 
 highchart() %>%

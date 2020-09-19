@@ -60,7 +60,11 @@ create_random_grid <- function(urls) {
       )
     }
   }
-  paste("<div class = 'grid-container'>", paste(unlist(skeleton_images), collapse = ""), "</div>")
+  paste(
+    "<div class = 'grid-container'>",
+    paste(unlist(skeleton_images), collapse = ""),
+    "</div>"
+    )
 }
 a <- create_random_grid(urls)
 fluidPage(
@@ -81,13 +85,17 @@ fluidPage(
         "Your Spotify listening habits"
       ),
       h2(
-        id = "click",
         "An Overview"
+      ),
+      h3(
+        "Learn more about not only yourself but also the artists you listen to"
       )
     ),
     tags$section(
       class = "content_page",
-      HTML("<h1> Your <span class = 'accent'>alltime</span> favorite artists</h1>"),
+      HTML(
+        "<h1> Your <span class = 'accent'>alltime</span> favorite artists</h1>"
+        ),
       HTML(a),
     ),
     tags$section(),

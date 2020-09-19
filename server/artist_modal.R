@@ -235,11 +235,17 @@ show_modal <- function(...) {
             p(
               paste(
                 album_infos$album_features[
-                  order(album_infos$album_features$acousticness, decreasing = TRUE),
+                  order(
+                    album_infos$album_features$acousticness,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$name,
                 round(
                   album_infos$album_features[
-                    order(album_infos$album_features$acousticness, decreasing = TRUE),
+                    order(
+                      album_infos$album_features$acousticness,
+                      decreasing = TRUE
+                      ),
                   ][1, ]$acousticness,
                   3
                 ),
@@ -253,11 +259,17 @@ show_modal <- function(...) {
             p(
               paste(
                 album_infos$album_features[
-                  order(album_infos$album_features$instrumentalness, decreasing = TRUE),
+                  order(
+                    album_infos$album_features$instrumentalness,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$name,
                 round(
                   album_infos$album_features[
-                    order(album_infos$album_features$instrumentalness, decreasing = TRUE),
+                    order(
+                      album_infos$album_features$instrumentalness,
+                      decreasing = TRUE
+                      ),
                   ][1, ]$instrumentalness,
                   3
                 ),
@@ -271,11 +283,17 @@ show_modal <- function(...) {
             p(
               paste(
                 album_infos$album_features[
-                  order(album_infos$album_features$energy, decreasing = TRUE),
+                  order(
+                    album_infos$album_features$energy,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$name,
                 round(
                   album_infos$album_features[
-                    order(album_infos$album_features$energy, decreasing = TRUE),
+                    order(
+                      album_infos$album_features$energy,
+                      decreasing = TRUE
+                      ),
                   ][1, ]$energy,
                   3
                 ),
@@ -307,11 +325,17 @@ show_modal <- function(...) {
             p(
               paste(
                 album_infos$album_features[
-                  order(album_infos$album_features$danceability, decreasing = TRUE),
+                  order(
+                    album_infos$album_features$danceability,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$name,
                 round(
                   album_infos$album_features[
-                    order(album_infos$album_features$danceability, decreasing = TRUE),
+                    order(
+                      album_infos$album_features$danceability,
+                      decreasing = TRUE
+                      ),
                   ][1, ]$danceability,
                   3
                 ),
@@ -351,12 +375,18 @@ show_modal <- function(...) {
             p(
               paste(
                 album_infos$album_features[
-                  order(album_infos$album_features$loudness, decreasing = TRUE),
+                  order(
+                    album_infos$album_features$loudness,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$name,
                 " - ",
                 round(
                   album_infos$album_features[
-                    order(album_infos$album_features$loudness, decreasing = TRUE),
+                    order(
+                      album_infos$album_features$loudness,
+                      decreasing = TRUE
+                      ),
                   ][1, ]$loudness,
                   3
                 ),
@@ -391,12 +421,18 @@ show_modal <- function(...) {
             p(
               paste(
                 album_infos$album_features[
-                  order(album_infos$album_features$tempo, decreasing = TRUE),
+                  order(
+                    album_infos$album_features$tempo,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$name,
                 " - ",
                 round(
                   album_infos$album_features[
-                    order(album_infos$album_features$tempo, decreasing = TRUE),
+                    order(
+                      album_infos$album_features$tempo,
+                      decreasing = TRUE
+                      ),
                   ][1, ]$tempo
                 ),
                 " bpm",
@@ -429,11 +465,17 @@ show_modal <- function(...) {
             p(
               paste(
                 album_infos$album_features[
-                  order(album_infos$album_features$valence, decreasing = TRUE),
+                  order(
+                    album_infos$album_features$valence,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$name,
                 round(
                   album_infos$album_features[
-                    order(album_infos$album_features$valence, decreasing = TRUE),
+                    order(
+                      album_infos$album_features$valence,
+                      decreasing = TRUE
+                      ),
                   ][1, ]$valence,
                   3
                 ),
@@ -523,16 +565,23 @@ show_modal <- function(...) {
           p(
             paste(
               song_infos$audio_features[
-                order( song_infos$audio_features$duration_ms, decreasing = TRUE),
+                order(
+                  song_infos$audio_features$duration_ms,
+                  decreasing = TRUE
+                  ),
               ][
                 1,
               ]$track_name,
               " - ",
               paste(
                 song_infos$audio_features[
-                  order( song_infos$audio_features$duration_ms, decreasing = TRUE),
+                  order(
+                    song_infos$audio_features$duration_ms,
+                    decreasing = TRUE
+                    ),
                 ][1, 12:13],
-                collapse = ":"),
+                collapse = ":"
+              ),
               " minutes",
               sep = ""
             )
@@ -544,7 +593,7 @@ show_modal <- function(...) {
           p(
             paste(
               song_infos$audio_features[
-                order( song_infos$audio_features$duration_ms),
+                order(song_infos$audio_features$duration_ms),
               ][
                 1,
               ]$track_name,
@@ -553,7 +602,8 @@ show_modal <- function(...) {
                 song_infos$audio_features[
                   order(song_infos$audio_features$duration_ms),
                 ][1, 12:13],
-                collapse = ":"),
+                collapse = ":"
+              ),
               " minutes",
               sep = ""
             )
@@ -567,11 +617,17 @@ show_modal <- function(...) {
           p(
             paste(
               song_infos$audio_features[
-                order(song_infos$audio_features$acousticness, decreasing = TRUE),
+                order(
+                  song_infos$audio_features$acousticness,
+                  decreasing = TRUE
+                  ),
               ][1, ]$track_name,
               round(
                 song_infos$audio_features[
-                  order(song_infos$audio_features$acousticness, decreasing = TRUE),
+                  order(
+                    song_infos$audio_features$acousticness,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$acousticness,
                 3
               ),
@@ -585,11 +641,17 @@ show_modal <- function(...) {
           p(
             paste(
               song_infos$audio_features[
-                order(song_infos$audio_features$instrumentalness, decreasing = TRUE),
+                order(
+                  song_infos$audio_features$instrumentalness,
+                  decreasing = TRUE
+                  ),
               ][1, ]$track_name,
               round(
                 song_infos$audio_features[
-                  order(song_infos$audio_features$instrumentalness, decreasing = TRUE),
+                  order(
+                    song_infos$audio_features$instrumentalness,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$instrumentalness,
                 3
               ),
@@ -603,11 +665,17 @@ show_modal <- function(...) {
           p(
             paste(
               song_infos$audio_features[
-                order(song_infos$audio_features$energy, decreasing = TRUE),
+                order(
+                  song_infos$audio_features$energy,
+                  decreasing = TRUE
+                  ),
               ][1, ]$track_name,
               round(
                 song_infos$audio_features[
-                  order(song_infos$audio_features$energy, decreasing = TRUE),
+                  order(
+                    song_infos$audio_features$energy,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$energy,
                 3
               ),
@@ -639,11 +707,17 @@ show_modal <- function(...) {
           p(
             paste(
               song_infos$audio_features[
-                order(song_infos$audio_features$danceability, decreasing = TRUE),
+                order(
+                  song_infos$audio_features$danceability,
+                  decreasing = TRUE
+                  ),
               ][1, ]$track_name,
               round(
                 song_infos$audio_features[
-                  order(song_infos$audio_features$danceability, decreasing = TRUE),
+                  order(
+                    song_infos$audio_features$danceability,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$danceability,
                 3
               ),
@@ -677,12 +751,18 @@ show_modal <- function(...) {
           p(
             paste(
               song_infos$audio_features[
-                order(song_infos$audio_features$loudness, decreasing = TRUE),
+                order(
+                  song_infos$audio_features$loudness,
+                  decreasing = TRUE
+                  ),
               ][1, ]$track_name,
               " - ",
               round(
                 song_infos$audio_features[
-                  order(song_infos$audio_features$loudness, decreasing = TRUE),
+                  order(
+                    song_infos$audio_features$loudness,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$loudness,
                 3
               ),
@@ -717,12 +797,18 @@ show_modal <- function(...) {
           p(
             paste(
               song_infos$audio_features[
-                order(song_infos$audio_features$tempo, decreasing = TRUE),
+                order(
+                  song_infos$audio_features$tempo,
+                  decreasing = TRUE
+                  ),
               ][1, ]$track_name,
               " - ",
               round(
                 song_infos$audio_features[
-                  order(song_infos$audio_features$tempo, decreasing = TRUE),
+                  order(
+                    song_infos$audio_features$tempo,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$tempo
               ),
               " bpm",
@@ -755,11 +841,17 @@ show_modal <- function(...) {
           p(
             paste(
               song_infos$audio_features[
-                order(song_infos$audio_features$valence, decreasing = TRUE),
+                order(
+                  song_infos$audio_features$valence,
+                  decreasing = TRUE
+                  ),
               ][1, ]$track_name,
               round(
                 song_infos$audio_features[
-                  order(song_infos$audio_features$valence, decreasing = TRUE),
+                  order(
+                    song_infos$audio_features$valence,
+                    decreasing = TRUE
+                    ),
                 ][1, ]$valence,
                 3
               ),

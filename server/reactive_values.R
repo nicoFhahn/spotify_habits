@@ -80,7 +80,7 @@ shinyjs::onclick("artist_at_1", function(x) {
     albums,
     album_name_col = "name",
     album_release_year_col = "release_date"
-    )
+  )
   # get the number of remaining albums
   art_infos$albums <- nrow(albums)
   # get the audio features of all the songs
@@ -123,12 +123,12 @@ shinyjs::onclick("artist_at_1", function(x) {
   album_infos$most_popular_albums <- album_data[
     album_data$popularity == max(album_data$popularity),
     c("name", "popularity", "images")
-    ]
+  ]
   # get the least popular album(s)
   album_infos$least_popular_albums <- album_data[
     album_data$popularity == min(album_data$popularity),
     c("name", "popularity", "images")
-    ]
+  ]
   # split audio features by album id to calculate the features of each album
   album_features <- split(audio_features, audio_features$album_id)
   # calculate the values for each album
@@ -154,13 +154,15 @@ shinyjs::onclick("artist_at_1", function(x) {
   # check if any albums have a missing release date
   missing_date <- album_features[
     !str_detect(album_features$release_date, "[0-9]{4}-"),
-    ]
+  ]
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -198,10 +200,10 @@ shinyjs::onclick("artist_at_1", function(x) {
   songs_popularity <- songs_popularity[songs_popularity$popularity > 0, ]
   song_infos$most_popular_songs <- songs_popularity[
     songs_popularity$popularity == max(songs_popularity$popularity),
-    ]
+  ]
   song_infos$least_popular_songs <- songs_popularity[
     songs_popularity$popularity == min(songs_popularity$popularity),
-    ]
+  ]
   # for the audio analysis part remove intros and interludes
   audio_features <- audio_features[
     !str_detect(
@@ -211,18 +213,21 @@ shinyjs::onclick("artist_at_1", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
-    )
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
+  )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
-      )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
+    )
+    * 60
+  )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
   )
   # important audio features
   audio_features <- audio_features[, c(
@@ -329,9 +334,11 @@ shinyjs::onclick("artist_at_2", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -382,18 +389,21 @@ shinyjs::onclick("artist_at_2", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
+  )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
   )
   # important audio features
   audio_features <- audio_features[, c(
@@ -500,9 +510,11 @@ shinyjs::onclick("artist_at_3", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -553,18 +565,21 @@ shinyjs::onclick("artist_at_3", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
+  )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
   )
   # important audio features
   audio_features <- audio_features[, c(
@@ -671,9 +686,11 @@ shinyjs::onclick("artist_at_4", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -724,18 +741,21 @@ shinyjs::onclick("artist_at_4", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
+  )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
   )
   # important audio features
   audio_features <- audio_features[, c(
@@ -842,9 +862,11 @@ shinyjs::onclick("artist_at_5", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -895,18 +917,21 @@ shinyjs::onclick("artist_at_5", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
+  )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
   )
   # important audio features
   audio_features <- audio_features[, c(
@@ -1013,9 +1038,11 @@ shinyjs::onclick("artist_at_6", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -1066,19 +1093,22 @@ shinyjs::onclick("artist_at_6", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
   )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
+    )
   # important audio features
   audio_features <- audio_features[, c(
     "danceability", "energy", "loudness", "speechiness", "acousticness",
@@ -1184,9 +1214,11 @@ shinyjs::onclick("artist_at_7", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -1237,18 +1269,21 @@ shinyjs::onclick("artist_at_7", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
+  )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
   )
   # important audio features
   audio_features <- audio_features[, c(
@@ -1355,9 +1390,11 @@ shinyjs::onclick("artist_at_8", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -1408,19 +1445,22 @@ shinyjs::onclick("artist_at_8", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
   )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
+    )
   # important audio features
   audio_features <- audio_features[, c(
     "danceability", "energy", "loudness", "speechiness", "acousticness",
@@ -1526,9 +1566,11 @@ shinyjs::onclick("artist_at_9", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -1579,19 +1621,22 @@ shinyjs::onclick("artist_at_9", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
   )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
+    )
   # important audio features
   audio_features <- audio_features[, c(
     "danceability", "energy", "loudness", "speechiness", "acousticness",
@@ -1697,9 +1742,11 @@ shinyjs::onclick("artist_at_10", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -1750,19 +1797,22 @@ shinyjs::onclick("artist_at_10", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
   )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
+    )
   # important audio features
   audio_features <- audio_features[, c(
     "danceability", "energy", "loudness", "speechiness", "acousticness",
@@ -1868,9 +1918,11 @@ shinyjs::onclick("artist_at_11", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -1921,19 +1973,22 @@ shinyjs::onclick("artist_at_11", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
   )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
+    )
   # important audio features
   audio_features <- audio_features[, c(
     "danceability", "energy", "loudness", "speechiness", "acousticness",
@@ -2039,9 +2094,11 @@ shinyjs::onclick("artist_at_12", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -2092,19 +2149,22 @@ shinyjs::onclick("artist_at_12", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
   )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
+    )
   # important audio features
   audio_features <- audio_features[, c(
     "danceability", "energy", "loudness", "speechiness", "acousticness",
@@ -2210,9 +2270,11 @@ shinyjs::onclick("artist_at_13", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -2263,19 +2325,22 @@ shinyjs::onclick("artist_at_13", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
   )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
+    )
   # important audio features
   audio_features <- audio_features[, c(
     "danceability", "energy", "loudness", "speechiness", "acousticness",
@@ -2405,9 +2470,11 @@ shinyjs::onclick("artist_at_14", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -2458,19 +2525,22 @@ shinyjs::onclick("artist_at_14", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
   )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
+    )
   # important audio features
   audio_features <- audio_features[, c(
     "danceability", "energy", "loudness", "speechiness", "acousticness",
@@ -2600,9 +2670,11 @@ shinyjs::onclick("artist_at_15", function(x) {
   # if so add one
   if (nrow(missing_date) > 0) {
     # remove the albums with a missing date
-    album_features[!str_detect(album_features$release_date, "[0-9]{4}-"), ] <- NA
+    album_features[
+      !str_detect(album_features$release_date, "[0-9]{4}-"),
+      ] <- NA
     album_features <- album_features[complete.cases(album_features), ]
-    for (i in 1:nrow(missing_date)) {
+    for (i in seq_len(nrow(missing_date))) {
       # check if the album is already present (sometimes it is for some reason)
       if (missing_date[i, ]$name %in% album_features$name) {
         missing_date[i, ]$release_date <- album_features[
@@ -2653,19 +2725,22 @@ shinyjs::onclick("artist_at_15", function(x) {
   ]
   # get the number of minutes of a song
   audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms/60000, "[0-9]{1,}")
+    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
   )
   # get the number of seconds of a song
   audio_features$seconds <- round(
     as.numeric(
-      str_extract(audio_features$duration_ms/60000, "\\.[0-9]{1,}")
+      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
     )
-    * 60)
-  audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
+    * 60
   )
+  audio_features$seconds[
+    !str_detect(audio_features$seconds, "[0-9]{2}")
+    ] <- paste(
+      "0",
+      audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
+      sep = ""
+    )
   # important audio features
   audio_features <- audio_features[, c(
     "danceability", "energy", "loudness", "speechiness", "acousticness",
