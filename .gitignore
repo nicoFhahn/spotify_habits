@@ -8,3 +8,4 @@ rsconnect/
 *.Rproj
 a.RData
 auth.R
+*.txt
