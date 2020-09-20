@@ -68,6 +68,13 @@ create_random_grid <- function(urls) {
 }
 a <- create_random_grid(urls)
 fluidPage(
+  add_busy_spinner(
+    spin = "semipolar",
+    color = "#EA5F23",
+    margins = c(40, 20),
+    height = "5%",
+    width = "5%"
+    ),
   tags$head(
     tags$style(
       css

@@ -7,11 +7,11 @@ show_modal <- function(...) {
         paste(
           tags$figure(
             tags$image(
-              src = art_infos$image
+              src = art_infos$values$image
             ),
             tags$figcaption(
               h4(
-                art_infos$name
+                paste("#", art_infos$values$place, ":", art_infos$values$name, sep = "")
               )
             )
           )
@@ -23,19 +23,19 @@ show_modal <- function(...) {
         tabPanel(
           title = "General information",
           column(
-            width = 10,
+            width = 8,
             h6(
               "Genre"
             ),
             p(
-              art_infos$genre
+              art_infos$values$genre
             ),
             br(),
             h6(
               "Populartiy"
             ),
             p(
-              art_infos$popularity
+              art_infos$values$popularity
             ),
             br(),
             h6(
@@ -43,7 +43,7 @@ show_modal <- function(...) {
             ),
             p(
               format(
-                art_infos$followers,
+                art_infos$values$followers,
                 big.interval = 3, big.mark = " "
               )
             ),
@@ -52,14 +52,14 @@ show_modal <- function(...) {
               "#Albums on Spotify"
             ),
             p(
-              art_infos$albums
+              art_infos$values$albums
             ),
             br(),
             h6(
               "#Songs on Spotify"
             ),
             p(
-              art_infos$songs
+              art_infos$values$songs
             ),
             br(),
             h6(
@@ -67,7 +67,7 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                art_infos$related,
+                art_infos$values$related,
                 collapse = ", "
               )
             )
@@ -76,28 +76,28 @@ show_modal <- function(...) {
         tabPanel(
           "Album Breakdown 1",
           column(
-            width = 10,
+            width = 8,
             h6(
               ifelse(
-                nrow(album_infos$most_popular_albums) > 1,
+                nrow(album_infos$values$most_popular_albums) > 1,
                 "Most popular albums",
                 "Most popular album"
               )
             ),
             p(
               ifelse(
-                nrow(album_infos$most_popular_albums) > 1,
+                nrow(album_infos$values$most_popular_albums) > 1,
                 paste(
                   paste(
-                    album_infos$most_popular_albums$name,
+                    album_infos$values$most_popular_albums$name,
                     collapse = ", "
                   ),
-                  album_infos$most_popular_albums$popularity,
+                  album_infos$values$most_popular_albums$popularity,
                   sep = " - "
                 ),
                 paste(
-                  album_infos$most_popular_albums$name,
-                  album_infos$most_popular_albums$popularity,
+                  album_infos$values$most_popular_albums$name,
+                  album_infos$values$most_popular_albums$popularity,
                   sep = " - "
                 )
               )
@@ -105,25 +105,25 @@ show_modal <- function(...) {
             br(),
             h6(
               ifelse(
-                nrow(album_infos$least_popular_albums) > 1,
+                nrow(album_infos$values$least_popular_albums) > 1,
                 "Least popular albums",
                 "Least popular album"
               )
             ),
             p(
               ifelse(
-                nrow(album_infos$least_popular_albums) > 1,
+                nrow(album_infos$values$least_popular_albums) > 1,
                 paste(
                   paste(
-                    album_infos$least_popular_albums$name,
+                    album_infos$values$least_popular_albums$name,
                     collapse = ", "
                   ),
-                  album_infos$least_popular_albums$popularity,
+                  album_infos$values$least_popular_albums$popularity,
                   sep = " - "
                 ),
                 paste(
-                  album_infos$least_popular_albums$name,
-                  album_infos$least_popular_albums$popularity,
+                  album_infos$values$least_popular_albums$name,
+                  album_infos$values$least_popular_albums$popularity,
                   sep = " - "
                 )
               )
@@ -134,17 +134,17 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
-                  order(album_infos$album_features$length),
+                album_infos$values$album_features[
+                  order(album_infos$values$album_features$length),
                 ][
-                  nrow(album_infos$album_features),
+                  nrow(album_infos$values$album_features),
                 ][, 11],
                 " - ",
                 round(
-                  album_infos$album_features[
-                    order(album_infos$album_features$length),
+                  album_infos$values$album_features[
+                    order(album_infos$values$album_features$length),
                   ][
-                    nrow(album_infos$album_features),
+                    nrow(album_infos$values$album_features),
                   ][, 1] / 60000
                 ),
                 " minutes",
@@ -157,15 +157,15 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
-                  order(album_infos$album_features$length),
+                album_infos$values$album_features[
+                  order(album_infos$values$album_features$length),
                 ][
                   1,
                 ][, 11],
                 " - ",
                 round(
-                  album_infos$album_features[
-                    order(album_infos$album_features$length),
+                  album_infos$values$album_features[
+                    order(album_infos$values$album_features$length),
                   ][
                     1,
                   ][, 1] / 60000
@@ -180,16 +180,16 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
-                  order(album_infos$album_features$release_date),
+                album_infos$values$album_features[
+                  order(album_infos$values$album_features$release_date),
                 ][
-                  nrow(album_infos$album_features),
+                  nrow(album_infos$values$album_features),
                 ]$name,
                 " (",
-                album_infos$album_features[
-                  order(album_infos$album_features$release_date),
+                album_infos$values$album_features[
+                  order(album_infos$values$album_features$release_date),
                 ][
-                  nrow(album_infos$album_features),
+                  nrow(album_infos$values$album_features),
                 ]$release_date,
                 ")",
                 sep = ""
@@ -201,12 +201,12 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
-                  order(album_infos$album_features$release_date),
+                album_infos$values$album_features[
+                  order(album_infos$values$album_features$release_date),
                 ][1, ]$name,
                 " (",
-                album_infos$album_features[
-                  order(album_infos$album_features$release_date),
+                album_infos$values$album_features[
+                  order(album_infos$values$album_features$release_date),
                 ][1, ]$release_date,
                 ")",
                 sep = ""
@@ -214,36 +214,29 @@ show_modal <- function(...) {
             )
           ),
           column(
-            width = 2,
-            img(
-              class = "album_cover",
-              src = album_infos$most_popular_albums$images[[1]][1, 2]
-            ),
-            img(
-              class = "album_cover",
-              src = album_infos$least_popular_albums$images[[1]][1, 2]
-            )
+            width = 4,
+            HTML(album_infos$values$most_popular_albums$uri[1])
           )
         ),
         tabPanel(
           "Album Breakdown 2",
           column(
-            width = 10,
+            width = 8,
             h6(
               "Most acoustic album"
             ),
             p(
               paste(
-                album_infos$album_features[
+                album_infos$values$album_features[
                   order(
-                    album_infos$album_features$acousticness,
+                    album_infos$values$album_features$acousticness,
                     decreasing = TRUE
                     ),
                 ][1, ]$name,
                 round(
-                  album_infos$album_features[
+                  album_infos$values$album_features[
                     order(
-                      album_infos$album_features$acousticness,
+                      album_infos$values$album_features$acousticness,
                       decreasing = TRUE
                       ),
                   ][1, ]$acousticness,
@@ -258,16 +251,16 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
+                album_infos$values$album_features[
                   order(
-                    album_infos$album_features$instrumentalness,
+                    album_infos$values$album_features$instrumentalness,
                     decreasing = TRUE
                     ),
                 ][1, ]$name,
                 round(
-                  album_infos$album_features[
+                  album_infos$values$album_features[
                     order(
-                      album_infos$album_features$instrumentalness,
+                      album_infos$values$album_features$instrumentalness,
                       decreasing = TRUE
                       ),
                   ][1, ]$instrumentalness,
@@ -282,16 +275,16 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
+                album_infos$values$album_features[
                   order(
-                    album_infos$album_features$energy,
+                    album_infos$values$album_features$energy,
                     decreasing = TRUE
                     ),
                 ][1, ]$name,
                 round(
-                  album_infos$album_features[
+                  album_infos$values$album_features[
                     order(
-                      album_infos$album_features$energy,
+                      album_infos$values$album_features$energy,
                       decreasing = TRUE
                       ),
                   ][1, ]$energy,
@@ -306,12 +299,12 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
-                  order(album_infos$album_features$energy),
+                album_infos$values$album_features[
+                  order(album_infos$values$album_features$energy),
                 ][1, ]$name,
                 round(
-                  album_infos$album_features[
-                    order(album_infos$album_features$energy),
+                  album_infos$values$album_features[
+                    order(album_infos$values$album_features$energy),
                   ][1, ]$energy,
                   3
                 ),
@@ -324,16 +317,16 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
+                album_infos$values$album_features[
                   order(
-                    album_infos$album_features$danceability,
+                    album_infos$values$album_features$danceability,
                     decreasing = TRUE
                     ),
                 ][1, ]$name,
                 round(
-                  album_infos$album_features[
+                  album_infos$values$album_features[
                     order(
-                      album_infos$album_features$danceability,
+                      album_infos$values$album_features$danceability,
                       decreasing = TRUE
                       ),
                   ][1, ]$danceability,
@@ -348,12 +341,12 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
-                  order(album_infos$album_features$danceability),
+                album_infos$values$album_features[
+                  order(album_infos$values$album_features$danceability),
                 ][1, ]$name,
                 round(
-                  album_infos$album_features[
-                    order(album_infos$album_features$danceability),
+                  album_infos$values$album_features[
+                    order(album_infos$values$album_features$danceability),
                   ][1, ]$danceability,
                   3
                 ),
@@ -362,29 +355,30 @@ show_modal <- function(...) {
             )
           ),
           column(
-            width = 2
+            width = 4,
+            HTML(album_infos$values$uri_2)
           )
         ),
         tabPanel(
           "Album Breakdown 3",
           column(
-            width = 10,
+            width = 8,
             h6(
               "Loudest album"
             ),
             p(
               paste(
-                album_infos$album_features[
+                album_infos$values$album_features[
                   order(
-                    album_infos$album_features$loudness,
+                    album_infos$values$album_features$loudness,
                     decreasing = TRUE
                     ),
                 ][1, ]$name,
                 " - ",
                 round(
-                  album_infos$album_features[
+                  album_infos$values$album_features[
                     order(
-                      album_infos$album_features$loudness,
+                      album_infos$values$album_features$loudness,
                       decreasing = TRUE
                       ),
                   ][1, ]$loudness,
@@ -400,13 +394,13 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
-                  order(album_infos$album_features$loudness),
+                album_infos$values$album_features[
+                  order(album_infos$values$album_features$loudness),
                 ][1, ]$name,
                 " - ",
                 round(
-                  album_infos$album_features[
-                    order(album_infos$album_features$loudness),
+                  album_infos$values$album_features[
+                    order(album_infos$values$album_features$loudness),
                   ][1, ]$loudness,
                   3
                 ),
@@ -420,17 +414,17 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
+                album_infos$values$album_features[
                   order(
-                    album_infos$album_features$tempo,
+                    album_infos$values$album_features$tempo,
                     decreasing = TRUE
                     ),
                 ][1, ]$name,
                 " - ",
                 round(
-                  album_infos$album_features[
+                  album_infos$values$album_features[
                     order(
-                      album_infos$album_features$tempo,
+                      album_infos$values$album_features$tempo,
                       decreasing = TRUE
                       ),
                   ][1, ]$tempo
@@ -445,13 +439,13 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
-                  order(album_infos$album_features$tempo),
+                album_infos$values$album_features[
+                  order(album_infos$values$album_features$tempo),
                 ][1, ]$name,
                 " - ",
                 round(
-                  album_infos$album_features[
-                    order(album_infos$album_features$tempo),
+                  album_infos$values$album_features[
+                    order(album_infos$values$album_features$tempo),
                   ][1, ]$tempo
                 ),
                 " bpm",
@@ -464,16 +458,16 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
+                album_infos$values$album_features[
                   order(
-                    album_infos$album_features$valence,
+                    album_infos$values$album_features$valence,
                     decreasing = TRUE
                     ),
                 ][1, ]$name,
                 round(
-                  album_infos$album_features[
+                  album_infos$values$album_features[
                     order(
-                      album_infos$album_features$valence,
+                      album_infos$values$album_features$valence,
                       decreasing = TRUE
                       ),
                   ][1, ]$valence,
@@ -488,12 +482,12 @@ show_modal <- function(...) {
             ),
             p(
               paste(
-                album_infos$album_features[
-                  order(album_infos$album_features$valence),
+                album_infos$values$album_features[
+                  order(album_infos$values$album_features$valence),
                 ][1, ]$name,
                 round(
-                  album_infos$album_features[
-                    order(album_infos$album_features$valence),
+                  album_infos$values$album_features[
+                    order(album_infos$values$album_features$valence),
                   ][1, ]$valence,
                   3
                 ),
@@ -502,379 +496,401 @@ show_modal <- function(...) {
             )
           ),
           column(
-            width = 2
+            width = 4,
+            HTML(album_infos$values$uri_3)
           )
         ),
         tabPanel(
           "Song Breakdown 1",
-          h6(
-            ifelse(
-              nrow(song_infos$most_popular_songs) > 1,
-              "Most popular songs",
-              "Most popular song"
-            )
-          ),
-          p(
-            ifelse(
-              nrow(song_infos$most_popular_songs) > 1,
-              paste(
-                paste(
-                  song_infos$most_popular_songs$name,
-                  collapse = ", "
-                ),
-                song_infos$most_popular_songs$popularity,
-                sep = " - "
-              ),
-              paste(
-                song_infos$most_popular_songs$name,
-                song_infos$most_popular_songs$popularity,
-                sep = " - "
+          column(
+            width = 8,
+            h6(
+              ifelse(
+                nrow(song_infos$values$most_popular_songs) > 1,
+                "Most popular songs",
+                "Most popular song"
               )
-            )
-          ),
-          br(),
-          h6(
-            ifelse(
-              nrow(song_infos$least_popular_songs) > 1,
-              "Least popular songs",
-              "Least popular song"
-            )
-          ),
-          p(
-            ifelse(
-              nrow(song_infos$least_popular_songs) > 1,
-              paste(
+            ),
+            p(
+              ifelse(
+                nrow(song_infos$values$most_popular_songs) > 1,
                 paste(
-                  song_infos$least_popular_songs$name,
-                  collapse = ", "
-                ),
-                song_infos$least_popular_songs$popularity,
-                sep = " - "
-              ),
-              paste(
-                song_infos$least_popular_songs$name,
-                song_infos$least_popular_songs$popularity,
-                sep = " - "
-              )
-            )
-          ),
-          br(),
-          h6(
-            "Longest song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(
-                  song_infos$audio_features$duration_ms,
-                  decreasing = TRUE
+                  paste(
+                    song_infos$values$most_popular_songs$name,
+                    collapse = ", "
                   ),
-              ][
-                1,
-              ]$track_name,
-              " - ",
+                  song_infos$values$most_popular_songs$popularity,
+                  sep = " - "
+                ),
+                paste(
+                  song_infos$values$most_popular_songs$name,
+                  song_infos$values$most_popular_songs$popularity,
+                  sep = " - "
+                )
+              )
+            ),
+            br(),
+            h6(
+              ifelse(
+                nrow(song_infos$values$least_popular_songs) > 1,
+                "Least popular songs",
+                "Least popular song"
+              )
+            ),
+            p(
+              ifelse(
+                nrow(song_infos$values$least_popular_songs) > 1,
+                paste(
+                  paste(
+                    song_infos$values$least_popular_songs$name,
+                    collapse = ", "
+                  ),
+                  song_infos$values$least_popular_songs$popularity,
+                  sep = " - "
+                ),
+                paste(
+                  song_infos$values$least_popular_songs$name,
+                  song_infos$values$least_popular_songs$popularity,
+                  sep = " - "
+                )
+              )
+            ),
+            br(),
+            h6(
+              "Longest song"
+            ),
+            p(
               paste(
-                song_infos$audio_features[
+                song_infos$values$audio_features[
                   order(
-                    song_infos$audio_features$duration_ms,
+                    song_infos$values$audio_features$duration_ms,
                     decreasing = TRUE
+                  ),
+                ][
+                  1,
+                ]$track_name,
+                " - ",
+                paste(
+                  song_infos$values$audio_features[
+                    order(
+                      song_infos$values$audio_features$duration_ms,
+                      decreasing = TRUE
                     ),
-                ][1, 12:13],
-                collapse = ":"
-              ),
-              " minutes",
-              sep = ""
-            )
-          ),
-          br(),
-          h6(
-            "Shortest song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(song_infos$audio_features$duration_ms),
-              ][
-                1,
-              ]$track_name,
-              " - ",
+                  ][1, 12:13],
+                  collapse = ":"
+                ),
+                " minutes",
+                sep = ""
+              )
+            ),
+            br(),
+            h6(
+              "Shortest song"
+            ),
+            p(
               paste(
-                song_infos$audio_features[
-                  order(song_infos$audio_features$duration_ms),
-                ][1, 12:13],
-                collapse = ":"
-              ),
-              " minutes",
-              sep = ""
+                song_infos$values$audio_features[
+                  order(song_infos$values$audio_features$duration_ms),
+                ][
+                  1,
+                ]$track_name,
+                " - ",
+                paste(
+                  song_infos$values$audio_features[
+                    order(song_infos$values$audio_features$duration_ms),
+                  ][1, 12:13],
+                  collapse = ":"
+                ),
+                " minutes",
+                sep = ""
+              )
             )
+          ),
+          column(
+            width = 4,
+            HTML(song_infos$values$most_popular_songs$uri[1])
           )
         ),
         tabPanel(
           "Song Breakdown 2",
-          h6(
-            "Most acoustic song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(
-                  song_infos$audio_features$acousticness,
-                  decreasing = TRUE
-                  ),
-              ][1, ]$track_name,
-              round(
-                song_infos$audio_features[
+          column(
+            width = 8,
+            h6(
+              "Most acoustic song"
+            ),
+            p(
+              paste(
+                song_infos$values$audio_features[
                   order(
-                    song_infos$audio_features$acousticness,
+                    song_infos$values$audio_features$acousticness,
                     decreasing = TRUE
-                    ),
-                ][1, ]$acousticness,
-                3
-              ),
-              sep = " - "
-            )
-          ),
-          br(),
-          h6(
-            "Most instrumental song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(
-                  song_infos$audio_features$instrumentalness,
-                  decreasing = TRUE
                   ),
-              ][1, ]$track_name,
-              round(
-                song_infos$audio_features[
-                  order(
-                    song_infos$audio_features$instrumentalness,
-                    decreasing = TRUE
+                ][1, ]$track_name,
+                round(
+                  song_infos$values$audio_features[
+                    order(
+                      song_infos$values$audio_features$acousticness,
+                      decreasing = TRUE
                     ),
-                ][1, ]$instrumentalness,
-                3
-              ),
-              sep = " - "
-            )
-          ),
-          br(),
-          h6(
-            "Most energetic song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(
-                  song_infos$audio_features$energy,
-                  decreasing = TRUE
+                  ][1, ]$acousticness,
+                  3
+                ),
+                sep = " - "
+              )
+            ),
+            br(),
+            h6(
+              "Most instrumental song"
+            ),
+            p(
+              paste(
+                song_infos$values$audio_features[
+                  order(
+                    song_infos$values$audio_features$instrumentalness,
+                    decreasing = TRUE
                   ),
-              ][1, ]$track_name,
-              round(
-                song_infos$audio_features[
-                  order(
-                    song_infos$audio_features$energy,
-                    decreasing = TRUE
+                ][1, ]$track_name,
+                round(
+                  song_infos$values$audio_features[
+                    order(
+                      song_infos$values$audio_features$instrumentalness,
+                      decreasing = TRUE
                     ),
-                ][1, ]$energy,
-                3
-              ),
-              sep = " - "
-            )
-          ),
-          br(),
-          h6(
-            "Least energetic song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(song_infos$audio_features$energy),
-              ][1, ]$track_name,
-              round(
-                song_infos$audio_features[
-                  order(song_infos$audio_features$energy),
-                ][1, ]$energy,
-                3
-              ),
-              sep = " - "
-            )
-          ),
-          br(),
-          h6(
-            "Most danceable song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(
-                  song_infos$audio_features$danceability,
-                  decreasing = TRUE
+                  ][1, ]$instrumentalness,
+                  3
+                ),
+                sep = " - "
+              )
+            ),
+            br(),
+            h6(
+              "Most energetic song"
+            ),
+            p(
+              paste(
+                song_infos$values$audio_features[
+                  order(
+                    song_infos$values$audio_features$energy,
+                    decreasing = TRUE
                   ),
-              ][1, ]$track_name,
-              round(
-                song_infos$audio_features[
-                  order(
-                    song_infos$audio_features$danceability,
-                    decreasing = TRUE
+                ][1, ]$track_name,
+                round(
+                  song_infos$values$audio_features[
+                    order(
+                      song_infos$values$audio_features$energy,
+                      decreasing = TRUE
                     ),
-                ][1, ]$danceability,
-                3
-              ),
-              sep = " - "
+                  ][1, ]$energy,
+                  3
+                ),
+                sep = " - "
+              )
+            ),
+            br(),
+            h6(
+              "Least energetic song"
+            ),
+            p(
+              paste(
+                song_infos$values$audio_features[
+                  order(song_infos$values$audio_features$energy),
+                ][1, ]$track_name,
+                round(
+                  song_infos$values$audio_features[
+                    order(song_infos$values$audio_features$energy),
+                  ][1, ]$energy,
+                  3
+                ),
+                sep = " - "
+              )
+            ),
+            br(),
+            h6(
+              "Most danceable song"
+            ),
+            p(
+              paste(
+                song_infos$values$audio_features[
+                  order(
+                    song_infos$values$audio_features$danceability,
+                    decreasing = TRUE
+                  ),
+                ][1, ]$track_name,
+                round(
+                  song_infos$values$audio_features[
+                    order(
+                      song_infos$values$audio_features$danceability,
+                      decreasing = TRUE
+                    ),
+                  ][1, ]$danceability,
+                  3
+                ),
+                sep = " - "
+              )
+            ),
+            br(),
+            h6(
+              "Least danceable song"
+            ),
+            p(
+              paste(
+                song_infos$values$audio_features[
+                  order(song_infos$values$audio_features$danceability),
+                ][1, ]$track_name,
+                round(
+                  song_infos$values$audio_features[
+                    order(song_infos$values$audio_features$danceability),
+                  ][1, ]$danceability,
+                  3
+                ),
+                sep = " - "
+              )
             )
           ),
-          br(),
-          h6(
-            "Least danceable song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(song_infos$audio_features$danceability),
-              ][1, ]$track_name,
-              round(
-                song_infos$audio_features[
-                  order(song_infos$audio_features$danceability),
-                ][1, ]$danceability,
-                3
-              ),
-              sep = " - "
-            )
+          column(
+            width = 4,
+            HTML(song_infos$values$iframe_2)
           )
         ),
         tabPanel(
           "Song Breakdown 3",
-          h6(
-            "Loudest song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(
-                  song_infos$audio_features$loudness,
-                  decreasing = TRUE
-                  ),
-              ][1, ]$track_name,
-              " - ",
-              round(
-                song_infos$audio_features[
+          column(
+            width = 8,
+            h6(
+              "Loudest song"
+            ),
+            p(
+              paste(
+                song_infos$values$audio_features[
                   order(
-                    song_infos$audio_features$loudness,
+                    song_infos$values$audio_features$loudness,
                     decreasing = TRUE
-                    ),
-                ][1, ]$loudness,
-                3
-              ),
-              " db",
-              sep = ""
-            )
-          ),
-          br(),
-          h6(
-            "Quietest song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(song_infos$audio_features$loudness),
-              ][1, ]$track_name,
-              " - ",
-              round(
-                song_infos$audio_features[
-                  order(song_infos$audio_features$loudness),
-                ][1, ]$loudness,
-                3
-              ),
-              " db",
-              sep = ""
-            )
-          ),
-          br(),
-          h6(
-            "Fastest song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(
-                  song_infos$audio_features$tempo,
-                  decreasing = TRUE
                   ),
-              ][1, ]$track_name,
-              " - ",
-              round(
-                song_infos$audio_features[
-                  order(
-                    song_infos$audio_features$tempo,
-                    decreasing = TRUE
+                ][1, ]$track_name,
+                " - ",
+                round(
+                  song_infos$values$audio_features[
+                    order(
+                      song_infos$values$audio_features$loudness,
+                      decreasing = TRUE
                     ),
-                ][1, ]$tempo
-              ),
-              " bpm",
-              sep = ""
-            )
-          ),
-          br(),
-          h6(
-            "Slowest song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(song_infos$audio_features$tempo),
-              ][1, ]$track_name,
-              " - ",
-              round(
-                song_infos$audio_features[
-                  order(song_infos$audio_features$tempo),
-                ][1, ]$tempo
-              ),
-              " bpm",
-              sep = ""
-            )
-          ),
-          br(),
-          h6(
-            "Happiest song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(
-                  song_infos$audio_features$valence,
-                  decreasing = TRUE
+                  ][1, ]$loudness,
+                  3
+                ),
+                " db",
+                sep = ""
+              )
+            ),
+            br(),
+            h6(
+              "Quietest song"
+            ),
+            p(
+              paste(
+                song_infos$values$audio_features[
+                  order(song_infos$values$audio_features$loudness),
+                ][1, ]$track_name,
+                " - ",
+                round(
+                  song_infos$values$audio_features[
+                    order(song_infos$values$audio_features$loudness),
+                  ][1, ]$loudness,
+                  3
+                ),
+                " db",
+                sep = ""
+              )
+            ),
+            br(),
+            h6(
+              "Fastest song"
+            ),
+            p(
+              paste(
+                song_infos$values$audio_features[
+                  order(
+                    song_infos$values$audio_features$tempo,
+                    decreasing = TRUE
                   ),
-              ][1, ]$track_name,
-              round(
-                song_infos$audio_features[
-                  order(
-                    song_infos$audio_features$valence,
-                    decreasing = TRUE
+                ][1, ]$track_name,
+                " - ",
+                round(
+                  song_infos$values$audio_features[
+                    order(
+                      song_infos$values$audio_features$tempo,
+                      decreasing = TRUE
                     ),
-                ][1, ]$valence,
-                3
-              ),
-              sep = " - "
+                  ][1, ]$tempo
+                ),
+                " bpm",
+                sep = ""
+              )
+            ),
+            br(),
+            h6(
+              "Slowest song"
+            ),
+            p(
+              paste(
+                song_infos$values$audio_features[
+                  order(song_infos$values$audio_features$tempo),
+                ][1, ]$track_name,
+                " - ",
+                round(
+                  song_infos$values$audio_features[
+                    order(song_infos$values$audio_features$tempo),
+                  ][1, ]$tempo
+                ),
+                " bpm",
+                sep = ""
+              )
+            ),
+            br(),
+            h6(
+              "Happiest song"
+            ),
+            p(
+              paste(
+                song_infos$values$audio_features[
+                  order(
+                    song_infos$values$audio_features$valence,
+                    decreasing = TRUE
+                  ),
+                ][1, ]$track_name,
+                round(
+                  song_infos$values$audio_features[
+                    order(
+                      song_infos$values$audio_features$valence,
+                      decreasing = TRUE
+                    ),
+                  ][1, ]$valence,
+                  3
+                ),
+                sep = " - "
+              )
+            ),
+            br(),
+            h6(
+              "Saddest song"
+            ),
+            p(
+              paste(
+                song_infos$values$audio_features[
+                  order(song_infos$values$audio_features$valence),
+                ][1, ]$track_name,
+                round(
+                  song_infos$values$audio_features[
+                    order(song_infos$values$audio_features$valence),
+                  ][1, ]$valence,
+                  3
+                ),
+                sep = " - "
+              )
             )
           ),
-          br(),
-          h6(
-            "Saddest song"
-          ),
-          p(
-            paste(
-              song_infos$audio_features[
-                order(song_infos$audio_features$valence),
-              ][1, ]$track_name,
-              round(
-                song_infos$audio_features[
-                  order(song_infos$audio_features$valence),
-                ][1, ]$valence,
-                3
-              ),
-              sep = " - "
-            )
+          column(
+            width = 4,
+            HTML(song_infos$values$iframe_3)
           )
         ),
         tabPanel(

@@ -16,7 +16,7 @@ longterm_art <- get_my_top_artists_or_tracks(
   authorization = code
 )
 
-id_1 <- longterm_art[1, ]$id
+id_1 <- longterm_art[15, ]$id
 albums_1 <- get_artist_albums(id_1, include_groups = "album")
 albums_1 <- dedupe_album_names(albums_1, album_name_col = "name", album_release_year_col = "release_date")
 albums_data_1 <- get_albums(albums_1$id)
@@ -225,52 +225,84 @@ highchart() %>%
   hc_legend(enabled = FALSE)
 
 
-d <- density(audio_features_1$duration_ms)
-d$y <- d$y / sum(d$y)
+dens <- density(audio_features_1$speechiness, from = 0, to = 1)
+dens$y <- dens$y / sum(dens$y)
 
 
 highchart() %>%
+  # area chart
   hc_chart(type = "area") %>%
+  # set the theme
   hc_add_theme(hc_theme_monokai()) %>%
+  # add the x axis values
   hc_xAxis(
-    categories = round(d$x),
-    min = -0.01,
+    # set the categories
+    categories = round(dens$x, ifelse(any(dens$x) > 1, 1, 2)),
+    # no gridLine
     gridLineWidth = 0,
-    labels = list(
+    # set the title
+    title = list(
+      # style the title
       style = list(
-        color = "#fff"
+        color = "#fff",
+        `font-size` = "calc(0.4em + 0.5vw)"
       )
     ),
-    tickInterval = 5
+    # style the labels
+    labels = list(
+      style = list(
+        color = "#fff",
+        `font-size` = "calc(0.3em + 0.5vw)"
+      )
+    ),
+    # set the tick interval
+    tickInterval = 20
   ) %>%
+  # add the data for the density
   hc_add_series(
-    data = d$y,
-    borderColor = "#EA5F23",
+    data = dens$y,
+    # style it
     color = "rgba(234, 95, 35, 1)",
     fillColor = "rgba(234, 95, 35, 0.1)"
   ) %>%
+  # style the y-axis
   hc_yAxis(
+    # set the title
     title = list(
-      text = "Count",
+      text = "Density",
+      # style it
       style = list(
-        color = "#fff"
+        color = "#fff",
+        `font-size` = "calc(0.4em + 0.5vw)"
       )
     ),
+    # style the gridLine
     gridLineWidth = 1,
-    gridLineColor = "#fff",
+    gridLineColor = "rgba(255, 255, 255, 0.3)",
     gridLineDashStyle = "Solid",
+    # style the labels
     labels = list(
       style = list(
-        color = "#fff"
+        color = "#fff",
+        `font-size` = "calc(0.3em + 0.5vw)"
       )
     )
   ) %>%
+  # set the background color
   hc_chart(backgroundColor = "#242424") %>%
+  # set the title
   hc_title(
-    text = "Acousticness of Gorillaz Songs",
-    style = list(color = "#fff")
+    text = paste(
+      "of",
+      "songs"
+    ),
+    # style it
+    style = list(
+      color = "#fff",
+      `font-size` = "calc(1em + 0.5vw)"
+    )
   ) %>%
+  # remove the legend
   hc_legend(enabled = FALSE) %>%
-  hc_tooltip(
-    enabled = FALSE
-  )
+  # remove the tooltip
+  hc_tooltip(enabled = FALSE)

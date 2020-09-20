@@ -152,3 +152,24 @@ ul.dropdown-menu {
 .dropdown-menu {
   box-shadow: 0 6px 12px rgba(234, 95, 35, 0.1);
 }
+
+iframe {
+  width: 100%;
+  height: calc(5em + 30vw);
+  margin-top: 2vh;
+  display: block;
+  border: 1px solid rgba(234, 95, 35, 0.3);
+  box-shadow: 0 6px 12px #EA5F23;
+}
+
+.af {
+background-color: red;
+}
+
+.at {
+background-color: red;
+}
+
+.bk{
+  background-color:red;
+}

@@ -3,11 +3,34 @@ output$art1_plot <- renderHighchart({
   if (input$plot_type == "Density") {
     # calculate the density of the duration in seconds
     if (input$plot_var == "Duration in seconds") {
-      dens <- density(song_infos$audio_features[, "duration_ms"] / 1000)
-    } else {
-      # calculate the density for the rest
-      dens <- density(song_infos$audio_features[, tolower(input$plot_var)])
-    }
+      dens <- density(
+        song_infos$values$audio_features[, "duration_ms"] / 1000,
+        from = 0
+        )
+    } else if (input$plot_var %in% c(
+      "Acousticness", "Danceability", "Energy",
+      "Instrumentalness", "Liveness", "Speechiness",
+      "Valence"
+    )) {
+      # calculate the density 
+      dens <- density(
+      song_infos$values$audio_features[, tolower(input$plot_var)],
+      from = -0.2,
+      to = 1.2
+    )
+      } else if (input$plot_var == "Tempo") {
+        # calculate the density for the tempo
+        dens <- density(
+          song_infos$values$audio_features[, tolower(input$plot_var)],
+          from = 0,
+          to = 250
+        ) 
+      } else {
+        # calculate the density for loudness
+        dens <- density(
+          song_infos$values$audio_features[, tolower(input$plot_var)]
+        ) 
+      }
     # get the relative density
     dens$y <- dens$y / sum(dens$y)
     highchart() %>%
@@ -99,7 +122,7 @@ output$art1_plot <- renderHighchart({
     )) {
       # get the histogram values
       hist <- hist(
-        song_infos$audio_features[, tolower(input$plot_var)],
+        song_infos$values$audio_features[, tolower(input$plot_var)],
         plot = FALSE,
         # custom breaks
         breaks = seq(0, 1, 0.1)
@@ -201,7 +224,7 @@ output$art1_plot <- renderHighchart({
     } else if (input$plot_var == "Loudness") {
       # all the same as the last histogram, check the comments there
       hist <- hist(
-        song_infos$audio_features$loudness,
+        song_infos$values$audio_features$loudness,
         plot = FALSE,
         breaks = seq(-60, 0, 2)
         )
@@ -281,9 +304,13 @@ output$art1_plot <- renderHighchart({
       # histogram for duration
     } else if (input$plot_var == "Duration in seconds") {
       # all the same as the first histogram, check the comments there
-      max <- round_any(max(song_infos$audio_features$duration_ms / 1000), 100)
+      max <- round_any(
+        max(song_infos$values$audio_features$duration_ms / 1000),
+        100,
+        ceiling
+        )
       hist <- hist(
-        song_infos$audio_features$duration_ms / 1000,
+        song_infos$values$audio_features$duration_ms / 1000,
         plot = FALSE,
         breaks = seq(0, max, 100)
       )
@@ -364,7 +391,7 @@ output$art1_plot <- renderHighchart({
     } else {
       # all the same as the first histogram, check the comments there
       hist <- hist(
-        song_infos$audio_features$tempo,
+        song_infos$values$audio_features$tempo,
         plot = FALSE,
         breaks = seq(0, 250, 10)
         )
