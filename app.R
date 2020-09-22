@@ -25,10 +25,17 @@ code <- get_spotify_authorization_code()
 longterm_art <- get_my_top_artists_or_tracks(
   type = "artists",
   time_range = "long_term",
-  limit = 15,
+  limit = 20,
   authorization = code
 )
-urls <- unlist(lapply(longterm_art$images, function(x) x$url[1]))
+shortterm_art <- get_my_top_artists_or_tracks(
+  type = "artists",
+  time_range = "short_term",
+  limit = 20,
+  authorization = code
+)
+urls_alltime <- unlist(lapply(longterm_art$images, function(x) x$url[1]))
+urls_recent <- unlist(lapply(shortterm_art$images, function(x) x$url[1]))
 css <- sass(sass_file("www/styles.scss"))
 ui <- source(file.path("ui", "ui.R"), local = TRUE)$value
 iframe_skeleton <- c(

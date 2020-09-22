@@ -1,60 +1,71 @@
-get_artist_features <- function(i, ...) {
+get_artist_features <- function(i, artists) {
   art_infos <- list()
   # get the rank
   art_infos$place <- i
   # get the genre
-  art_infos$genre <- longterm_art$genres[[i]][1]
+  art_infos$genre <- artists$genres[[i]][1]
   # get the popularity
-  art_infos$popularity <- longterm_art$popularity[i]
+  art_infos$popularity <- artists$popularity[i]
   # get the number of followers
-  art_infos$followers <- longterm_art$followers.total[i]
+  art_infos$followers <- artists$followers.total[i]
   # get the albums
-  albums <- get_artist_albums(longterm_art$id[i], include_groups = "album")
-  # deduplicate the album bames
-  albums <- dedupe_album_names(
-    albums,
-    album_name_col = "name",
-    album_release_year_col = "release_date"
-  )
-  # get the number of remaining albums
-  art_infos$albums <- nrow(albums)
+  albums <- get_artist_albums(artists$id[i], include_groups = "album")
+  if (is.null(nrow(albums))) {
+    art_infos$albums <- 0
+    album_data <- data.frame()
+    album_data_old <- data.frame()
+  } else {
+    # deduplicate the album bames
+    albums <- dedupe_album_names(
+      albums,
+      album_name_col = "name",
+      album_release_year_col = "release_date"
+    )
+    # get the number of remaining albums
+    art_infos$albums <- nrow(albums)
+  }
   # get the audio features of all the songs
-  audio_features <- get_artist_audio_features(longterm_art$id[i])
+  audio_features <- get_artist_audio_features(
+    artists$id[i],
+    include_groups = "single"
+    )
   # get the number of songs
   art_infos$songs <- nrow(audio_features)
   # get the related artists
-  art_infos$related <- get_related_artists(longterm_art$id[i])$name[1:5]
+  art_infos$related <- get_related_artists(artists$id[i])$name[1:5]
   # get the artist image
-  art_infos$image <- longterm_art$images[[i]][, 2][1]
+  art_infos$image <- artists$images[[i]][, 2][1]
   # get the artist name
-  art_infos$name <- longterm_art$name[i]
+  art_infos$name <- artists$name[i]
   # get the album data
-  album_data <- get_albums(albums$id)
-  # save for later
-  album_data_old <- album_data
-  # manual deduplication
-  dupes <- unique(album_data$name[duplicated(album_data$name)])
-  if (length(dupes) > 0) {
-    album_dupes <- lapply(dupes, function(x, ...) {
-      # get the dupes
-      dupes <- album_data[album_data$name %in% x, ]
-      # keep the most popular one
-      dupes <- dupes[dupes$popularity == max(dupes$popularity), ]
-      # if there is still more than the most tracks
-      if (nrow(dupes) > 1) {
-        dupes <- dupes[dupes$tracks.total == max(dupes$tracks.total), ]
-      }
-      # now just choose one
-      if (nrow(dupes) > 1) {
-        dupes <- dupes[1, ]
-      }
-      dupes
-    })
-    # bind them together
-    album_dupes <- Reduce(rbind, album_dupes)
-    album_data <- album_data[!album_data$name %in% dupes, ]
-    album_data <- rbind(album_data, album_dupes)
-    art_infos$albums <- nrow(album_data)
+  if (!is.null(nrow(albums))) {
+    album_data <- get_albums(albums$id)
+    # save for later
+    album_data_old <- album_data
+    # manual deduplication
+    dupes <- unique(album_data$name[duplicated(album_data$name)])
+    if (length(dupes) > 0) {
+      album_dupes <- lapply(dupes, function(x, ...) {
+        # get the dupes
+        dupes <- album_data[album_data$name %in% x, ]
+        # keep the most popular one
+        dupes <- dupes[dupes$popularity == max(dupes$popularity), ]
+        # if there is still more than the most tracks
+        if (nrow(dupes) > 1) {
+          dupes <- dupes[dupes$tracks.total == max(dupes$tracks.total), ]
+        }
+        # now just choose one
+        if (nrow(dupes) > 1) {
+          dupes <- dupes[1, ]
+        }
+        dupes
+      })
+      # bind them together
+      album_dupes <- Reduce(rbind, album_dupes)
+      album_data <- album_data[!album_data$name %in% dupes, ]
+      album_data <- rbind(album_data, album_dupes)
+      art_infos$albums <- nrow(album_data)
+    }
   }
   return(list(
     "art_infos" = art_infos,
@@ -262,6 +273,9 @@ get_song_features <- function(audio_features) {
     * 60
   )
   audio_features$seconds[
+    is.na(audio_features$seconds)
+  ] <- 0
+  audio_features$seconds[
     !str_detect(audio_features$seconds, "[0-9]{2}")
   ] <- paste(
     "0",
@@ -295,6 +309,10 @@ get_song_features <- function(audio_features) {
       audio_features$valence %in% range(audio_features$valence),
     ]
   songs_3 <- songs_3[!duplicated(songs_3$track_name), ]
+  # remove itunes interviews
+  audio_features <- audio_features[!str_detect(
+    audio_features$track_name, "iTunes Originals Interview"
+  ), ]
   song_infos$iframe_2 <- sample(songs_2$track_uri, 1)
   song_infos$iframe_3 <- sample(songs_3$track_uri, 1)
   # get the audio features
