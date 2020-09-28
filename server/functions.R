@@ -27,7 +27,7 @@ get_artist_features <- function(i, artists) {
   # get the audio features of all the songs
   audio_features <- get_artist_audio_features(
     artists$id[i],
-    include_groups = "single"
+    include_groups = c("single", "album")
     )
   # get the number of songs
   art_infos$songs <- nrow(audio_features)
@@ -261,27 +261,10 @@ get_song_features <- function(audio_features) {
       "(Intro|Interlude)"
     ),
   ]
-  # get the number of minutes of a song
-  audio_features$minutes <- as.numeric(
-    str_extract(audio_features$duration_ms / 60000, "[0-9]{1,}")
-  )
-  # get the number of seconds of a song
-  audio_features$seconds <- round(
-    as.numeric(
-      str_extract(audio_features$duration_ms / 60000, "\\.[0-9]{1,}")
-    )
-    * 60
-  )
-  audio_features$seconds[
-    is.na(audio_features$seconds)
-  ] <- 0
-  audio_features$seconds[
-    !str_detect(audio_features$seconds, "[0-9]{2}")
-  ] <- paste(
-    "0",
-    audio_features$seconds[!str_detect(audio_features$seconds, "[0-9]{2}")],
-    sep = ""
-  )
+  # get the number of minutes and seconds of a song
+  times <- get_minutes_and_seconds(audio_features)
+  audio_features$minutes <- times$minutes
+  audio_features$seconds <- times$seconds
   # important audio features
   audio_features <- audio_features[, c(
     "danceability", "energy", "loudness", "speechiness", "acousticness",
@@ -332,4 +315,212 @@ create_uri <- function(uri, iframe_skeleton) {
   )
   uri <- str_replace(iframe_skeleton, "placeholder", uri)
   return(uri)
+}
+
+get_audio_features_top <- function(artists) {
+  audio_features <- lapply(
+    artists$id,
+    function(x, ...) {
+      features <- get_artist_audio_features(x, include_groups = c("single", "album"))
+      Sys.sleep(3)
+      features %>%
+        group_by(artist_name) %>%
+        summarise(
+          danceability = mean(danceability),
+          energy = mean(energy),
+          loudness = mean(loudness),
+          speechiness = mean(speechiness),
+          acousticness = mean(acousticness),
+          instrumentalness = mean(instrumentalness),
+          liveness = mean(liveness),
+          valence = mean(valence),
+          tempo = mean(tempo),
+          explicit = mean(explicit)
+        )
+    }
+  )
+  Reduce(rbind, audio_features)
+}
+
+create_random_grid <- function(urls, type) {
+  # dran random sample
+  sample_numbers <- sample(1:28, size = 20)
+  # skeleton for the grid
+  skeleton <- c(
+    '<div class="area1"></div>',
+    '<div class="area2"></div>',
+    '<div class="area3"></div>',
+    '<div class="area4"></div>',
+    '<div class="area5"></div>',
+    '<div class="area6 "></div>',
+    '<div class="area7 "></div>',
+    '<div class="area8 "></div>',
+    '<div class="area9 "></div>',
+    '<div class="area10 "></div>',
+    '<div class="area11 "></div>',
+    '<div class="area12 "></div>',
+    '<div class="area13 "></div>',
+    '<div class="area14 "></div>',
+    '<div class="area15 "></div>',
+    '<div class="area16 "></div>',
+    '<div class="area17 "></div>',
+    '<div class="area18 "></div>',
+    '<div class="area19 "></div>',
+    '<div class="area20 "></div>',
+    '<div class="area21 "></div>',
+    '<div class="area22 "></div>',
+    '<div class="area23 "></div>',
+    '<div class="area24 "></div>',
+    '<div class="area25 "></div>',
+    '<div class="area26 "></div>',
+    '<div class="area27 "></div>',
+    '<div class="area28 "></div>'
+  )
+  skeleton_images <- c()
+  urls_old <- urls
+  for (x in skeleton) {
+    # get the number of the current area
+    number <- as.numeric(str_extract(x, "[0-9]{1,2}"))
+    # check if it is in the sample
+    if (number %in% sample_numbers) {
+      # if yes draw a random image
+      cover <- sample(urls, 1)
+      # add the correct artist id
+      id_first <- paste("artist_", type, "_", sep = "")
+      id <- paste(id_first, match(cover, urls_old), sep = "")
+      urls <- urls[!urls %in% cover]
+      # create the new html tag
+      skeleton_images <- c(
+        skeleton_images,
+        str_replace(
+          x,
+          "><",
+          paste(
+            '><img class = "hidden" id = "',
+            id,
+            '" src = "',
+            cover,
+            '"><',
+            sep = ""
+          )
+        )
+      )
+    } else {
+      skeleton_images <- c(
+        skeleton_images,
+        x
+      )
+    }
+  }
+  # paste it all together
+  paste(
+    "<div class = 'grid-container'>",
+    paste(unlist(skeleton_images), collapse = ""),
+    "</div>"
+  )
+}
+
+skeleton_replacer <- function(i, df, table_skeleton, urls) {
+  # replace certain parts of the table skeleton
+  table_skeleton <- str_replace(
+    table_skeleton,
+    "rank_1",
+    paste("#", i[1], sep = "")
+  )
+  table_skeleton <- str_replace(
+    table_skeleton,
+    "rank_2",
+    paste("#", i[2], sep = "")
+  )
+  table_skeleton <- str_replace(
+    table_skeleton,
+    "name_1",
+    df$name[i[1]]
+  )
+  table_skeleton <- str_replace(
+    table_skeleton,
+    "name_2",
+    df$name[i[2]]
+  )
+  table_skeleton <- str_replace(
+    table_skeleton,
+    "img_1",
+    paste("<img class='table_image' src='", urls[i[1]], "'>", sep = "")
+  )
+  table_skeleton <- str_replace(
+    table_skeleton,
+    "img_2",
+    paste("<img class='table_image' src='", urls[i[2]], "'>", sep = "")
+  )
+  table_skeleton
+}
+
+add_id <- function(html, id) {
+  # split by the class tag
+  html_split <- str_split(
+    html,
+    "class='col_name'"
+  )
+  places <- unlist(lapply(seq_len(10), seq, to = 20, by = 10))
+  # add the correct ids for each
+  html_id_added <- lapply(seq_len(20), function(x, ...) {
+    paste(
+      "class='col_name' id='",
+      id,
+      "_",
+      places[x],
+      "'",
+      html_split[[1]][x+1],
+      sep = ""
+    )
+  })
+  # paste it all together
+  paste(html_split[[1]][1], Reduce(paste, html_id_added))
+}
+
+
+get_minutes_and_seconds <- function(dataframe) {
+  minutes <- unlist(
+    lapply(
+      dataframe$duration_ms,
+      function(x) {
+        as.numeric(
+          str_extract(
+            x / 60000,
+            "[0-9]{1,}"
+          )
+        )
+      }
+    )
+  )
+  
+  seconds <- unlist(
+    lapply(
+      dataframe$duration_ms,
+      function(x) {
+        seconds <- round(
+          as.numeric(
+            str_extract(
+              x / 60000,
+              "\\.[0-9]{1,}"
+            )
+          ),
+          2
+        )
+        if (is.na(seconds)) {
+          seconds <- 0
+        }
+        seconds <- round(seconds  * 60)
+        if (!str_detect(seconds, "[0-9]{2}")) {
+          seconds <- paste("0", seconds, sep = "")
+        }
+        seconds
+      }
+    )
+  )
+  list(
+    minutes = minutes,
+    seconds = seconds
+  )
+  
 }
