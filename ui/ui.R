@@ -1,82 +1,12 @@
-create_random_grid <- function(urls, type) {
-  sample_numbers <- sample(1:28, size = 20)
-  skeleton <- c(
-    '<div class="area1"></div>',
-    '<div class="area2"></div>',
-    '<div class="area3"></div>',
-    '<div class="area4"></div>',
-    '<div class="area5"></div>',
-    '<div class="area6 "></div>',
-    '<div class="area7 "></div>',
-    '<div class="area8 "></div>',
-    '<div class="area9 "></div>',
-    '<div class="area10 "></div>',
-    '<div class="area11 "></div>',
-    '<div class="area12 "></div>',
-    '<div class="area13 "></div>',
-    '<div class="area14 "></div>',
-    '<div class="area15 "></div>',
-    '<div class="area16 "></div>',
-    '<div class="area17 "></div>',
-    '<div class="area18 "></div>',
-    '<div class="area19 "></div>',
-    '<div class="area20 "></div>',
-    '<div class="area21 "></div>',
-    '<div class="area22 "></div>',
-    '<div class="area23 "></div>',
-    '<div class="area24 "></div>',
-    '<div class="area25 "></div>',
-    '<div class="area26 "></div>',
-    '<div class="area27 "></div>',
-    '<div class="area28 "></div>'
-  )
-  skeleton_images <- c()
-  urls_old <- urls
-  for (x in skeleton) {
-    number <- as.numeric(str_extract(x, "[0-9]{1,2}"))
-    if (number %in% sample_numbers) {
-      cover <- sample(urls, 1)
-      id_first <- paste("artist_", type, "_", sep = "")
-      id <- paste(id_first, match(cover, urls_old), sep = "")
-      urls <- urls[!urls %in% cover]
-      skeleton_images <- c(
-        skeleton_images,
-        str_replace(
-          x,
-          "><",
-          paste(
-            '><img class = "hidden" id = "',
-            id,
-            '" src = "',
-            cover,
-            '"><',
-            sep = ""
-          )
-        )
-      )
-    } else {
-      skeleton_images <- c(
-        skeleton_images,
-        x
-      )
-    }
-  }
-  paste(
-    "<div class = 'grid-container'>",
-    paste(unlist(skeleton_images), collapse = ""),
-    "</div>"
-    )
-}
-alltime_grid <- create_random_grid(urls_alltime, "at")
-recent_grid <- create_random_grid(urls_recent, "rc")
+source(file.path("server", "create_html_thingys.R"), local = TRUE)$value
 fluidPage(
-  # add_busy_spinner(
-  #   spin = "semipolar",
-  #   color = "#EA5F23",
-  #   margins = c(40, 20),
-  #   height = "5%",
-  #   width = "5%"
-  #   ),
+  add_busy_spinner(
+    spin = "semipolar",
+    color = "#EA5F23",
+    margins = c(40, 20),
+    height = "5%",
+    width = "5%"
+    ),
   tags$head(
     tags$style(
       css
@@ -92,18 +22,46 @@ fluidPage(
       class = "landing_page",
       div(
         class = "banner",
-        h1(
-          "Your Spotify listening habits"
+        HTML(
+          "<h1>Your spotify<br>listening<br>habits</h1>"
         ),
         tags$canvas(
           id = "waves"
         ),
         h2(
           "An Overview"
-        ),
-        h3(
-          "Learn more about not only yourself but also the artists you listen to"
+        )#,
+        # h3(
+        #   "Learn more about not only yourself but also the artists you listen to"
+        # )
+      )
+    ),
+    tags$section(
+      class = "content_page",
+      div(class="content",
+      div(
+        class = "content_header",
+        HTML(
+          "<h1> Your <span class = 'accent'>recent</span> favorite songs</h1>"
         )
+      ),
+      div(
+        class = "content_table",
+        HTML(table_recent_songs)
+      ),
+      div(
+        class = "content_footer",
+        br(),
+        br(),
+        HTML(
+          "<h4><span class = 'accent'>Click
+          </span> on any of the titles to get a detailed look at the song"
+        )
+      )
+      ),
+      div(
+        class="modal",
+        h1("This is a modal page")
       )
     ),
     tags$section(
@@ -120,6 +78,7 @@ fluidPage(
     ),
     tags$section(
       class = "content_page",
+      id = "alltime",
       div(
         class = "content_header",
         HTML(
@@ -130,9 +89,29 @@ fluidPage(
       div(
         class = "content_footer",
         HTML(
-          "<h4><span class = 'accent'>Click</span> on any of the artists to
-          get a detailed look at their music.<h4>"
+          "<h4><span class = 'accent'>Click
+          </span> on any of the artists to get a detailed look at their music.
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Scroll down for the ranked view</h4>"
         )
+      )
+    ),
+    tags$section(
+      class = "content_page",
+      div(
+        class = "content_header",
+        HTML(
+          "<h1> Your <span class = 'accent'>all-time</span> favorite artists</h1>"
+        )
+      ),
+      div(
+        class = "content_table",
+        HTML(table_alltime_artist)
       )
     ),
     tags$section(
@@ -160,9 +139,26 @@ fluidPage(
       div(
         class = "content_footer",
         HTML(
-          "<h4><span class = 'accent'>Click</span> on any of the artists to
-          get a detailed look at their music.<h4>"
+          "<h4><span class = 'accent'>Click
+          </span> on any of the artists to get a detailed look at their music.
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Scroll down for the ranked view</h4>"
         )
+      )
+    ),
+    tags$section(
+      class = "content_page",
+      div(
+        class = "content_header",
+        HTML(
+          "<h1> Your <span class = 'accent'>recent</span> favorite artists</h1>"
+        )
+      ),
+      div(
+        class = "content_table",
+        HTML(table_recent_artist)
       )
     ),
     tags$section()
@@ -178,5 +174,8 @@ fluidPage(
   ),
   tags$script(
     src = "waves.js"
+  ),
+  tags$script(
+    src = "swap.js"
   )
 )
