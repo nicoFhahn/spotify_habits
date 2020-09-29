@@ -28,5 +28,9 @@ shortterm_tracks <- get_my_top_artists_or_tracks(
 )
 urls_alltime <- unlist(lapply(longterm_art$images, function(x) x$url[1]))[1:20]
 urls_recent <- unlist(lapply(shortterm_art$images, function(x) x$url[1]))[1:20]
-urls_alltime_songs <- unlist(lapply(longterm_tracks$album.images, function(x) x$url[1]))[1:20]
-urls_recent_songs <- unlist(lapply(shortterm_tracks$album.images, function(x) x$url[1]))[1:20]
+urls_alltime_songs <- unlist(
+  lapply(longterm_tracks$album.images, function(x) x$url[1])
+  )[1:20]
+urls_recent_songs <- unlist(
+  lapply(shortterm_tracks$album.images, function(x) x$url[1])
+  )[1:20]

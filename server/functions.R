@@ -28,7 +28,7 @@ get_artist_features <- function(i, artists) {
   audio_features <- get_artist_audio_features(
     artists$id[i],
     include_groups = c("single", "album")
-    )
+  )
   # get the number of songs
   art_infos$songs <- nrow(audio_features)
   # get the related artists
@@ -180,9 +180,9 @@ get_album_features <- function(album_data, audio_features, album_data_old) {
   uri_2 <- create_uri(
     album_data_old[album_data_old$id == id_2, ]$uri,
     iframe_skeleton
-    )
+  )
   # get random covers of the albums on page 4
-  id_3 = c(
+  id_3 <- c(
     album_features[
       album_features$loudness == max(album_features$loudness),
     ]$id,
@@ -252,7 +252,7 @@ get_song_features <- function(audio_features) {
   least_popular_songs$uri <- create_uri(
     least_popular_songs$uri,
     iframe_skeleton
-    )
+  )
   song_infos$least_popular_songs <- least_popular_songs
   # for the audio analysis part remove intros and interludes
   audio_features <- audio_features[
@@ -277,20 +277,20 @@ get_song_features <- function(audio_features) {
       audio_features$track_uri,
       create_uri,
       iframe_skeleton
-      )
     )
+  )
   songs_2 <- audio_features[
     audio_features$acousticness == max(audio_features$acousticness) |
       audio_features$instrumentalness == max(audio_features$instrumentalness) |
-        audio_features$energy %in% range(audio_features$energy) |
-          audio_features$danceability %in% range(audio_features$danceability),
+      audio_features$energy %in% range(audio_features$energy) |
+      audio_features$danceability %in% range(audio_features$danceability),
   ]
   songs_2 <- songs_2[!duplicated(songs_2$track_name), ]
   songs_3 <- audio_features[
     audio_features$loudness %in% range(audio_features$loudness) |
       audio_features$tempo %in% range(audio_features$tempo) |
       audio_features$valence %in% range(audio_features$valence),
-    ]
+  ]
   songs_3 <- songs_3[!duplicated(songs_3$track_name), ]
   # remove itunes interviews
   audio_features <- audio_features[!str_detect(
@@ -321,7 +321,10 @@ get_audio_features_top <- function(artists) {
   audio_features <- lapply(
     artists$id,
     function(x, ...) {
-      features <- get_artist_audio_features(x, include_groups = c("single", "album"))
+      features <- get_artist_audio_features(
+        x,
+        include_groups = c("single", "album")
+        )
       Sys.sleep(3)
       features %>%
         group_by(artist_name) %>%
@@ -470,7 +473,7 @@ add_id <- function(html, id) {
       "_",
       places[x],
       "'",
-      html_split[[1]][x+1],
+      html_split[[1]][x + 1],
       sep = ""
     )
   })
@@ -492,7 +495,7 @@ get_minutes_and_seconds <- function(dataframe) {
       }
     )
   )
-  
+
   seconds <- unlist(
     lapply(
       dataframe$duration_ms,
@@ -509,7 +512,7 @@ get_minutes_and_seconds <- function(dataframe) {
         if (is.na(seconds)) {
           seconds <- 0
         }
-        seconds <- round(seconds  * 60)
+        seconds <- round(seconds * 60)
         if (!str_detect(seconds, "[0-9]{2}")) {
           seconds <- paste("0", seconds, sep = "")
         }
@@ -521,7 +524,6 @@ get_minutes_and_seconds <- function(dataframe) {
     minutes = minutes,
     seconds = seconds
   )
-  
 }
 
 get_track_infos <- function(i, tracks, ...) {

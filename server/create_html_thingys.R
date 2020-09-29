@@ -5,7 +5,7 @@ pairs <- lapply(seq_len(10), seq, to = 20, by = 10)
 table_skeleton <- "<tr><td class='col_rank'>rank_1</td><td class='col_name'>name_1</td><td class='col_img'>img_1</td><td>&nbsp;</td><td class='col_rank'>rank_2</td><td class='col_name'>name_2</td><td class='col_img'>img_2</td></tr>"
 table_rows_alltime_artist <- lapply(
   pairs,
-  skeleton_replacer, 
+  skeleton_replacer,
   longterm_art,
   table_skeleton,
   urls_alltime
@@ -18,7 +18,7 @@ table_alltime_artist <- paste(
 )
 table_rows_recent_artist <- lapply(
   pairs,
-  skeleton_replacer, 
+  skeleton_replacer,
   shortterm_art,
   table_skeleton,
   urls_recent
@@ -31,7 +31,7 @@ table_recent_artist <- paste(
 )
 table_rows_alltime_songs <- lapply(
   pairs,
-  skeleton_replacer, 
+  skeleton_replacer,
   longterm_tracks,
   table_skeleton,
   urls_alltime_songs
@@ -45,7 +45,7 @@ table_alltime_songs <- paste(
 table_alltime_songs <- add_id(table_alltime_songs, "alltime_songs")
 table_rows_recent_songs <- lapply(
   pairs,
-  skeleton_replacer, 
+  skeleton_replacer,
   shortterm_tracks,
   table_skeleton,
   urls_recent_songs

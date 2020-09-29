@@ -6,7 +6,7 @@ fluidPage(
     margins = c(40, 20),
     height = "5%",
     width = "5%"
-    ),
+  ),
   tags$head(
     tags$style(
       css
@@ -51,7 +51,8 @@ fluidPage(
       div(
         class = "content_header",
         HTML(
-          "<h1> Your <span class = 'accent'>all-time</span> favorite artists</h1>"
+          "<h1>Your <span class = 'accent'>all-time</span> favorite
+          artists</h1>"
         )
       ),
       HTML(alltime_grid),
@@ -75,7 +76,8 @@ fluidPage(
       div(
         class = "content_header",
         HTML(
-          "<h1> Your <span class = 'accent'>all-time</span> favorite artists</h1>"
+          "<h1>Your <span class = 'accent'>all-time</span> favorite
+          artists</h1>"
         )
       ),
       div(
@@ -137,36 +139,38 @@ fluidPage(
         After taking a look at the artists you are listening to, we
         will now focus on the songs you listen to regularly. We'll once again
         be looking at your<span class='accent'>all-time</span> favorite
-        songs and your most <span class='accent'>recent</span> favorites, 
-        starting with the first of the two: 
+        songs and your most <span class='accent'>recent</span> favorites,
+        starting with the first of the two:
         </p>"
       )
     ),
     tags$section(
       class = "content_page",
-      div(class="content",
-          div(
-            class = "content_header",
-            HTML(
-              "<h1> Your <span class = 'accent'>all-time</span> favorite songs</h1>"
-            )
-          ),
-          div(
-            class = "content_table",
-            HTML(table_alltime_songs)
-          ),
-          div(
-            class = "content_footer",
-            br(),
-            br(),
-            HTML(
-              "<h4><span class = 'accent'>Click
-          </span> on any of the titles to get a detailed look at the song"
-            )
+      div(
+        class = "content",
+        div(
+          class = "content_header",
+          HTML(
+            "<h1>Your <span class = 'accent'>all-time</span> favorite
+            songs</h1>"
           )
+        ),
+        div(
+          class = "content_table",
+          HTML(table_alltime_songs)
+        ),
+        div(
+          class = "content_footer",
+          br(),
+          br(),
+          HTML(
+            "<h4><span class = 'accent'>Click
+          </span> on any of the titles to get a detailed look at the song"
+          )
+        )
       ),
       div(
-        class="modal",
+        class = "modal",
         h1("This is a modal page")
       )
     ),
@@ -181,29 +185,30 @@ fluidPage(
     ),
     tags$section(
       class = "content_page",
-      div(class="content",
-          div(
-            class = "content_header",
-            HTML(
-              "<h1> Your <span class = 'accent'>recent</span> favorite songs</h1>"
-            )
-          ),
-          div(
-            class = "content_table",
-            HTML(table_recent_songs)
-          ),
-          div(
-            class = "content_footer",
-            br(),
-            br(),
-            HTML(
-              "<h4><span class = 'accent'>Click
-          </span> on any of the titles to get a detailed look at the song"
-            )
+      div(
+        class = "content",
+        div(
+          class = "content_header",
+          HTML(
+            "<h1> Your <span class = 'accent'>recent</span> favorite songs</h1>"
           )
+        ),
+        div(
+          class = "content_table",
+          HTML(table_recent_songs)
+        ),
+        div(
+          class = "content_footer",
+          br(),
+          br(),
+          HTML(
+            "<h4><span class = 'accent'>Click
+          </span> on any of the titles to get a detailed look at the song"
+          )
+        )
       ),
       div(
-        class="modal",
+        class = "modal",
         h1("This is a modal page")
       )
     ),

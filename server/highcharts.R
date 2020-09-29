@@ -6,31 +6,31 @@ output$art1_plot <- renderHighchart({
       dens <- density(
         song_infos$values$audio_features[, "duration_ms"] / 1000,
         from = 0
-        )
+      )
     } else if (input$plot_var %in% c(
       "Acousticness", "Danceability", "Energy",
       "Instrumentalness", "Liveness", "Speechiness",
       "Valence"
     )) {
-      # calculate the density 
+      # calculate the density
       dens <- density(
-      song_infos$values$audio_features[, tolower(input$plot_var)],
-      from = -0.2,
-      to = 1.2
-    )
-      } else if (input$plot_var == "Tempo") {
-        # calculate the density for the tempo
-        dens <- density(
-          song_infos$values$audio_features[, tolower(input$plot_var)],
-          from = 0,
-          to = 250
-        ) 
-      } else {
-        # calculate the density for loudness
-        dens <- density(
-          song_infos$values$audio_features[, tolower(input$plot_var)]
-        ) 
-      }
+        song_infos$values$audio_features[, tolower(input$plot_var)],
+        from = -0.2,
+        to = 1.2
+      )
+    } else if (input$plot_var == "Tempo") {
+      # calculate the density for the tempo
+      dens <- density(
+        song_infos$values$audio_features[, tolower(input$plot_var)],
+        from = 0,
+        to = 250
+      )
+    } else {
+      # calculate the density for loudness
+      dens <- density(
+        song_infos$values$audio_features[, tolower(input$plot_var)]
+      )
+    }
     # get the relative density
     dens$y <- dens$y / sum(dens$y)
     highchart() %>%
@@ -131,7 +131,7 @@ output$art1_plot <- renderHighchart({
         plot = FALSE,
         # custom breaks
         breaks = seq(0, 1, 0.1)
-        )
+      )
       # get the intervals for labelling
       iv <- lapply(2:11, function(x, ...) {
         paste("(", hist$breaks[x - 1], ", ", hist$breaks[x], "]", sep = "")
@@ -232,7 +232,7 @@ output$art1_plot <- renderHighchart({
         song_infos$values$audio_features$loudness,
         plot = FALSE,
         breaks = seq(-60, 0, 2)
-        )
+      )
       iv <- seq(-60, 0, 10)
       iv <- lapply(2:31, function(x, ...) {
         paste("(", hist$breaks[x - 1], ", ", hist$breaks[x], "]", sep = "")
@@ -313,7 +313,7 @@ output$art1_plot <- renderHighchart({
         max(song_infos$values$audio_features$duration_ms / 1000),
         100,
         ceiling
-        )
+      )
       hist <- hist(
         song_infos$values$audio_features$duration_ms / 1000,
         plot = FALSE,
@@ -399,7 +399,7 @@ output$art1_plot <- renderHighchart({
         song_infos$values$audio_features$tempo,
         plot = FALSE,
         breaks = seq(0, 250, 10)
-        )
+      )
       iv <- seq(0, 250, 10)
       iv <- lapply(2:26, function(x, ...) {
         paste("(", hist$breaks[x - 1], ", ", hist$breaks[x], "]", sep = "")
@@ -479,7 +479,14 @@ output$art1_plot <- renderHighchart({
 
 output$track_plot_1 <- renderHighchart({
   data <- track_analysis$values$sections
-  data$iv <- paste("[", round(data$start), "; ", round(data$start + data$duration), ")", sep = "")
+  data$iv <- paste(
+    "[",
+    round(data$start),
+    "; ",
+    round(data$start + data$duration),
+    ")",
+    sep = ""
+  )
   data$iv[nrow(data)] <- str_replace(data$iv[nrow(data)], "\\)", "]")
   highchart() %>%
     hc_chart(type = "line") %>%
@@ -555,7 +562,7 @@ output$track_plot_1 <- renderHighchart({
         )
       ),
       name = "Tempo"
-    ) %>%# set the yAxis
+    ) %>% # set the yAxis
     hc_yAxis(
       # set the title
       title = list(
@@ -601,7 +608,7 @@ output$track_plot_2 <- renderHighchart({
   data_tatums <- data$tatums
   data_tatums$id <- 3
   data_sections <- data$sections
-  plotLines <- lapply(
+  plot_lines <- lapply(
     data_sections$start[2:nrow(data_sections)], function(x, ...) {
       list(
         label = list(
@@ -687,7 +694,7 @@ output$track_plot_2 <- renderHighchart({
         )
       ),
       name = "Tatums"
-    ) %>%# set the yAxis
+    ) %>% # set the yAxis
     hc_xAxis(
       # set the title
       title = list(
@@ -707,8 +714,8 @@ output$track_plot_2 <- renderHighchart({
           `font-size` = "calc(0.3em + 0.5vw)"
         )
       ),
-      plotLines = plotLines
-    ) %>%# set the yAxis
+      plotLines = plot_lines
+    ) %>% # set the yAxis
     hc_yAxis(
       # set the title
       title = list(

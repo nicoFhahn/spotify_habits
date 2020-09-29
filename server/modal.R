@@ -15,7 +15,13 @@ show_modal <- function(type, ...) {
                 ),
                 tags$figcaption(
                   h4(
-                    paste("#", art_infos$values$place, ":", art_infos$values$name, sep = "")
+                    paste(
+                      "#",
+                      art_infos$values$place,
+                      ":",
+                      art_infos$values$name,
+                      sep = ""
+                    )
                   )
                 )
               )
@@ -973,7 +979,13 @@ show_modal <- function(type, ...) {
                 ),
                 tags$figcaption(
                   h4(
-                    paste("#", art_infos$values$place, ":", art_infos$values$name, sep = "")
+                    paste(
+                      "#",
+                      art_infos$values$place,
+                      ":",
+                      art_infos$values$name,
+                      sep = ""
+                    )
                   )
                 )
               )
@@ -1505,7 +1517,13 @@ show_modal <- function(type, ...) {
               ),
               tags$figcaption(
                 h4(
-                  paste("#", track_infos$values$place, ":", track_infos$values$title, sep = ""),
+                  paste(
+                    "#",
+                    track_infos$values$place,
+                    ":",
+                    track_infos$values$title,
+                    sep = ""
+                    ),
                   class = "song_title"
                 )
               )
@@ -1606,7 +1624,7 @@ show_modal <- function(type, ...) {
                 "Instrumentalness"
               ),
               p(
-                track_details$values$instrumentalness 
+                track_details$values$instrumentalness
               ),
               br(),
               h6(
@@ -1654,7 +1672,7 @@ show_modal <- function(type, ...) {
                 "Valence"
               ),
               p(
-                track_details$values$valence 
+                track_details$values$valence
               ),
             ),
             column(

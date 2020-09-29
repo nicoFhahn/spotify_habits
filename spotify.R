@@ -17,13 +17,19 @@ short_term <- get_my_top_artists_or_tracks(
   authorization = code
 )
 albums <- get_artist_albums(short_term$id[11], include_groups = "album")
-audio_features <- get_artist_audio_features(short_term$id[25], include_groups = c("single", "album"))
+audio_features <- get_artist_audio_features(
+  short_term$id[25],
+  include_groups = c("single", "album")
+  )
 audio_features <- list()
 start <- Sys.time()
 audio_features <- lapply(
   short_term$id,
   function(x, ...) {
-    features <- get_artist_audio_features(x, include_groups = c("single", "album"))
+    features <- get_artist_audio_features(
+      x,
+      include_groups = c("single", "album")
+      )
     Sys.sleep(3)
     features %>%
       group_by(artist_name) %>%
@@ -45,7 +51,9 @@ audio_features_df <- Reduce(rbind, audio_features)
 library(mlr)
 task <- makeClusterTask(
   id = "cluster",
-  data = audio_features_df[, c("acousticness", "danceability", "instrumentalness", "energy", "speechiness")]
+  data = audio_features_df[, c(
+    "acousticness", "danceability", "instrumentalness", "energy", "speechiness"
+    )]
 )
 learner_names <- c(
   "cluster.cmeans",

@@ -1324,41 +1324,41 @@ shinyjs::onclick("recent_songs_20", function(x) {
 
 
 clicked <- reactiveValues(
-  last = 'Acousticness'
+  last = "Acousticness"
 )
 
-shinyjs::onclick('acoust', {
-  clicked$last = 'Acousticness'
+shinyjs::onclick("acoust", {
+  clicked$last <- "Acousticness"
 })
 
-shinyjs::onclick('dance', {
-  clicked$last = 'Danceability'
+shinyjs::onclick("dance", {
+  clicked$last <- "Danceability"
 })
 
-shinyjs::onclick('energy', {
-  clicked$last = 'Energy'
+shinyjs::onclick("energy", {
+  clicked$last <- "Energy"
 })
 
-shinyjs::onclick('instrument', {
-  clicked$last = 'Instrumentalness'
+shinyjs::onclick("instrument", {
+  clicked$last <- "Instrumentalness"
 })
 
-shinyjs::onclick('live', {
-  clicked$last = 'Liveness'
+shinyjs::onclick("live", {
+  clicked$last <- "Liveness"
 })
 
-shinyjs::onclick('loud', {
-  clicked$last = 'Loudness'
+shinyjs::onclick("loud", {
+  clicked$last <- "Loudness"
 })
 
-shinyjs::onclick('speech', {
-  clicked$last = 'Speechiness'
+shinyjs::onclick("speech", {
+  clicked$last <- "Speechiness"
 })
 
-shinyjs::onclick('tempo', {
-  clicked$last = 'Tempo'
+shinyjs::onclick("tempo", {
+  clicked$last <- "Tempo"
 })
 
-shinyjs::onclick('valence', {
-  clicked$last = 'Valence'
+shinyjs::onclick("valence", {
+  clicked$last <- "Valence"
 })
