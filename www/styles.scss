@@ -702,5 +702,20 @@ $highlight-color: #505050;
 
 
 .song_title {
-  font-size: calc(1em + 1vw);
+  font-size: calc(1em + 2vw);
+  margin-top: auto;
+  margin-bottom: auto;
+  position: absolute;
+  top: 5%;
+  bottom: 10%;
+}
+.song_uri {
+  iframe {
+    height: calc(10em + 10vh);
+    margin-bottom: 2vh;
+  }
+}
+
+#also {
+  margin-left: 2%;
 }

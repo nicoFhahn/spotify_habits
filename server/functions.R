@@ -478,7 +478,6 @@ add_id <- function(html, id) {
   paste(html_split[[1]][1], Reduce(paste, html_id_added))
 }
 
-
 get_minutes_and_seconds <- function(dataframe) {
   minutes <- unlist(
     lapply(
@@ -523,4 +522,68 @@ get_minutes_and_seconds <- function(dataframe) {
     seconds = seconds
   )
   
+}
+
+get_track_infos <- function(i, tracks, ...) {
+  values <- list()
+  # get the name
+  values$artists <- tracks$artists[[i]]$name
+  # get the title
+  values$title <- tracks$name[i]
+  # get the album
+  values$album <- tracks$album.name[i]
+  # get the popularity
+  values$popularity <- tracks$popularity[i]
+  # get whether its explicit
+  values$explicit <- tracks$explicit[i]
+  # get the album image
+  values$image <- tracks$album.images[[i]][, 2][1]
+  # get the place
+  values$place <- i
+  times <- get_minutes_and_seconds(tracks[i, ])
+  values$minutes <- times$minutes
+  values$seconds <- times$seconds
+  values$uri <- create_uri(tracks$uri[i], iframe_skeleton)
+  return(values)
+}
+
+get_track_details <- function(i, tracks) {
+  values <- list()
+  # get the audio features
+  audio_features <- get_track_audio_features(tracks$id[i])
+  # get the acousticness
+  values$acousticness <- audio_features$acousticness
+  # get the instrumentalness
+  values$instrumentalness <- audio_features$instrumentalness
+  # get the energy
+  values$energy <- audio_features$energy
+  # get the danceability
+  values$danceability <- audio_features$danceability
+  # get the loudness
+  values$loudness <- audio_features$loudness
+  # get the tempo
+  values$tempo <- audio_features$tempo
+  # get the valence
+  values$valence <- audio_features$valence
+  # get the liveness
+  values$liveness <- audio_features$liveness
+  # get the speechiness
+  values$speechiness <- audio_features$speechiness
+  return(values)
+}
+
+get_similar_songs <- function(i, tracks, details) {
+  recommendations <- get_recommendations(
+    limit = 6,
+    seed_tracks = tracks$id[i],
+    seed_artists = tracks$artists[[i]]$id,
+    target_acousticness = details$acousticness,
+    target_instrumentalness = details$instrumentalness,
+    target_loudness = details$loudness,
+    target_speechiness = details$speechiness,
+    target_tempo = details$tempo
+  )
+  values <- lapply(recommendations$uri, create_uri, iframe_skeleton)
+  names(values) <- paste("uri_", seq_len(6), sep = "")
+  return(values)
 }

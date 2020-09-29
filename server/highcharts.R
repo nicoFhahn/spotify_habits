@@ -68,7 +68,12 @@ output$art1_plot <- renderHighchart({
         data = dens$y,
         # style it
         color = "rgba(234, 95, 35, 1)",
-        fillColor = "rgba(234, 95, 35, 0.1)"
+        fillColor = "rgba(234, 95, 35, 0.1)",
+        states = list(
+          hover = list(
+            enabled = FALSE
+          )
+        )
       ) %>%
       # style the y-axis
       hc_yAxis(
@@ -470,4 +475,277 @@ output$art1_plot <- renderHighchart({
         hc_legend(enabled = FALSE)
     }
   }
+})
+
+output$track_plot_1 <- renderHighchart({
+  data <- track_analysis$values$sections
+  data$iv <- paste("[", round(data$start), "; ", round(data$start + data$duration), ")", sep = "")
+  data$iv[nrow(data)] <- str_replace(data$iv[nrow(data)], "\\)", "]")
+  highchart() %>%
+    hc_chart(type = "line") %>%
+    hc_add_theme(hc_theme_monokai()) %>%
+    hc_xAxis(
+      # set the categories
+      categories = data$iv,
+      # minimum value
+      min = -0.01,
+      # no gridLine
+      gridLineWidth = 0,
+      # set the title
+      title = list(
+        text = "Loudness and tempo",
+        # style it
+        style = list(
+          color = "#fff",
+          `font-size` = "calc(0.4em + 0.5vw)"
+        )
+      ),
+      # style the labels
+      labels = list(
+        style = list(
+          color = "#fff",
+          `font-size` = "calc(0.3em + 0.5vw)"
+        )
+      )
+    ) %>%
+    hc_add_series(
+      data$loudness,
+      # set the border color
+      borderColor = "#F19A3E",
+      # set the fillColor
+      color = "rgba(241, 154, 62, 1)",
+      # edit the tooltip
+      tooltip = list(
+        pointFormat = paste(
+          "Average loudness in db: {point.y}"
+        ),
+        headerFormat = "
+            <span style='font-weight:bold'>{point.x}:</span><br>"
+      ),
+      states = list(
+        hover = list(
+          enabled = FALSE
+        ),
+        inactive = list(
+          opacity = 1
+        )
+      ),
+      name = "Loudness"
+    ) %>%
+    hc_add_series(
+      data$tempo,
+      # set the border color
+      borderColor = "#ABEDC6",
+      # set the fillColor
+      color = "rgba(171, 237, 198, 1)",
+      # edit the tooltip
+      tooltip = list(
+        pointFormat = paste(
+          "Average tempo in bpm: {point.y}"
+        ),
+        headerFormat = "
+            <span style='font-weight:bold'>{point.x}:</span><br>"
+      ),
+      states = list(
+        hover = list(
+          enabled = FALSE
+        ),
+        inactive = list(
+          opacity = 1
+        )
+      ),
+      name = "Tempo"
+    ) %>%# set the yAxis
+    hc_yAxis(
+      # set the title
+      title = list(
+        text = "Value",
+        style = list(
+          color = "#fff",
+          `font-size` = "calc(0.4em + 0.5vw)"
+        )
+      ),
+      # style the gridLine
+      gridLineWidth = 1,
+      gridLineColor = "rgba(255, 255, 255, 0.3)",
+      gridLineDashStyle = "Solid",
+      # style the labels
+      labels = list(
+        style = list(
+          color = "#fff",
+          `font-size` = "calc(0.3em + 0.5vw)"
+        )
+      )
+    ) %>%
+    # set the background color
+    hc_chart(backgroundColor = "#242424") %>%
+    # set the title
+    hc_title(
+      text = paste(
+        "Loudness and tempo of",
+        track_infos$values$title
+      ),
+      style = list(
+        color = "#fff",
+        `font-size` = "calc(1em + 0.5vw)"
+      )
+    )
+})
+
+output$track_plot_2 <- renderHighchart({
+  data <- track_analysis$values
+  data_bars <- data$bars
+  data_bars$id <- 1
+  data_beats <- data$beats
+  data_beats$id <- 2
+  data_tatums <- data$tatums
+  data_tatums$id <- 3
+  data_sections <- data$sections
+  plotLines <- lapply(
+    data_sections$start[2:nrow(data_sections)], function(x, ...) {
+      list(
+        label = list(
+          text = paste(
+            "End section",
+            match(
+              x,
+              data_sections$start[2:nrow(data_sections)]
+            )
+          )
+        ),
+        color = "rgba(234, 95, 35, 0.9)",
+        width = 1,
+        value = x,
+        zIndex = 10
+      )
+    }
+  )
+  highchart() %>%
+    hc_add_theme(hc_theme_monokai()) %>%
+    hc_add_series(
+      data_bars,
+      "scatter",
+      color = "#FFC971",
+      hcaes(
+        x = start,
+        y = id
+      ),
+      marker = list(
+        radius = 3,
+        symbol = "diamond"
+      ),
+      states = list(
+        hover = list(
+          enabled = FALSE
+        ),
+        inactive = list(
+          opacity = 1
+        )
+      ),
+      name = "Bars"
+    ) %>%
+    hc_add_series(
+      data_beats,
+      "scatter",
+      color = "#59A96A",
+      hcaes(
+        x = start,
+        y = id
+      ),
+      marker = list(
+        radius = 3,
+        symbol = "square"
+      ),
+      states = list(
+        hover = list(
+          enabled = FALSE
+        ),
+        inactive = list(
+          opacity = 1
+        )
+      ),
+      name = "Beats"
+    ) %>%
+    hc_add_series(
+      data_tatums,
+      "scatter",
+      color = "#D16666",
+      hcaes(
+        x = start,
+        y = id
+      ),
+      marker = list(
+        radius = 3,
+        symbol = "circle"
+      ),
+      states = list(
+        hover = list(
+          enabled = FALSE
+        ),
+        inactive = list(
+          opacity = 1
+        )
+      ),
+      name = "Tatums"
+    ) %>%# set the yAxis
+    hc_xAxis(
+      # set the title
+      title = list(
+        text = "Second",
+        style = list(
+          color = "#fff",
+          `font-size` = "calc(0.4em + 0.5vw)"
+        )
+      ),
+      # max = round(max(data_tatums$start)/4),
+      # style the gridLine
+      gridLineWidth = 0,
+      # style the labels
+      labels = list(
+        style = list(
+          color = "#fff",
+          `font-size` = "calc(0.3em + 0.5vw)"
+        )
+      ),
+      plotLines = plotLines
+    ) %>%# set the yAxis
+    hc_yAxis(
+      # set the title
+      title = list(
+        text = "Type",
+        style = list(
+          color = "#fff",
+          `font-size` = "calc(0.4em + 0.5vw)"
+        )
+      ),
+      categories = list(
+        "", "Bars", "Beats", "Tatums"
+      ),
+      # style the gridLine
+      gridLineWidth = 0,
+      # style the labels
+      labels = list(
+        style = list(
+          color = "#fff",
+          `font-size` = "calc(0.3em + 0.5vw)"
+        )
+      )
+    ) %>%
+    # remove the tooltip
+    hc_tooltip(enabled = FALSE) %>%
+    hc_chart(
+      zoomType = "x",
+      backgroundColor = "#242424"
+    ) %>%
+    # set the title
+    hc_title(
+      text = paste(
+        "Audio Analysis of",
+        track_infos$values$title
+      ),
+      style = list(
+        color = "#fff",
+        `font-size` = "calc(1em + 0.5vw)"
+      )
+    )
 })

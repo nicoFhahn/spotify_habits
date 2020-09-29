@@ -42,6 +42,7 @@ table_alltime_songs <- paste(
   "</tbody></table>",
   sep = ""
 )
+table_alltime_songs <- add_id(table_alltime_songs, "alltime_songs")
 table_rows_recent_songs <- lapply(
   pairs,
   skeleton_replacer, 

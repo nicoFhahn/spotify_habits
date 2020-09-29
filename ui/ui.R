@@ -30,38 +30,7 @@ fluidPage(
         ),
         h2(
           "An Overview"
-        )#,
-        # h3(
-        #   "Learn more about not only yourself but also the artists you listen to"
-        # )
-      )
-    ),
-    tags$section(
-      class = "content_page",
-      div(class="content",
-      div(
-        class = "content_header",
-        HTML(
-          "<h1> Your <span class = 'accent'>recent</span> favorite songs</h1>"
         )
-      ),
-      div(
-        class = "content_table",
-        HTML(table_recent_songs)
-      ),
-      div(
-        class = "content_footer",
-        br(),
-        br(),
-        HTML(
-          "<h4><span class = 'accent'>Click
-          </span> on any of the titles to get a detailed look at the song"
-        )
-      )
-      ),
-      div(
-        class="modal",
-        h1("This is a modal page")
       )
     ),
     tags$section(
@@ -161,6 +130,83 @@ fluidPage(
         HTML(table_recent_artist)
       )
     ),
+    tags$section(
+      class = "content_page",
+      HTML(
+        "<p>
+        After taking a look at the artists you are listening to, we
+        will now focus on the songs you listen to regularly. We'll once again
+        be looking at your<span class='accent'>all-time</span> favorite
+        songs and your most <span class='accent'>recent</span> favorites, 
+        starting with the first of the two: 
+        </p>"
+      )
+    ),
+    tags$section(
+      class = "content_page",
+      div(class="content",
+          div(
+            class = "content_header",
+            HTML(
+              "<h1> Your <span class = 'accent'>all-time</span> favorite songs</h1>"
+            )
+          ),
+          div(
+            class = "content_table",
+            HTML(table_alltime_songs)
+          ),
+          div(
+            class = "content_footer",
+            br(),
+            br(),
+            HTML(
+              "<h4><span class = 'accent'>Click
+          </span> on any of the titles to get a detailed look at the song"
+            )
+          )
+      ),
+      div(
+        class="modal",
+        h1("This is a modal page")
+      )
+    ),
+    tags$section(
+      class = "content_page",
+      HTML(
+        "<p>
+        And now for the songs that you just can't get enough of in recent
+        times. Here are your <span class='accent'>recent</span> favorite songs:
+        </p>"
+      )
+    ),
+    tags$section(
+      class = "content_page",
+      div(class="content",
+          div(
+            class = "content_header",
+            HTML(
+              "<h1> Your <span class = 'accent'>recent</span> favorite songs</h1>"
+            )
+          ),
+          div(
+            class = "content_table",
+            HTML(table_recent_songs)
+          ),
+          div(
+            class = "content_footer",
+            br(),
+            br(),
+            HTML(
+              "<h4><span class = 'accent'>Click
+          </span> on any of the titles to get a detailed look at the song"
+            )
+          )
+      ),
+      div(
+        class="modal",
+        h1("This is a modal page")
+      )
+    ),
     tags$section()
   ),
   tags$script(
@@ -174,8 +220,5 @@ fluidPage(
   ),
   tags$script(
     src = "waves.js"
-  ),
-  tags$script(
-    src = "swap.js"
   )
 )

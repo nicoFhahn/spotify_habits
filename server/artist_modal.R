@@ -1491,5 +1491,288 @@ show_modal <- function(type, ...) {
         )
       )
     }
+  } else {
+    showModal(
+      modalDialog(
+        title = HTML(
+          paste(
+            tags$figure(
+              tags$div(
+                class = "column accent_img",
+                tags$image(
+                  src = track_infos$values$image
+                )
+              ),
+              tags$figcaption(
+                h4(
+                  paste("#", track_infos$values$place, ":", track_infos$values$title, sep = ""),
+                  class = "song_title"
+                )
+              )
+            )
+          )
+        ),
+        easyClose = TRUE,
+        footer = NULL,
+        tabsetPanel(
+          tabPanel(
+            title = "General information",
+            column(
+              width = 8,
+              h6(
+                ifelse(
+                  length(track_infos$values$artists) > 1,
+                  "Artists",
+                  "Artist"
+                )
+              ),
+              p(
+                paste(track_infos$values$artists, collapse = ", ")
+              ),
+              br(),
+              h6(
+                "Album"
+              ),
+              p(
+                track_infos$values$album
+              ),
+              br(),
+              h6(
+                "Popularity"
+              ),
+              p(
+                track_infos$values$popularity
+              ),
+              br(),
+              h6(
+                "Explicit"
+              ),
+              p(
+                ifelse(
+                  track_infos$values$explicit,
+                  "Yes",
+                  "No"
+                )
+              ),
+              br(),
+              h6(
+                "Length"
+              ),
+              p(
+                paste(
+                  track_infos$values$minutes,
+                  ":",
+                  track_infos$values$seconds,
+                  " minutes",
+                  sep = ""
+                )
+              ),
+            ),
+            column(
+              width = 4,
+              HTML(track_infos$values$uri)
+            )
+          ),
+          tabPanel(
+            title = "Audio Features",
+            column(
+              width = 4,
+              h6(
+                id = "acoust",
+                "Acousticness"
+              ),
+              p(
+                track_details$values$acousticness
+              ),
+              br(),
+              h6(
+                id = "dance",
+                "Danceability"
+              ),
+              p(
+                track_details$values$danceability
+              ),
+              br(),
+              h6(
+                id = "energy",
+                "Energy"
+              ),
+              p(
+                track_details$values$energy
+              ),
+              br(),
+              h6(
+                id = "instrument",
+                "Instrumentalness"
+              ),
+              p(
+                track_details$values$instrumentalness 
+              ),
+              br(),
+              h6(
+                id = "live",
+                "Liveness"
+              ),
+              p(
+                track_details$values$liveness
+              ),
+              br(),
+              br(),
+              p(
+                "Click on any of the feature names for an explanation of what
+              exactly it is."
+              )
+            ),
+            column(
+              width = 4,
+              h6(
+                id = "loud",
+                "Loudness"
+              ),
+              p(
+                paste(track_details$values$loudness, "db")
+              ),
+              br(),
+              h6(
+                id = "speech",
+                "Speechiness"
+              ),
+              p(
+                track_details$values$speechiness
+              ),
+              br(),
+              h6(
+                id = "tempo",
+                "Tempo"
+              ),
+              p(
+                paste(track_details$values$tempo, "bpm")
+              ),
+              br(),
+              h6(
+                id = "valence",
+                "Valence"
+              ),
+              p(
+                track_details$values$valence 
+              ),
+            ),
+            column(
+              width = 4,
+              h6(
+                "Explanation"
+              ),
+              htmlOutput(
+                "explanation_song"
+              )
+            )
+          ),
+          tabPanel(
+            title = "Acoustic Analysis 1",
+            column(
+              width = 8,
+              br(),
+              highchartOutput(
+                "track_plot_1",
+                height = "60vh"
+              )
+            ),
+            column(
+              width = 4,
+              br(),
+              htmlOutput(
+                "explanation_plot_1"
+              )
+            )
+          ),
+          tabPanel(
+            title = "Acoustic Analysis 2",
+            column(
+              width = 8,
+              br(),
+              highchartOutput(
+                "track_plot_2",
+                height = "60vh"
+              )
+            ),
+            column(
+              width = 4,
+              br(),
+              htmlOutput(
+                "explanation_plot_2"
+              )
+            )
+          ),
+          tabPanel(
+            title = "You might also like",
+            fluidRow(
+              br(),
+              p(
+                id = "also",
+                paste(
+                  "Here are a few songs that you might also like, based
+                on having similar features to ",
+                  track_infos$values$title,
+                  ".",
+                  sep = ""
+                )
+              )
+            ),
+            fluidRow(
+              column(
+                class = "song_uri",
+                width = 3,
+                HTML(uri_sim$values$uri_1)
+              ),
+              column(
+                width = 1
+              ),
+              column(
+                class = "song_uri",
+                width = 3,
+                HTML(uri_sim$values$uri_2)
+              ),
+              column(
+                width = 1
+              ),
+              column(
+                class = "song_uri",
+                width = 3,
+                HTML(uri_sim$values$uri_3)
+              ),
+              column(
+                width = 1
+              )
+            ),
+            fluidRow(
+              column(
+                class = "song_uri",
+                width = 3,
+                HTML(uri_sim$values$uri_4)
+              ),
+              column(
+                width = 1
+              ),
+              column(
+                class = "song_uri",
+                width = 3,
+                HTML(uri_sim$values$uri_5)
+              ),
+              column(
+                width = 1
+              ),
+              column(
+                class = "song_uri",
+                width = 3,
+                HTML(uri_sim$values$uri_6)
+              ),
+              column(
+                width = 1
+              )
+            )
+          )
+        )
+      )
+    )
   }
 }

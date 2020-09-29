@@ -808,115 +808,557 @@ track_infos <- reactiveValues(
     image = "",
     place = "",
     minutes = "",
-    seconds = ""
+    seconds = "",
+    uri = ""
   )
 )
 
-get_track_infos <- function(i, tracks) {
-  values <- list()
-  # get the name
-  values$artists <- tracks$artists[[i]]$name
-  # get the title
-  values$title <- tracks$name[i]
-  # get the album
-  values$album <- tracks$album.name[i]
-  # get the popularity
-  values$popularity <- tracks$popularity[i]
-  # get whether its explicit
-  values$explicit <- tracks$explicit[i]
-  # get the album image
-  values$image <- tracks$album.images[[i]][, 2][1]
-  # get the place
-  values$place <- i
-  times <- get_minutes_and_seconds(tracks[i, ])
-  values$minutes <- times$minutes
-  values$seconds <- times$seconds
-  return(values)
-}
+track_details <- reactiveValues(
+  values = list(
+    acousticness = "",
+    instrumentalness = "",
+    energy = "",
+    danceability = "",
+    loudness = "",
+    tempo = "",
+    valence = "",
+    liveness = "",
+    speechiness = ""
+  )
+)
+
+track_analysis <- reactiveValues(
+  values = list()
+)
+
+uri_sim <- reactiveValues(
+  values = list(
+    uri_1 = "",
+    uri_2 = "",
+    uri_3 = "",
+    uri_4 = "",
+    uri_5 = "",
+    uri_6 = ""
+  )
+)
+
+shinyjs::onclick("alltime_songs_1", function(x) {
+  i <- 1
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_2", function(x) {
+  i <- 2
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_3", function(x) {
+  i <- 3
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_4", function(x) {
+  i <- 4
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_5", function(x) {
+  i <- 5
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_6", function(x) {
+  i <- 6
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_7", function(x) {
+  i <- 7
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_8", function(x) {
+  i <- 8
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_9", function(x) {
+  i <- 9
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_10", function(x) {
+  i <- 10
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_11", function(x) {
+  i <- 11
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_12", function(x) {
+  i <- 12
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_13", function(x) {
+  i <- 13
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_14", function(x) {
+  i <- 14
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_15", function(x) {
+  i <- 15
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_16", function(x) {
+  i <- 16
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_17", function(x) {
+  i <- 17
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_18", function(x) {
+  i <- 18
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_19", function(x) {
+  i <- 19
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("alltime_songs_20", function(x) {
+  i <- 20
+  # get the track infos
+  infos <- get_track_infos(i, longterm_tracks)
+  details <- get_track_details(i, longterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(longterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, longterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
 
 shinyjs::onclick("recent_songs_1", function(x) {
   i <- 1
   # get the track infos
   infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
   track_infos$values <- infos
-  showModal(
-    modalDialog(
-      title = HTML(
-        paste(
-          tags$figure(
-            tags$div(
-              class = "column accent_img",
-              tags$image(
-                src = track_infos$values$image
-              )
-            ),
-            tags$figcaption(
-              h4(
-                paste("#", track_infos$values$place, ":", track_infos$values$title, sep = ""),
-                class = "song_title"
-              )
-            )
-          )
-        )
-      ),
-      easyClose = TRUE,
-      footer = NULL,
-      tabsetPanel(
-        tabPanel(
-          title = "General information",
-          column(
-            width = 8,
-            h6(
-              ifelse(
-                length(track_infos$values$artists) > 1,
-                "Artists",
-                "Artist"
-              )
-            ),
-            p(
-              paste(track_infos$values$artists, collapse = ", ")
-            ),
-            br(),
-            h6(
-              "Album"
-            ),
-            p(
-              track_infos$values$album
-            ),
-            br(),
-            h6(
-              "Popularity"
-            ),
-            p(
-              track_infos$values$popularity
-            ),
-            br(),
-            h6(
-              "Explicit"
-            ),
-            p(
-              ifelse(
-                track_infos$values$explicit,
-                "Yes",
-                "No"
-              )
-            ),
-            br(),
-            h6(
-              "Length"
-            ),
-            p(
-              paste(
-                track_infos$values$minutes,
-                ":",
-                track_infos$values$seconds,
-                " minutes",
-                sep = ""
-              )
-            ),
-          )
-        )
-      )
-    )
-  )
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_2", function(x) {
+  i <- 2
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_3", function(x) {
+  i <- 3
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_4", function(x) {
+  i <- 4
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_5", function(x) {
+  i <- 5
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_6", function(x) {
+  i <- 6
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_7", function(x) {
+  i <- 7
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_8", function(x) {
+  i <- 8
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_9", function(x) {
+  i <- 9
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_10", function(x) {
+  i <- 10
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_11", function(x) {
+  i <- 11
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_12", function(x) {
+  i <- 12
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_13", function(x) {
+  i <- 13
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_14", function(x) {
+  i <- 14
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_15", function(x) {
+  i <- 15
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_16", function(x) {
+  i <- 16
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_17", function(x) {
+  i <- 17
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_18", function(x) {
+  i <- 18
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_19", function(x) {
+  i <- 19
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+shinyjs::onclick("recent_songs_20", function(x) {
+  i <- 20
+  # get the track infos
+  infos <- get_track_infos(i, shortterm_tracks)
+  details <- get_track_details(i, shortterm_tracks)
+  track_infos$values <- infos
+  track_details$values <- details
+  track_analysis$values <- get_track_audio_analysis(shortterm_tracks$id[i])
+  uri_sim$values <- get_similar_songs(i, shortterm_tracks, track_details$values)
+  show_modal(type = "song")
+})
+
+
+clicked <- reactiveValues(
+  last = 'Acousticness'
+)
+
+shinyjs::onclick('acoust', {
+  clicked$last = 'Acousticness'
+})
+
+shinyjs::onclick('dance', {
+  clicked$last = 'Danceability'
+})
+
+shinyjs::onclick('energy', {
+  clicked$last = 'Energy'
+})
+
+shinyjs::onclick('instrument', {
+  clicked$last = 'Instrumentalness'
+})
+
+shinyjs::onclick('live', {
+  clicked$last = 'Liveness'
+})
+
+shinyjs::onclick('loud', {
+  clicked$last = 'Loudness'
+})
+
+shinyjs::onclick('speech', {
+  clicked$last = 'Speechiness'
+})
+
+shinyjs::onclick('tempo', {
+  clicked$last = 'Tempo'
+})
+
+shinyjs::onclick('valence', {
+  clicked$last = 'Valence'
 })
