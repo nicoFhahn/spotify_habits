@@ -399,7 +399,9 @@ create_random_grid <- function(urls, type) {
           x,
           "><",
           paste(
-            '><img class = "hidden" id = "',
+            # '><img class = "hidden" id = "',
+            '><img id = "',
+            # '><img id = "',
             id,
             '" src = "',
             cover,
@@ -588,4 +590,144 @@ get_similar_songs <- function(i, tracks, details) {
   values <- lapply(recommendations$uri, create_uri, iframe_skeleton)
   names(values) <- paste("uri_", seq_len(6), sep = "")
   return(values)
+}
+
+get_all_saved_stuff <- function() {
+  tracks <- list()
+  # get all the saved tracks
+  new_tracks <- get_my_saved_tracks(
+    limit = 50,
+    offset = 0
+  )
+  offset <- 50
+  tracks <- list.append(
+    tracks,
+    new_tracks
+  )
+  # download while there are still tracks available
+  while (length(new_tracks) > 0) {
+    offset <- offset + 50
+    new_tracks <- get_my_saved_tracks(
+      limit = 50,
+      offset = offset
+    )
+    tracks <- list.append(
+      tracks,
+      new_tracks
+    )
+  }
+  # bind together
+  tracks <- Reduce(rbind, tracks)
+  playlists <- list()
+  # now do the same for all the playlists
+  new_playlists <- get_my_playlists(
+    limit = 50,
+    offset = 0
+  )
+  offset <- 50
+  playlists <- list.append(
+    playlists,
+    new_playlists
+  )
+  while (length(new_playlists) > 0) {
+    offset <- offset + 50
+    new_playlists <- get_my_playlists(
+      limit = 50,
+      offset = offset
+    )
+    playlists <- list.append(
+      playlists,
+      new_playlists
+    )
+  }
+  # bind them together
+  playlists <- Reduce(rbind, playlists)
+  # keep only the playlist that are made by the user
+  playlists <- playlists[playlists$owner.id == get_my_profile()$id, ]
+  playlist_tracks <- list()
+  # now get the tracks out of all these playlists
+  playlist_tracks <- lapply(
+    playlists$id,
+    function(x) {
+      tracks <- list()
+      new_tracks <- get_playlist_tracks(
+        playlist_id = x,
+        limit = 100,
+        offset = 0
+      )
+      offset <- 100
+      tracks <- list.append(
+        tracks,
+        new_tracks
+      )
+      while (length(new_tracks) > 0) {
+        offset <- offset + 100
+        new_tracks <- get_playlist_tracks(
+          playlist_id = x,
+          limit = 100,
+          offset = offset
+        )
+        tracks <- list.append(
+          tracks,
+          new_tracks
+        )
+      }
+      tracks <- Reduce(rbind, tracks)
+      
+    }
+  )
+  # bind everything together
+  playlist_tracks <- Reduce(rbind, playlist_tracks)
+  # keep relevant information
+  tracks <- tracks[, c(
+    "added_at",
+    "track.artists",
+    "track.name",
+    "track.id",
+    "track.popularity"
+  )]
+  playlist_tracks <- playlist_tracks[, c(
+    "added_at",
+    "track.artists",
+    "track.name",
+    "track.id",
+    "track.popularity"
+  )]
+  all_tracks <- rbind(
+    tracks,
+    playlist_tracks
+  )
+  # deduplicate the tracks
+  all_tracks <- all_tracks[
+    !duplicated(all_tracks$track.id),
+  ]
+  # get the artists
+  all_tracks$track.artists <- unlist(lapply(all_tracks$track.artists, function(x) paste(x$name, collapse = ", ")))
+  # get the ids
+  ids <- split(
+    all_tracks$track.id,
+    rep(1:ceiling(nrow(all_tracks) / 100), each = 100)[1:nrow(all_tracks)]
+  )
+  # get the all the audio features
+  audio_features <- lapply(
+    ids,
+    get_track_audio_features
+  )
+  audio_features_df <- Reduce(rbind, audio_features)
+  # return one df with all the info
+  cbind(
+    all_tracks,
+    audio_features_df
+  )
+}
+
+update_values <- function(i, ...) {
+  clust_number$val[i] <- !clust_number$val[i]
+  num_clicks$val[i] <- num_clicks$val[i] + 1
+  if (num_clicks$val[i] %% 2 == 0) {
+    sample_songs$val[[i]] <- sample(
+      length(clustered[clustered$cluster == i, ]$tracks[[1]]),
+      3
+    )
+  }
 }

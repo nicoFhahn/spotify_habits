@@ -756,3 +756,162 @@ output$track_plot_2 <- renderHighchart({
       )
     )
 })
+
+output$change_plot <- renderHighchart({
+  highchart() %>%
+    hc_chart(type = "line") %>%
+    hc_add_theme(hc_theme_monokai()) %>%
+    hc_xAxis(
+      categories = all_tracks_grouped_quarter$date,
+      # minimum value
+      min = -0.01,
+      # no gridLine
+      gridLineWidth = 0,
+      # set the title
+      title = list(
+        text = "Date",
+        # style it
+        style = list(
+          color = "#fff",
+          `font-size` = "calc(0.4em + 0.5vw)"
+        )
+      ),
+      # style the labels
+      labels = list(
+        style = list(
+          color = "#fff",
+          `font-size` = "calc(0.3em + 0.5vw)"
+        )
+      )
+    ) %>%
+    hc_yAxis(
+      min = 0,
+      max = 1,
+      # set the title
+      title = list(
+        text = "Value",
+        style = list(
+          color = "#fff",
+          `font-size` = "calc(0.4em + 0.5vw)"
+        )
+      ),
+      # style the gridLine
+      gridLineWidth = 1,
+      gridLineColor = "rgba(255, 255, 255, 0.3)",
+      gridLineDashStyle = "Solid",
+      # style the labels
+      labels = list(
+        style = list(
+          color = "#fff",
+          `font-size` = "calc(0.3em + 0.5vw)"
+        )
+      )
+    ) %>%
+    hc_add_series(
+      round(all_tracks_grouped_quarter$acousticness, 2),
+      marker = list(
+        radius = 0
+      ),
+      color = "#fffcf9",
+      name = "Acousticness"
+    ) %>%
+    hc_add_series(
+      round(all_tracks_grouped_quarter$danceability, 2),
+      marker = list(
+        radius = 0
+      ),
+      color = "#06d6a0",
+      name = "Danceability"
+    ) %>%
+    hc_add_series(
+      round(all_tracks_grouped_quarter$energy, 2),
+      marker = list(
+        radius = 0
+      ),
+      color = "#ffd166",
+      name = "Energy"
+    ) %>%
+    hc_add_series(
+      round(all_tracks_grouped_quarter$instrumentalness, 2),
+      marker = list(
+        radius = 0
+      ),
+      color = "#ef476f",
+      name = "Instrumentalness"
+    ) %>%
+    hc_add_series(
+      round(all_tracks_grouped_quarter$speechiness, 2),
+      marker = list(
+        radius = 0
+      ),
+      color = "#26547c",
+      name = "Speechiness"
+    ) %>%
+    hc_add_series(
+      round(all_tracks_grouped_quarter$valence, 2),
+      marker = list(
+        radius = 0
+      ),
+      color = "#ffa69e",
+      name = "Valence"
+    ) %>%
+    # set the background color
+    hc_chart(backgroundColor = "#121212") %>%
+    # set the title
+    hc_title(
+      text = paste(
+        "Average acoustic features of your saved tracks
+      over time"
+      ),
+      style = list(
+        color = "#fff",
+        `font-size` = "calc(1em + 0.5vw)"
+      )
+    )
+  
+})
+
+output$radarchart <- renderHighchart({
+  radarchart <- highchart() %>%
+    hc_chart(polar = TRUE) %>% 
+    hc_add_theme(hc_theme_monokai()) %>%
+    hc_xAxis(
+      categories = colnames(clustered)[2:7],
+      tickmarkPlacement = "on",
+      lineWidth = 0,
+      gridLineDashStyle = "Solid"
+    ) %>%
+    hc_yAxis(
+      gridLineInterpolation = "polygon",
+      lineWidth = 0,
+      min = 0,
+      gridLineDashStyle = "Solid"
+    ) %>%
+    # set the background color
+    hc_chart(backgroundColor = "#181818")
+  indexes <- which(clust_number$val %in% TRUE)
+  colors <- c(
+    "#EA5F23",
+    "#008CF9",
+    "#B80058",
+    "#00BBAD",
+    "#FF9287",
+    "#5954D6",
+    "#00C6F8",
+    "#006E00",
+    "#D163E6",
+    "#EBAC23"
+  )
+  for(i in indexes) {
+    radarchart <- radarchart %>%
+      hc_add_series(
+        name = paste("Cluster", i),
+        marker = list(
+          radius = 0
+        ),
+        data = round(as.numeric(clustered[i, 2:7]), 2),
+        color = colors[i]
+      )
+  }
+  radarchart
+})

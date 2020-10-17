@@ -161,3 +161,176 @@ output$explanation_plot_2 <- renderText({
     of the track.'
   )
 })
+
+
+output$clust_1_out <- renderText({
+  if (clust_number$val[1]) {
+    samples <- sample_songs$val[[1]]
+    HTML(
+      paste(
+        paste(
+          clustered[clustered$cluster == 1, ]$artists[[1]][samples],
+          clustered[clustered$cluster == 1, ]$tracks[[1]][samples],
+          sep = " - "
+        ),
+        collapse = "<br>"
+      )
+    )
+  } else {
+    HTML("<br>")
+  }
+})
+
+output$clust_2_out <- renderText({
+  if (clust_number$val[2]) {
+    samples <- sample_songs$val[[2]]
+    HTML(
+      paste(
+        paste(
+          clustered[clustered$cluster == 2, ]$artists[[1]][samples],
+          clustered[clustered$cluster == 2, ]$tracks[[1]][samples],
+          sep = " - "
+        ),
+        collapse = "<br>")
+    )
+  } else {
+    HTML("<br>")
+  }
+})
+
+output$clust_3_out <- renderText({
+  if (clust_number$val[3]) {
+    samples <- sample_songs$val[[3]]
+    HTML(
+      paste(
+        paste(
+          clustered[clustered$cluster == 3, ]$artists[[1]][samples],
+          clustered[clustered$cluster == 3, ]$tracks[[1]][samples],
+          sep = " - "
+        ),
+        collapse = "<br>")
+    )
+  } else {
+    HTML("<br>")
+  }
+})
+
+output$clust_4_out <- renderText({
+  if (clust_number$val[4]) {
+    samples <- sample_songs$val[[4]]
+    HTML(
+      paste(
+        paste(
+          clustered[clustered$cluster == 4, ]$artists[[1]][samples],
+          clustered[clustered$cluster == 4, ]$tracks[[1]][samples],
+          sep = " - "
+        ),
+        collapse = "<br>")
+    )
+  } else {
+    HTML("<br>")
+  }
+})
+
+output$clust_5_out <- renderText({
+  if (clust_number$val[5]) {
+    samples <- sample_songs$val[[5]]
+    HTML(
+      paste(
+        paste(
+          clustered[clustered$cluster == 5, ]$artists[[1]][samples],
+          clustered[clustered$cluster == 5, ]$tracks[[1]][samples],
+          sep = " - "
+        ),
+        collapse = "<br>")
+    )
+  } else {
+    HTML("<br>")
+  }
+})
+
+output$clust_6_out <- renderText({
+  if (clust_number$val[6]) {
+    samples <- sample_songs$val[[6]]
+    HTML(
+      paste(
+        paste(
+          clustered[clustered$cluster == 6, ]$artists[[1]][samples],
+          clustered[clustered$cluster == 6, ]$tracks[[1]][samples],
+          sep = " - "
+        ),
+        collapse = "<br>")
+    )
+  } else {
+    HTML("<br>")
+  }
+})
+
+output$clust_7_out <- renderText({
+  if (clust_number$val[7]) {
+    samples <- sample_songs$val[[7]]
+    HTML(
+      paste(
+        paste(
+          clustered[clustered$cluster == 7, ]$artists[[1]][samples],
+          clustered[clustered$cluster == 7, ]$tracks[[1]][samples],
+          sep = " - "
+        ),
+        collapse = "<br>")
+    )
+  } else {
+    HTML("<br>")
+  }
+})
+
+output$clust_8_out <- renderText({
+  if (clust_number$val[8]) {
+    samples <- sample_songs$val[[8]]
+    HTML(
+      paste(
+        paste(
+          clustered[clustered$cluster == 8, ]$artists[[1]][samples],
+          clustered[clustered$cluster == 8, ]$tracks[[1]][samples],
+          sep = " - "
+        ),
+        collapse = "<br>")
+    )
+  } else {
+    HTML("<br>")
+  }
+})
+
+output$clust_9_out <- renderText({
+  if (clust_number$val[9]) {
+    samples <- sample_songs$val[[9]]
+    HTML(
+      paste(
+        paste(
+          clustered[clustered$cluster == 9, ]$artists[[1]][samples],
+          clustered[clustered$cluster == 9, ]$tracks[[1]][samples],
+          sep = " - "
+        ),
+        collapse = "<br>")
+    )
+  } else {
+    HTML("<br>")
+  }
+})
+
+
+output$clust_10_out <- renderText({
+  if (clust_number$val[10]) {
+    samples <- sample_songs$val[[10]]
+    HTML(
+      paste(
+        paste(
+          clustered[clustered$cluster == 10, ]$artists[[1]][samples],
+          clustered[clustered$cluster == 10, ]$tracks[[1]][samples],
+          sep = " - "
+        ),
+        collapse = "<br>")
+    )
+  } else {
+    HTML("<br>")
+  }
+})

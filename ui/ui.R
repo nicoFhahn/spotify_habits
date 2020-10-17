@@ -1,4 +1,3 @@
-source(file.path("server", "create_html_thingys.R"), local = TRUE)$value
 fluidPage(
   add_busy_spinner(
     spin = "semipolar",
@@ -11,8 +10,8 @@ fluidPage(
     tags$style(
       css
     ),
-    includeCSS(
-      "www/styles.css"
+    HTML(
+      '<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />'
     )
   ),
   useShinyjs(),
@@ -30,6 +29,11 @@ fluidPage(
         ),
         h2(
           "An Overview"
+        ),
+        HTML(
+          "<h6>Because I am
+          <sup>(or rather the spotifyr package is)</sup> kinda
+          dumb you can only view my listening habits at the moment"
         )
       )
     ),
@@ -55,7 +59,7 @@ fluidPage(
           artists</h1>"
         )
       ),
-      HTML(alltime_grid),
+      uiOutput("alltime_grid_ui"),
       div(
         class = "content_footer",
         HTML(
@@ -82,7 +86,7 @@ fluidPage(
       ),
       div(
         class = "content_table",
-        HTML(table_alltime_artist)
+        uiOutput("table_alltime_artist_ui")
       )
     ),
     tags$section(
@@ -106,7 +110,7 @@ fluidPage(
           "<h1> Your <span class = 'accent'>recent</span> favorite artists</h1>"
         )
       ),
-      HTML(recent_grid),
+      uiOutput("recent_grid_ui"),
       div(
         class = "content_footer",
         HTML(
@@ -129,7 +133,7 @@ fluidPage(
       ),
       div(
         class = "content_table",
-        HTML(table_recent_artist)
+        uiOutput("table_recent_artist_ui")
       )
     ),
     tags$section(
@@ -138,7 +142,7 @@ fluidPage(
         "<p>
         After taking a look at the artists you are listening to, we
         will now focus on the songs you listen to regularly. We'll once again
-        be looking at your<span class='accent'>all-time</span> favorite
+        be looking at your <span class='accent'>all-time</span> favorite
         songs and your most <span class='accent'>recent</span> favorites,
         starting with the first of the two:
         </p>"
@@ -157,8 +161,8 @@ fluidPage(
         ),
         div(
           class = "content_table",
-          HTML(table_alltime_songs)
-        ),
+          uiOutput("table_alltime_songs_ui")
+        ),#
         div(
           class = "content_footer",
           br(),
@@ -195,7 +199,7 @@ fluidPage(
         ),
         div(
           class = "content_table",
-          HTML(table_recent_songs)
+          uiOutput("table_recent_songs_ui")
         ),
         div(
           class = "content_footer",
@@ -212,6 +216,107 @@ fluidPage(
         h1("This is a modal page")
       )
     ),
+    tags$section(
+      class = "content_page",
+      HTML(
+        "<p>
+        As we grow older, we may stop listening to certain types of music and 
+        start exploring new music. <br> 
+        In addition, certain events in our lives can temporarily affect the 
+        type of music we consume. People listen to <span class = 'accent'>sad
+        </span> songs to 
+        help them cope with a break-up and to <span class = 'accent'>happier
+        </span> music when life is good.
+        <br>
+        By looking at all the songs that you have saved or that are part of one
+        of your playlists, we can look how the types of songs you have listened
+        to have changed over time.
+        </p>"
+      )
+    ),
+    tags$section(
+      class = "content_page",
+      div(id = "break"),
+      highchartOutput(
+        "change_plot",
+        width = "60%",
+        height = "60%"
+      )
+    ),
+    tags$section(
+      class = "content_page",
+      HTML(
+        "<p>
+        The last thing we will be looking at is what kind of songs you are
+        listening to and how we can group them. We look at the audio features
+        of all your saved songs and songs in playlist and cluster them into
+        <span class = 'accent'>ten</span> different groups. <br>
+        <span class = 'accent'>Click</span> on any of 
+        the clusters to see how
+        an average song in that cluster is characterised and what are 
+        examples of the songs in there. <br>
+        Suprised by the similarity of these 
+        songs?
+        </p>"
+      )
+    ),
+    tags$section(
+      class = "content_page",
+      div(
+        class = "content_header",
+        HTML(
+          "<h1><span class = 'accent'>Clustering</span> of your saved
+          tracks</h1>"
+        )
+      ),
+      column(
+        width = 1
+      ),
+      column(
+        class = "cluster_col",
+        width = 2,
+        h3(id = "clust_1", "Cluster 1"),
+        htmlOutput("clust_1_out", class = "clust_out"),
+        h3(id = "clust_2", "Cluster 2"),
+        htmlOutput("clust_2_out", class = "clust_out"),
+        h3(id = "clust_3", "Cluster 3"),
+        htmlOutput("clust_3_out", class = "clust_out"),
+        h3(id = "clust_4", "Cluster 4"),
+        htmlOutput("clust_4_out", class = "clust_out"),
+        h3(id = "clust_5", "Cluster 5"),
+        htmlOutput("clust_5_out", class = "clust_out"),
+      ),
+      column(
+        class = "cluster_col",
+        width = 6,
+        highchartOutput(
+          "radarchart",
+          width = "100%",
+          height = "50%"
+        ),
+        htmlOutput(
+          "song_examples"
+        )
+      ),
+      column(
+        class = "cluster_col",
+        width = 2,
+        h3(id = "clust_6", "Cluster 6"),
+        htmlOutput("clust_6_out", class = "clust_out"),
+        h3(id = "clust_7", "Cluster 7"),
+        htmlOutput("clust_7_out", class = "clust_out"),
+        h3(id = "clust_8", "Cluster 8"),
+        htmlOutput("clust_8_out", class = "clust_out"),
+        h3(id = "clust_9", "Cluster 9"),
+        htmlOutput("clust_9_out", class = "clust_out"),
+        h3(id = "clust_10", "Cluster 10"),
+        htmlOutput("clust_10_out", class = "clust_out"),
+      ),
+      column(
+        width = 1
+      ),
+      div(class = "content_footer")
+    ),
     tags$section()
   ),
   tags$script(
@@ -225,5 +330,11 @@ fluidPage(
   ),
   tags$script(
     src = "waves.js"
+  ),
+  tags$script(
+    src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.js'
+  ),
+  tags$script(
+    src='https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.3/localforage.min.js'
   )
 )
