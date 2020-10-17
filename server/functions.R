@@ -174,7 +174,7 @@ get_album_features <- function(album_data, audio_features, album_data_old) {
   if (length(ids_available) > 0) {
     id_2 <- sample(ids_available, 1)
   } else {
-    id_2 <- most_popular_albums$id
+    id_2 <- sample(most_popular_albums$id, 1)
   }
   # get the uri
   uri_2 <- create_uri(
@@ -230,7 +230,7 @@ get_song_features <- function(audio_features) {
   a <- split(song_ids, rep(1:ceiling(n / k), each = k)[1:n])
   # get the tracks
   features <- lapply(a, function(x) {
-    features <- get_tracks(x)[, c("name", "popularity", "uri")]
+    get_tracks(x)[, c("name", "popularity", "uri")]
   })
   # bind it all together
   songs_popularity <- Reduce(rbind, features)
@@ -324,7 +324,7 @@ get_audio_features_top <- function(artists) {
       features <- get_artist_audio_features(
         x,
         include_groups = c("single", "album")
-        )
+      )
       Sys.sleep(3)
       features %>%
         group_by(artist_name) %>%
@@ -399,9 +399,8 @@ create_random_grid <- function(urls, type) {
           x,
           "><",
           paste(
-            # '><img class = "hidden" id = "',
+            # '><img class = "hidden2" id = "',
             '><img id = "',
-            # '><img id = "',
             id,
             '" src = "',
             cover,
@@ -673,7 +672,6 @@ get_all_saved_stuff <- function() {
         )
       }
       tracks <- Reduce(rbind, tracks)
-      
     }
   )
   # bind everything together
@@ -702,11 +700,19 @@ get_all_saved_stuff <- function() {
     !duplicated(all_tracks$track.id),
   ]
   # get the artists
-  all_tracks$track.artists <- unlist(lapply(all_tracks$track.artists, function(x) paste(x$name, collapse = ", ")))
+  all_tracks$track.artists <- unlist(
+    lapply(
+      all_tracks$track.artists,
+      function(x) paste(x$name, collapse = ", ")
+    )
+  )
   # get the ids
   ids <- split(
     all_tracks$track.id,
-    rep(1:ceiling(nrow(all_tracks) / 100), each = 100)[1:nrow(all_tracks)]
+    rep(
+      1:ceiling(nrow(all_tracks) / 100),
+      each = 100
+    )[seq_len(nrow(all_tracks))]
   )
   # get the all the audio features
   audio_features <- lapply(

@@ -856,24 +856,12 @@ output$change_plot <- renderHighchart({
       name = "Valence"
     ) %>%
     # set the background color
-    hc_chart(backgroundColor = "#121212") %>%
-    # set the title
-    hc_title(
-      text = paste(
-        "Average acoustic features of your saved tracks
-      over time"
-      ),
-      style = list(
-        color = "#fff",
-        `font-size` = "calc(1em + 0.5vw)"
-      )
-    )
-  
+    hc_chart(backgroundColor = "#121212")
 })
 
 output$radarchart <- renderHighchart({
   radarchart <- highchart() %>%
-    hc_chart(polar = TRUE) %>% 
+    hc_chart(polar = TRUE) %>%
     hc_add_theme(hc_theme_monokai()) %>%
     hc_xAxis(
       categories = colnames(clustered)[2:7],
@@ -888,7 +876,7 @@ output$radarchart <- renderHighchart({
       gridLineDashStyle = "Solid"
     ) %>%
     # set the background color
-    hc_chart(backgroundColor = "#181818")
+    hc_chart(backgroundColor = "#121212")
   indexes <- which(clust_number$val %in% TRUE)
   colors <- c(
     "#EA5F23",
@@ -902,7 +890,7 @@ output$radarchart <- renderHighchart({
     "#D163E6",
     "#EBAC23"
   )
-  for(i in indexes) {
+  for (i in indexes) {
     radarchart <- radarchart %>%
       hc_add_series(
         name = paste("Cluster", i),

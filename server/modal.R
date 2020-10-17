@@ -1523,7 +1523,7 @@ show_modal <- function(type, ...) {
                     ":",
                     track_infos$values$title,
                     sep = ""
-                    ),
+                  ),
                   class = "song_title"
                 )
               )

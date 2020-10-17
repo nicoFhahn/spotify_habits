@@ -39,18 +39,6 @@ fluidPage(
     ),
     tags$section(
       class = "content_page",
-      HTML(
-        "<p>
-        First, let's have a look at the artists you've been listening to the
-        most since you became a part of the Spotify community. These artists
-        have been by your side, whether you feel happy or sad, and you will
-        always enjoy hearing their voices. Enough talk, here are your 20
-        <span class = 'accent'>all-time</span> favorite artists:
-        </p>"
-      )
-    ),
-    tags$section(
-      class = "content_page",
       id = "alltime",
       div(
         class = "content_header",
@@ -73,6 +61,18 @@ fluidPage(
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           Scroll down for the ranked view</h4>"
         )
+      )
+    ),
+    tags$section(
+      class = "content_page",
+      HTML(
+        "<p>
+        First, let's have a look at the artists you've been listening to the
+        most since you became a part of the Spotify community. These artists
+        have been by your side, whether you feel happy or sad, and you will
+        always enjoy hearing their voices. Enough talk, here are your 20
+        <span class = 'accent'>all-time</span> favorite artists:
+        </p>"
       )
     ),
     tags$section(
@@ -162,7 +162,7 @@ fluidPage(
         div(
           class = "content_table",
           uiOutput("table_alltime_songs_ui")
-        ),#
+        ), #
         div(
           class = "content_footer",
           br(),
@@ -220,11 +220,11 @@ fluidPage(
       class = "content_page",
       HTML(
         "<p>
-        As we grow older, we may stop listening to certain types of music and 
-        start exploring new music. <br> 
-        In addition, certain events in our lives can temporarily affect the 
+        As we grow older, we may stop listening to certain types of music and
+        start exploring new music. <br>
+        In addition, certain events in our lives can temporarily affect the
         type of music we consume. People listen to <span class = 'accent'>sad
-        </span> songs to 
+        </span> songs to
         help them cope with a break-up and to <span class = 'accent'>happier
         </span> music when life is good.
         <br>
@@ -236,7 +236,13 @@ fluidPage(
     ),
     tags$section(
       class = "content_page",
-      div(id = "break"),
+      div(
+        class = "content_header",
+        HTML(
+          "<h1> Average acoustic features of your
+          <span class = 'accent'>saved</span> tracks</h1>"
+        )
+      ),
       highchartOutput(
         "change_plot",
         width = "60%",
@@ -251,11 +257,11 @@ fluidPage(
         listening to and how we can group them. We look at the audio features
         of all your saved songs and songs in playlist and cluster them into
         <span class = 'accent'>ten</span> different groups. <br>
-        <span class = 'accent'>Click</span> on any of 
+        <span class = 'accent'>Click</span> on any of
         the clusters to see how
-        an average song in that cluster is characterised and what are 
+        an average song in that cluster is characterised and what are
         examples of the songs in there. <br>
-        Suprised by the similarity of these 
+        Suprised by the similarity of these
         songs?
         </p>"
       )
@@ -265,65 +271,73 @@ fluidPage(
       div(
         class = "content_header",
         HTML(
-          "<h1><span class = 'accent'>Clustering</span> of your saved
+          "<h1>Clustering of your <span class = 'accent'>saved</span>
           tracks</h1>"
         )
       ),
-      column(
-        width = 1
-      ),
-      column(
-        class = "cluster_col",
-        width = 2,
-        h3(id = "clust_1", "Cluster 1"),
-        htmlOutput("clust_1_out", class = "clust_out"),
-        h3(id = "clust_2", "Cluster 2"),
-        htmlOutput("clust_2_out", class = "clust_out"),
-        h3(id = "clust_3", "Cluster 3"),
-        htmlOutput("clust_3_out", class = "clust_out"),
-        h3(id = "clust_4", "Cluster 4"),
-        htmlOutput("clust_4_out", class = "clust_out"),
-        h3(id = "clust_5", "Cluster 5"),
-        htmlOutput("clust_5_out", class = "clust_out"),
-      ),
-      column(
-        class = "cluster_col",
-        width = 6,
-        highchartOutput(
-          "radarchart",
-          width = "100%",
-          height = "50%"
+      div(
+        class = "content_cluster",
+        column(
+          width = 1
         ),
-        htmlOutput(
-          "song_examples"
+        column(
+          class = "cluster_col",
+          width = 2,
+          h3(id = "clust_1", "Cluster 1"),
+          htmlOutput("clust_1_out", class = "clust_out"),
+          h3(id = "clust_2", "Cluster 2"),
+          htmlOutput("clust_2_out", class = "clust_out"),
+          h3(id = "clust_3", "Cluster 3"),
+          htmlOutput("clust_3_out", class = "clust_out"),
+          h3(id = "clust_4", "Cluster 4"),
+          htmlOutput("clust_4_out", class = "clust_out"),
+          h3(id = "clust_5", "Cluster 5"),
+          htmlOutput("clust_5_out", class = "clust_out"),
+        ),
+        column(
+          class = "cluster_col",
+          width = 6,
+          highchartOutput(
+            "radarchart",
+            width = "100%",
+            height = "100%"
+          ),
+          htmlOutput(
+            "song_examples"
+          )
+        ),
+        column(
+          class = "cluster_col",
+          width = 2,
+          h3(id = "clust_6", "Cluster 6"),
+          htmlOutput("clust_6_out", class = "clust_out"),
+          h3(id = "clust_7", "Cluster 7"),
+          htmlOutput("clust_7_out", class = "clust_out"),
+          h3(id = "clust_8", "Cluster 8"),
+          htmlOutput("clust_8_out", class = "clust_out"),
+          h3(id = "clust_9", "Cluster 9"),
+          htmlOutput("clust_9_out", class = "clust_out"),
+          h3(id = "clust_10", "Cluster 10"),
+          htmlOutput("clust_10_out", class = "clust_out"),
+        ),
+        column(
+          width = 1
         )
       ),
-      column(
-        class = "cluster_col",
-        width = 2,
-        h3(id = "clust_6", "Cluster 6"),
-        htmlOutput("clust_6_out", class = "clust_out"),
-        h3(id = "clust_7", "Cluster 7"),
-        htmlOutput("clust_7_out", class = "clust_out"),
-        h3(id = "clust_8", "Cluster 8"),
-        htmlOutput("clust_8_out", class = "clust_out"),
-        h3(id = "clust_9", "Cluster 9"),
-        htmlOutput("clust_9_out", class = "clust_out"),
-        h3(id = "clust_10", "Cluster 10"),
-        htmlOutput("clust_10_out", class = "clust_out"),
-      ),
-      column(
-        width = 1
-      ),
-      div(class = "content_footer")
+      div(
+        class = "content_footer",
+        br(),
+        br(),
+        HTML(
+          "<h4><span class = 'accent'>Click
+          </span> on any of the clusters to add them to the graphic"
+        )
+      )
     ),
     tags$section()
   ),
   tags$script(
     src = "fullpage.js"
-  ),
-  tags$script(
-    src = "animate.js"
   ),
   tags$script(
     src = "https://isuttell.github.io/sine-waves/javascripts/sine-waves.min.js"
@@ -332,9 +346,9 @@ fluidPage(
     src = "waves.js"
   ),
   tags$script(
-    src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.js'
+    src = "https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17-beta.0/vue.js"
   ),
   tags$script(
-    src='https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.3/localforage.min.js'
+    src = "https://cdnjs.cloudflare.com/ajax/libs/localforage/1.7.3/localforage.min.js"
   )
 )

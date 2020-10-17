@@ -191,7 +191,8 @@ output$clust_2_out <- renderText({
           clustered[clustered$cluster == 2, ]$tracks[[1]][samples],
           sep = " - "
         ),
-        collapse = "<br>")
+        collapse = "<br>"
+      )
     )
   } else {
     HTML("<br>")
@@ -208,7 +209,8 @@ output$clust_3_out <- renderText({
           clustered[clustered$cluster == 3, ]$tracks[[1]][samples],
           sep = " - "
         ),
-        collapse = "<br>")
+        collapse = "<br>"
+      )
     )
   } else {
     HTML("<br>")
@@ -225,7 +227,8 @@ output$clust_4_out <- renderText({
           clustered[clustered$cluster == 4, ]$tracks[[1]][samples],
           sep = " - "
         ),
-        collapse = "<br>")
+        collapse = "<br>"
+      )
     )
   } else {
     HTML("<br>")
@@ -242,7 +245,8 @@ output$clust_5_out <- renderText({
           clustered[clustered$cluster == 5, ]$tracks[[1]][samples],
           sep = " - "
         ),
-        collapse = "<br>")
+        collapse = "<br>"
+      )
     )
   } else {
     HTML("<br>")
@@ -259,7 +263,8 @@ output$clust_6_out <- renderText({
           clustered[clustered$cluster == 6, ]$tracks[[1]][samples],
           sep = " - "
         ),
-        collapse = "<br>")
+        collapse = "<br>"
+      )
     )
   } else {
     HTML("<br>")
@@ -276,7 +281,8 @@ output$clust_7_out <- renderText({
           clustered[clustered$cluster == 7, ]$tracks[[1]][samples],
           sep = " - "
         ),
-        collapse = "<br>")
+        collapse = "<br>"
+      )
     )
   } else {
     HTML("<br>")
@@ -293,7 +299,8 @@ output$clust_8_out <- renderText({
           clustered[clustered$cluster == 8, ]$tracks[[1]][samples],
           sep = " - "
         ),
-        collapse = "<br>")
+        collapse = "<br>"
+      )
     )
   } else {
     HTML("<br>")
@@ -310,7 +317,8 @@ output$clust_9_out <- renderText({
           clustered[clustered$cluster == 9, ]$tracks[[1]][samples],
           sep = " - "
         ),
-        collapse = "<br>")
+        collapse = "<br>"
+      )
     )
   } else {
     HTML("<br>")
@@ -328,7 +336,8 @@ output$clust_10_out <- renderText({
           clustered[clustered$cluster == 10, ]$tracks[[1]][samples],
           sep = " - "
         ),
-        collapse = "<br>")
+        collapse = "<br>"
+      )
     )
   } else {
     HTML("<br>")

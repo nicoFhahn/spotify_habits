@@ -30,10 +30,10 @@ urls_alltime <- unlist(lapply(longterm_art$images, function(x) x$url[1]))[1:20]
 urls_recent <- unlist(lapply(shortterm_art$images, function(x) x$url[1]))[1:20]
 urls_alltime_songs <- unlist(
   lapply(longterm_tracks$album.images, function(x) x$url[1])
-  )[1:20]
+)[1:20]
 urls_recent_songs <- unlist(
   lapply(shortterm_tracks$album.images, function(x) x$url[1])
-  )[1:20]
+)[1:20]
 
 all_tracks <- get_all_saved_stuff()
 all_tracks$year <- year(all_tracks$added_at)
@@ -56,8 +56,8 @@ all_tracks_grouped <- all_tracks %>%
 all_tracks_grouped$date <- as.Date(paste(all_tracks_grouped$year, all_tracks_grouped$month, "01", sep = "-"))
 missing_months <- list()
 missing_month <- all_tracks_grouped[1, ]
-for(i in 1:(nrow(all_tracks_grouped) - 1)) {
-  if(all_tracks_grouped$year[i + 1] == all_tracks_grouped$year[i]) {
+for (i in 1:(nrow(all_tracks_grouped) - 1)) {
+  if (all_tracks_grouped$year[i + 1] == all_tracks_grouped$year[i]) {
     diff_months <- all_tracks_grouped$month[i + 1] - all_tracks_grouped$month[i]
     if (diff_months > 1) {
       missing <- missing_month[1:(diff_months - 1), ]
@@ -125,12 +125,13 @@ for(i in 1:(nrow(all_tracks_grouped) - 1)) {
         all_tracks_grouped$valence[i + 1] - all_tracks_grouped$valence[i]
       ) / diff_months
       missing$n_tracks <- 0
-      missing$date <- as.Date(paste(missing$year, missing$month, "01", sep = "-"))
+      missing$date <- as.Date(
+        paste(missing$year, missing$month, "01", sep = "-")
+        )
       missing_months <- list.append(
         missing_months,
         missing
       )
-      
     }
   }
 }
@@ -170,7 +171,16 @@ all_tracks_grouped_quarter$date <- paste(
 )
 
 
-all_tracks_clust <- all_tracks[, c("track.artists", "track.name", "danceability", "energy", "speechiness", "acousticness", "instrumentalness", "valence")]
+all_tracks_clust <- all_tracks[, c(
+  "track.artists",
+  "track.name",
+  "danceability",
+  "energy",
+  "speechiness",
+  "acousticness",
+  "instrumentalness",
+  "valence"
+)]
 task <- makeClusterTask(
   data = all_tracks_clust[, 3:8]
 )
@@ -194,23 +204,63 @@ clustered <- all_tracks_clust %>%
     valence = mean(valence, na.rm = TRUE),
     cluster_size = length(cluster)
   )
-clustered$tracks[clustered$cluster == 1] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 1, ]$track.name)
-clustered$artists[clustered$cluster == 1] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 1, ]$track.artists)
-clustered$tracks[clustered$cluster == 2] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 2, ]$track.name)
-clustered$artists[clustered$cluster == 2] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 2, ]$track.artists)
-clustered$tracks[clustered$cluster == 3] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 3, ]$track.name)
-clustered$artists[clustered$cluster == 3] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 3, ]$track.artists)
-clustered$tracks[clustered$cluster == 4] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 4, ]$track.name)
-clustered$artists[clustered$cluster == 4] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 4, ]$track.artists)
-clustered$tracks[clustered$cluster == 5] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 5, ]$track.name)
-clustered$artists[clustered$cluster == 5] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 5, ]$track.artists)
-clustered$tracks[clustered$cluster == 6] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 6, ]$track.name)
-clustered$artists[clustered$cluster == 6] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 6, ]$track.artists)
-clustered$tracks[clustered$cluster == 7] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 7, ]$track.name)
-clustered$artists[clustered$cluster == 7] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 7, ]$track.artists)
-clustered$tracks[clustered$cluster == 8] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 8, ]$track.name)
-clustered$artists[clustered$cluster == 8] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 8, ]$track.artists)
-clustered$tracks[clustered$cluster == 9] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 9, ]$track.name)
-clustered$artists[clustered$cluster == 9] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 9, ]$track.artists)
-clustered$tracks[clustered$cluster == 10] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 10, ]$track.name)
-clustered$artists[clustered$cluster == 10] <- as.data.frame(all_tracks_clust[all_tracks_clust$cluster == 10, ]$track.artists)
+clustered$tracks[clustered$cluster == 1] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 1, ]$track.name
+)
+clustered$artists[clustered$cluster == 1] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 1, ]$track.artists
+)
+clustered$tracks[clustered$cluster == 2] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 2, ]$track.name
+)
+clustered$artists[clustered$cluster == 2] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 2, ]$track.artists
+)
+clustered$tracks[clustered$cluster == 3] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 3, ]$track.name
+)
+clustered$artists[clustered$cluster == 3] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 3, ]$track.artists
+)
+clustered$tracks[clustered$cluster == 4] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 4, ]$track.name
+)
+clustered$artists[clustered$cluster == 4] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 4, ]$track.artists
+)
+clustered$tracks[clustered$cluster == 5] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 5, ]$track.name
+)
+clustered$artists[clustered$cluster == 5] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 5, ]$track.artists
+)
+clustered$tracks[clustered$cluster == 6] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 6, ]$track.name
+)
+clustered$artists[clustered$cluster == 6] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 6, ]$track.artists
+)
+clustered$tracks[clustered$cluster == 7] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 7, ]$track.name
+)
+clustered$artists[clustered$cluster == 7] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 7, ]$track.artists
+)
+clustered$tracks[clustered$cluster == 8] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 8, ]$track.name
+)
+clustered$artists[clustered$cluster == 8] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 8, ]$track.artists
+)
+clustered$tracks[clustered$cluster == 9] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 9, ]$track.name
+)
+clustered$artists[clustered$cluster == 9] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 9, ]$track.artists
+)
+clustered$tracks[clustered$cluster == 10] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 10, ]$track.name
+)
+clustered$artists[clustered$cluster == 10] <- as.data.frame(
+  all_tracks_clust[all_tracks_clust$cluster == 10, ]$track.artists
+)

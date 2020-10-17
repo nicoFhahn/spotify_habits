@@ -522,7 +522,6 @@ $highlight-color: #505050;
   right: 10%;
   top: 20%;
   bottom: 20%;
-  background-color: #121212;
 }
 
 #break {
@@ -644,9 +643,6 @@ section:nth-of-type(6) .column:nth-of-type(2) {
   transition: all ease-in-out .5s;
 }
 
-
-/* Color Overlay position */
-
 .column::after {
   content: '';
   position: absolute;
@@ -685,4 +681,8 @@ section:nth-of-type(6) .column:nth-of-type(2) {
 .clust_out {
  line-height: calc(1em + 0.5vh);
  font-size: calc(0.1em + 1vh);
+}
+
+.content_cluster {
+  height: 70vh;
 }
