@@ -63,7 +63,7 @@ js source: https://www.jqueryscript.net/animation/Basic-Cross-platform-One-Page-
 				});
 
 				this.$el.on('touchmove',utils.throttle(function(){
-					console.log('move')
+					console.log('move');
 					var e = arguments[0];
 					if (!x0 || !y0) return;
 					xDiff = e.touches[0].clientX - x0;
@@ -107,42 +107,3 @@ js source: https://www.jqueryscript.net/animation/Basic-Cross-platform-One-Page-
 })(this,this.jQuery);
 //Call the function and the plugin will take care of the rest.
 $('#fullpage').fullpage();
-
-var $trigger = $('#artist_at_1');
-var $close = $('.modal-close');
-var $modal = $('.modal-box');
-
-$(window).on('resize', function() {
-    var top = $trigger.offset().top + $trigger.outerHeight();
-    var left = $trigger.offset().left;
-    var width = $trigger.outerWidth();
-    $trigger.attr({
-        'data-top': top,
-        'data-left': left,
-        'data-width': width
-    });
-    $modal.css({
-        top: top,
-        left: left
-    });
-}).trigger('resize');
-
-$trigger.on('click', function() {
-    $modal.css({
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%'
-    }).addClass('is-open');
-});
-
-$close.on('click', function() {
-    var top = $trigger.offset().top + $trigger.outerHeight();
-    var left = $trigger.offset().left;
-    $modal.css({
-        top: top,
-        left: left,
-        width: 0,
-        height: '2px'
-    }).removeClass('is-open');
-});
