@@ -127,7 +127,7 @@ for (i in 1:(nrow(all_tracks_grouped) - 1)) {
       missing$n_tracks <- 0
       missing$date <- as.Date(
         paste(missing$year, missing$month, "01", sep = "-")
-        )
+      )
       missing_months <- list.append(
         missing_months,
         missing

@@ -12,11 +12,11 @@ library(shinyWidgets)
 library(spotifyr)
 library(sass)
 library(stringr)
-local <- FALSE
+local <- TRUE
 css <- sass(sass_file("www/styles.scss"))
 ui <- source(file.path("ui", "ui.R"), local = TRUE)$value
 # Define server logic required to draw a histogram
-server <- function(input, output) {
+server <- function(input, output, session) {
   source(file.path("server", "functions.R"), local = TRUE)$value
   if (local) {
     load("files.RData")
@@ -29,6 +29,7 @@ server <- function(input, output) {
   source(file.path("server", "ui_outputs.R"), local = TRUE)$value
   source(file.path("server", "modal.R"), local = TRUE)$value
   source(file.path("server", "reactive_values.R"), local = TRUE)$value
+  source(file.path("server", "event_observer.R"), local = TRUE)$value
   source(file.path("server", "text_outputs.R"), local = TRUE)$value
 }
 

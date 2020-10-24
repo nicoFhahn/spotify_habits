@@ -92,6 +92,7 @@ get_album_features <- function(album_data, audio_features, album_data_old) {
     c("name", "popularity", "uri", "id")
   ]
   # split audio features by album id to calculate the features of each album
+  audio_features <- audio_features[audio_features$album_type == "album", ]
   album_features <- split(audio_features, audio_features$album_id)
   # calculate the values for each album
   album_features <- lapply(
@@ -347,7 +348,7 @@ get_audio_features_top <- function(artists) {
 
 create_random_grid <- function(urls, type) {
   # dran random sample
-  sample_numbers <- sample(1:28, size = 20)
+  sample_numbers <- sample(1:28, size = length(urls))
   # skeleton for the grid
   skeleton <- c(
     '<div class="area1"></div>',
@@ -399,8 +400,8 @@ create_random_grid <- function(urls, type) {
           x,
           "><",
           paste(
-            # '><img class = "hidden2" id = "',
-            '><img id = "',
+            '><img class = "hidden2" id = "',
+            # '><img id = "',
             id,
             '" src = "',
             cover,
@@ -418,7 +419,7 @@ create_random_grid <- function(urls, type) {
   }
   # paste it all together
   paste(
-    "<div class = 'grid-container'>",
+    "<div id = 'grid-container-id' class = 'grid-container'>",
     paste(unlist(skeleton_images), collapse = ""),
     "</div>"
   )

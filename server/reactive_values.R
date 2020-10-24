@@ -87,6 +87,8 @@ shinyjs::onclick("artist_at_1", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -109,6 +111,8 @@ shinyjs::onclick("artist_at_2", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -132,6 +136,8 @@ shinyjs::onclick("artist_at_3", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -154,6 +160,8 @@ shinyjs::onclick("artist_at_4", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -177,6 +185,8 @@ shinyjs::onclick("artist_at_5", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -200,6 +210,8 @@ shinyjs::onclick("artist_at_6", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -223,6 +235,8 @@ shinyjs::onclick("artist_at_7", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -246,6 +260,8 @@ shinyjs::onclick("artist_at_8", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -269,6 +285,8 @@ shinyjs::onclick("artist_at_9", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -292,6 +310,8 @@ shinyjs::onclick("artist_at_10", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -315,6 +335,8 @@ shinyjs::onclick("artist_at_11", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -338,6 +360,8 @@ shinyjs::onclick("artist_at_12", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -361,6 +385,8 @@ shinyjs::onclick("artist_at_13", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -384,6 +410,8 @@ shinyjs::onclick("artist_at_14", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -407,6 +435,8 @@ shinyjs::onclick("artist_at_15", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -430,6 +460,8 @@ shinyjs::onclick("artist_at_16", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -453,6 +485,8 @@ shinyjs::onclick("artist_at_17", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -476,6 +510,8 @@ shinyjs::onclick("artist_at_18", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -499,6 +535,8 @@ shinyjs::onclick("artist_at_19", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -522,6 +560,8 @@ shinyjs::onclick("artist_at_20", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -546,6 +586,8 @@ shinyjs::onclick("artist_rc_1", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -569,6 +611,8 @@ shinyjs::onclick("artist_rc_2", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -592,6 +636,8 @@ shinyjs::onclick("artist_rc_3", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -615,6 +661,8 @@ shinyjs::onclick("artist_rc_4", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -639,6 +687,8 @@ shinyjs::onclick("artist_rc_5", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -662,6 +712,8 @@ shinyjs::onclick("artist_rc_6", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -685,6 +737,8 @@ shinyjs::onclick("artist_rc_7", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -708,6 +762,8 @@ shinyjs::onclick("artist_rc_8", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -731,6 +787,8 @@ shinyjs::onclick("artist_rc_9", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -754,6 +812,8 @@ shinyjs::onclick("artist_rc_10", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -777,6 +837,8 @@ shinyjs::onclick("artist_rc_11", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -800,6 +862,8 @@ shinyjs::onclick("artist_rc_12", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -823,6 +887,8 @@ shinyjs::onclick("artist_rc_13", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -846,6 +912,8 @@ shinyjs::onclick("artist_rc_14", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -869,6 +937,8 @@ shinyjs::onclick("artist_rc_15", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -892,6 +962,8 @@ shinyjs::onclick("artist_rc_16", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -915,6 +987,8 @@ shinyjs::onclick("artist_rc_17", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -938,6 +1012,8 @@ shinyjs::onclick("artist_rc_18", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -961,6 +1037,8 @@ shinyjs::onclick("artist_rc_19", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
@@ -984,6 +1062,8 @@ shinyjs::onclick("artist_rc_20", function(x) {
     audio_features <- infos$audio_features
     if (nrow(album_data) > 0) {
       albums <- get_album_features(album_data, audio_features, album_data_old)
+    } else {
+      albums <- NA
     }
     songs <- get_song_features(audio_features)
   } else {
