@@ -1,4 +1,4 @@
-basicPage(
+fillPage(
   add_busy_spinner(
     spin = "semipolar",
     color = "#EA5F23",

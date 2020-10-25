@@ -99,7 +99,7 @@ output$art1_plot <- renderHighchart({
         )
       ) %>%
       # set the background color
-      hc_chart(backgroundColor = "#242424") %>%
+      hc_chart(backgroundColor = "#2400a7") %>%
       # set the title
       hc_title(
         text = paste(
@@ -209,7 +209,7 @@ output$art1_plot <- renderHighchart({
           )
         ) %>%
         # set the background color
-        hc_chart(backgroundColor = "#242424") %>%
+        hc_chart(backgroundColor = "#2400a7") %>%
         # set the title
         hc_title(
           text = paste(
@@ -292,7 +292,7 @@ output$art1_plot <- renderHighchart({
             )
           )
         ) %>%
-        hc_chart(backgroundColor = "#242424") %>%
+        hc_chart(backgroundColor = "#2400a7") %>%
         hc_title(
           text = paste(
             input$plot_var,
@@ -378,7 +378,7 @@ output$art1_plot <- renderHighchart({
             )
           )
         ) %>%
-        hc_chart(backgroundColor = "#242424") %>%
+        hc_chart(backgroundColor = "#2400a7") %>%
         hc_title(
           text = paste(
             input$plot_var,
@@ -459,7 +459,7 @@ output$art1_plot <- renderHighchart({
             )
           )
         ) %>%
-        hc_chart(backgroundColor = "#242424") %>%
+        hc_chart(backgroundColor = "#2400a7") %>%
         hc_title(
           text = paste(
             input$plot_var,
@@ -585,7 +585,7 @@ output$track_plot_1 <- renderHighchart({
       )
     ) %>%
     # set the background color
-    hc_chart(backgroundColor = "#242424") %>%
+    hc_chart(backgroundColor = "#2400a7") %>%
     # set the title
     hc_title(
       text = paste(
@@ -742,7 +742,7 @@ output$track_plot_2 <- renderHighchart({
     hc_tooltip(enabled = FALSE) %>%
     hc_chart(
       zoomType = "x",
-      backgroundColor = "#242424"
+      backgroundColor = "#2400a7"
     ) %>%
     # set the title
     hc_title(
@@ -844,7 +844,7 @@ output$change_plot <- renderHighchart({
       marker = list(
         radius = 0
       ),
-      color = "#26547c",
+      color = "#a77800",
       name = "Speechiness"
     ) %>%
     hc_add_series(
@@ -856,7 +856,7 @@ output$change_plot <- renderHighchart({
       name = "Valence"
     ) %>%
     # set the background color
-    hc_chart(backgroundColor = "#121212")
+    hc_chart(backgroundColor = "#002fa7")
 })
 
 output$radarchart <- renderHighchart({
@@ -876,17 +876,17 @@ output$radarchart <- renderHighchart({
       gridLineDashStyle = "Solid"
     ) %>%
     # set the background color
-    hc_chart(backgroundColor = "#121212")
+    hc_chart(backgroundColor = "#002fa7")
   indexes <- which(clust_number$val %in% TRUE)
   colors <- c(
     "#EA5F23",
-    "#008CF9",
+    "#a77800",
     "#B80058",
     "#00BBAD",
     "#FF9287",
-    "#5954D6",
+    "#121212",
     "#00C6F8",
-    "#006E00",
+    "#2fa700",
     "#D163E6",
     "#EBAC23"
   )

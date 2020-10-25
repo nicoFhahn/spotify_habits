@@ -111,11 +111,11 @@ body {
 }
 
 #fullpage section:nth-of-type(odd) {
-  background: #121212;
+  background: #002fa7;
 }
 
 #fullpage section:nth-of-type(even) {
-  background: #181818;
+  background: #0036c1;
 }
 
 .hidden2 {
@@ -134,7 +134,7 @@ body {
 // Styling of the modal
 .modal-content {
   border-radius: 0;
-  background-color: #242424 !important;
+  background-color: #2400a7 !important;
   .col-sm-10 {
     padding-left: 0;
   }
@@ -197,13 +197,13 @@ a {
 }
 
 a:hover {
-  color: #242424;
+  color: #2400a7;
 }
 
 .nav-tabs>li.active>a,
 .nav-tabs>li.active>a:focus,
 .nav-tabs>li.active>a:hover {
- color:#242424;
+ color:#2400a7;
  cursor:default;
  background-color:#fff;
  border:1px solid #ddd;
@@ -249,17 +249,17 @@ $highlight-color: #505050;
 }
 
 .bootstrap-select > .dropdown-toggle {
-  background-color: #242424;
+  background-color: #2400a7;
   color: #fff;
 }
 
 div.dropdown-menu {
- background-color: #242424;
+ background-color: #2400a7;
 }
 
 
 ul.dropdown-menu {
-  background-color: #242424;
+  background-color: #2400a7;
 }
 
 .bootstrap-select .dropdown-menu li a {
@@ -425,7 +425,7 @@ section:nth-of-type(6) .column:nth-of-type(2) {
 
 .clust_out {
  line-height: calc(1em + 0.5vh);
- font-size: calc(0.1em + 1vh);
+ font-size: calc(0.2em + 0.1vw);
 }
 
 .content_cluster {
@@ -444,7 +444,7 @@ section:nth-of-type(6) .column:nth-of-type(2) {
   position: relative;
   color: #fff;
   border-color: #EA5F23;
-  background-color: #121212;
+  background-color: #002fa7;
   font-family: 'IBM Plex Mono', monospace;
   &:hover {
     background-color: #EA5F23;
@@ -463,7 +463,7 @@ section:nth-of-type(6) .column:nth-of-type(2) {
   position: relative;
   color: #fff;
   border-color: #EA5F23;
-  background-color: #121212;
+  background-color: #002fa7;
   font-family: 'IBM Plex Mono', monospace;
   &:hover {
     background-color: #EA5F23;
@@ -473,7 +473,7 @@ section:nth-of-type(6) .column:nth-of-type(2) {
 
 section.content_page:nth-child(15) > div:nth-child(3) {
  height: 16vh;
- background-color: #121212;
+ background-color: #002fa7;
 }
 
 section.content_page:nth-child(12) > p:nth-child(1) {
