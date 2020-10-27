@@ -2091,7 +2091,7 @@ shinyjs::onclick("playlist_create", {
   name <- input$playlist_name
   if (local) {
     Sys.sleep(1)
-    uri <- "spotify:playlist:2a83NGRrkheoDgXqsRJRhA"
+    uri <- "spotify:playlist:3ZybT78WC4FcTuD3JBn9s7"
   } else {
     if (name == "") {
       uri <- generate_playlist(shortterm_tracks, longterm_tracks)

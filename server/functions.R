@@ -829,9 +829,7 @@ generate_playlist <- function(shortterm_tracks, longterm_tracks, name = "Wow suc
   # create a playlist
   create_playlist(
     get_my_profile()$id,
-    name = name,
-    public = FALSE,
-    authorization = code
+    name = name
   )
   # add the tracks
   add_tracks_to_playlist(
