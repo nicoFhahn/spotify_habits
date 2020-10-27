@@ -64,5 +64,8 @@ tags$section(
       "<h4><span class = 'accent'>Click
           </span> on any of the clusters to add them to the graphic"
     )
+  ),
+  HTML(
+    "<h5 class = 'github'><a  target = '_blank' href='https://github.com/nicoFhahn/spotify_habits'>GitHub</a><h6>"
   )
 )

@@ -9,5 +9,8 @@ tags$section(
         the most over the last month. Here are your <span class = 'accent'>
         recent</span> favorite artists:
         </p>"
+  ),
+  HTML(
+    "<h5 class = 'github'><a  target = '_blank' href='https://github.com/nicoFhahn/spotify_habits'>GitHub</a><h6>"
   )
 )

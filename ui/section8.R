@@ -8,5 +8,8 @@ tags$section(
         songs and your most <span class='accent'>recent</span> favorites,
         starting with the first of the two:
         </p>"
+  ),
+  HTML(
+    "<h5 class = 'github'><a  target = '_blank' href='https://github.com/nicoFhahn/spotify_habits'>GitHub</a><h6>"
   )
 )

@@ -38,5 +38,8 @@ tags$section(
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       Hover over a track title to scroll the widget.</h4>"
     )
+  ),
+  HTML(
+    "<h5 class = 'github'><a  target = '_blank' href='https://github.com/nicoFhahn/spotify_habits'>GitHub</a><h6>"
   )
 )

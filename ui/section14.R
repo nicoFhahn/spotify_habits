@@ -13,5 +13,8 @@ tags$section(
         Suprised by the similarity of these
         songs?
         </p>"
+  ),
+  HTML(
+    "<h5 class = 'github'><a  target = '_blank' href='https://github.com/nicoFhahn/spotify_habits'>GitHub</a><h6>"
   )
 )

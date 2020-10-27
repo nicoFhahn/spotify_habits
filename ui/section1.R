@@ -12,7 +12,7 @@ tags$section(
       "An Overview"
     ),
     HTML(
-      "<h6 data-aos='fade-in'>Because I am
+      "<h6>Because I am
               <sup>(or rather using oauth2 in R is)</sup> kinda
               dumb you can only view my listening habits at the moment</h6>"
     )

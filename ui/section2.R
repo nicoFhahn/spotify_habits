@@ -8,5 +8,8 @@ tags$section(
         always enjoy hearing their voices. Enough talk, here are your 20
         <span class = 'accent'>all-time</span> favorite artists:
         </p>"
+  ),
+  HTML(
+    "<h5 class = 'github'><a  target = '_blank' href='https://github.com/nicoFhahn/spotify_habits'>GitHub</a><h6>"
   )
 )

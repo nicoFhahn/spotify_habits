@@ -12,7 +12,7 @@ library(shinyWidgets)
 library(spotifyr)
 library(sass)
 library(stringr)
-local <- TRUE
+local <- FALSE
 css <- sass(sass_file("www/styles.scss"))
 ui <- source(file.path("ui", "ui.R"), local = TRUE)$value
 # Define server logic required to draw a histogram

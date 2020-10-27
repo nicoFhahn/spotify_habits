@@ -752,3 +752,25 @@ section.content_page:nth-child(16) > div:nth-child(3) {
  height: 15vh;
  background-color: #0036c1;
 }
+.github {
+  float: right;
+  margin-right: 10vw;
+  margin-top: 3vh;
+  font-size: calc(1em + 1vw);
+  font-family: 'IBM Plex Mono', monospace;
+  position: fixed;
+  z-index: 20;
+  left: 92vw;
+  top: 90vh;
+  a {
+    &:visited {
+      color: #fff;
+    }
+    &:hover {
+      color: #EA5F23;
+    }
+    &:active {
+      color: #EA5F23;
+    }
+  }
+}
