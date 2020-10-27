@@ -11,7 +11,7 @@ You can run the app on your own machine using the following code:
 ```R
 packages <- c(
 	"dotenv", "dplyr", "highcharter", "lubridate", "mlr", "plyr", "rlist",
-  "shiny", "shinybusy", "shinyjs", "shinyWidgets", "sass", "stringr"
+	"shiny", "shinybusy", "shinyjs", "shinyWidgets", "sass", "stringr"
 	)
 to_install <- packages[!packages %in% installed.packages()[, "Package"]]
 install.packages(to_install, repos = "https://cran.rstudio.com/")
