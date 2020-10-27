@@ -3,7 +3,6 @@
 .RData
 .Ruserdata
 .httr-oauth
-*.env
 rsconnect/
 *.Rproj
 a.RData
