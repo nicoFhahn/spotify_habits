@@ -15,7 +15,7 @@ packages <- c(
 	)
 to_install <- packages[!packages %in% installed.packages()[, "Package"]]
 install.packages(to_install, repos = "https://cran.rstudio.com/")
-devtools::install_github('charlie86/spotifyr')
+devtools::install_github("charlie86/spotifyr")
 library(shiny)
 runGitHub("spotify_habits", "nicoFhahn")
 ```
