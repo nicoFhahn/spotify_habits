@@ -738,3 +738,105 @@ update_values <- function(i, ...) {
     )
   }
 }
+
+generate_playlist <- function(shortterm_tracks, longterm_tracks, name = "Wow such name") {
+  # take your top 20 tracks
+  short_list <- split(shortterm_tracks[1:20, ], shortterm_tracks[1:20, ]$id)
+  # get the artists id and song id of each song
+  short_pairs <- lapply(short_list, function(x) {
+    list(
+      "artist_id" = unlist(lapply(x$artists, function(x) x$id)),
+      "song_id" = x$id
+    )
+  })
+  # get recommendations for new songs
+  recommendations_short <- lapply(
+    short_pairs,
+    function(x) {
+      get_recommendations(
+        limit = 20,
+        seed_artists = x$artist_id,
+        seed_tracks = x$song_id
+      )
+    }
+  )
+  # remove songs that appear in most listened to
+  recommendations_short <- lapply(
+    recommendations_short,
+    function(x) {
+      x[!x$id %in% c(longterm_tracks$id, shortterm_tracks$id), ]
+    }
+  )
+  # use more songs that are recommended based on your most listened to songs
+  songs_short <- lapply(
+    seq_len(20),
+    function(x, ...) {
+      if (x <= 5) {
+        recommendations_short[[x]][1:4, ]
+      } else if (x <= 10) {
+        recommendations_short[[x]][1:3, ]
+      } else if (x <= 15) {
+        recommendations_short[[x]][1:2, ]
+      } else {
+        recommendations_short[[x]][1, ]
+      }
+    }
+  )
+  # bind everything together
+  songs_short <- do.call(rbind, songs_short)
+  # now do the same again
+  long_list <- split(longterm_tracks[1:20, ], longterm_tracks[1:20, ]$id)
+  long_pairs <- lapply(long_list, function(x) {
+    list(
+      "artist_id" = unlist(lapply(x$artists, function(x) x$id)),
+      "song_id" = x$id
+    )
+  })
+  recommendations_long <- lapply(
+    long_pairs,
+    function(x) {
+      get_recommendations(
+        limit = 20,
+        seed_artists = x$artist_id,
+        seed_tracks = x$song_id
+      )
+    }
+  )
+  
+  # remove songs that appear in most listened to
+  recommendations_long <- lapply(
+    recommendations_long,
+    function(x) {
+      x[!x$id %in% c(longterm_tracks$id, shortterm_tracks$id), ]
+    }
+  )
+  songs_long <- lapply(
+    seq_len(20),
+    function(x, ...) {
+      if (x <= 5) {
+        recommendations_long[[x]][1:4, ]
+      } else if (x <= 10) {
+        recommendations_long[[x]][1:3, ]
+      } else if (x <= 15) {
+        recommendations_long[[x]][1:2, ]
+      } else {
+        recommendations_long[[x]][1, ]
+      }
+    }
+  )
+  songs_long <- do.call(rbind, songs_long)
+  songs_all <- rbind(songs_short, songs_long)
+  # create a playlist
+  create_playlist(
+    get_my_profile()$id,
+    name = name,
+    public = FALSE,
+    authorization = code
+  )
+  # add the tracks
+  add_tracks_to_playlist(
+    get_my_playlists()[1, ]$id,
+    uris = songs_all$uri
+  )
+  get_my_playlists()[1, ]$uri
+}

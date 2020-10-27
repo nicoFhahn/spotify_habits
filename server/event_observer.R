@@ -684,3 +684,19 @@ observeEvent(
     }
   }
 )
+
+observeEvent(
+  input$playlist_create,
+  {
+    if (input$playlist_create > 0) {
+      addClass(
+        selector = ".playlist_in",
+        class = "playlist_hide"
+      )
+      addClass(
+        selector = ".playlist_out",
+        class = "playlist_show"
+      )
+    }
+  }
+)

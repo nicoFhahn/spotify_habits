@@ -64,3 +64,29 @@ output$table_recent_songs_ui <- renderUI({
 output$table_recent_songs_html <- renderText({
   HTML(table_recent_songs)
 })
+
+output$ui_playlist <- renderUI({
+  div(
+    div(
+      class = "playlist_in",
+      textInput(
+        "playlist_name",
+        "Name your playlist"
+      ),
+      actionButton(
+        "playlist_create",
+        label = "Create playlist"
+      )
+    ),
+    div(
+      class = "playlist_out",
+      htmlOutput(
+        "playlist_out"
+      )
+    )
+  )
+})
+
+output$playlist_out <- renderText({
+  HTML(playlist_uri$uri)
+})

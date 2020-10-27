@@ -29,7 +29,8 @@ fillPage(
     source(file.path("ui", "section12.R"), local = TRUE)$value,
     source(file.path("ui", "section13.R"), local = TRUE)$value,
     source(file.path("ui", "section14.R"), local = TRUE)$value,
-    source(file.path("ui", "section15.R"), local = TRUE)$value
+    source(file.path("ui", "section15.R"), local = TRUE)$value,
+    source(file.path("ui", "section16.R"), local = TRUE)$value,
   ),
   tags$script(
     src = "fullpage.js"

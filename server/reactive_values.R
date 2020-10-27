@@ -2082,3 +2082,21 @@ shinyjs::onclick("tempo", {
 shinyjs::onclick("valence", {
   clicked$last <- "Valence"
 })
+
+playlist_uri <- reactiveValues(
+  uri = ""
+)
+
+shinyjs::onclick("playlist_create", {
+  name <- input$playlist_name
+  if (local) {
+    Sys.sleep(1)
+    uri <- "spotify:playlist:2a83NGRrkheoDgXqsRJRhA"
+  } else {
+    if (name == "") {
+      uri <- generate_playlist(shortterm_tracks, longterm_tracks)
+    } else {
+      uri <- generate_playlist(shortterm_tracks, longterm_tracks, name = input$playlist_name)}
+  }
+  playlist_uri$uri <- create_uri(uri, iframe_skeleton)
+})
