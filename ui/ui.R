@@ -1,4 +1,5 @@
 fillPage(
+  title = "Your Spotify Listening Habits",
   add_busy_spinner(
     spin = "semipolar",
     color = "#EA5F23",

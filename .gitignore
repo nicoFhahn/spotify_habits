@@ -8,3 +8,4 @@ rsconnect/
 a.RData
 auth.R
 *.txt
+*.env

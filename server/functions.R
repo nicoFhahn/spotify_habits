@@ -617,6 +617,10 @@ get_all_saved_stuff <- function() {
     )
   }
   # bind together
+  len <- unlist(lapply(tracks, length)) > 0
+  tracks <- tracks[len]
+  cols <- min(unlist(lapply(tracks, ncol)))
+  tracks <- lapply(tracks, function(x) x[, 1:cols])
   tracks <- Reduce(rbind, tracks)
   playlists <- list()
   # now do the same for all the playlists
@@ -655,6 +659,7 @@ get_all_saved_stuff <- function() {
         limit = 100,
         offset = 0
       )
+      new_tracks <- new_tracks[!new_tracks$is_local, ]
       offset <- 100
       tracks <- list.append(
         tracks,
@@ -672,7 +677,12 @@ get_all_saved_stuff <- function() {
           new_tracks
         )
       }
+      len <- unlist(lapply(tracks, length)) > 0
+      tracks <- tracks[len]
+      cols <- min(unlist(lapply(tracks, ncol)))
+      tracks <- lapply(tracks, function(x) x[, 1:cols])
       tracks <- Reduce(rbind, tracks)
+      tracks[!tracks$track.is_local, ]
     }
   )
   # bind everything together
