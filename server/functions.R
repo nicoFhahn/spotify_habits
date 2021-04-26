@@ -580,7 +580,7 @@ get_similar_songs <- function(i, tracks, details) {
   recommendations <- get_recommendations(
     limit = 6,
     seed_tracks = tracks$id[i],
-    seed_artists = tracks$artists[[i]]$id,
+    seed_artists = tracks$artists[[i]]$id[1:4],
     target_acousticness = details$acousticness,
     target_instrumentalness = details$instrumentalness,
     target_loudness = details$loudness,
