@@ -1006,7 +1006,7 @@ show_modal <- function(type, ...) {
                 ),
                 br(),
                 h6(
-                  "Populartiy"
+                  "Popularity"
                 ),
                 p(
                   art_infos$values$popularity
